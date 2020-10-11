@@ -29,6 +29,8 @@ bld/
 bin/
 obj/
 
+.vscode/
+
 [Rr]aspberryDebug/
 
 # Visual Studio 2015 cache/options directory
