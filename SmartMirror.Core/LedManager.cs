@@ -22,7 +22,7 @@ namespace SmartMirror.Core
 ***REMOVED***
       ***REMOVED***
 
-        public async Task StartLedProcessing()
+        public Task StartProcessing()
         ***REMOVED***
             var settings = new S***REMOVED***ConnectionSettings(0, 0)
             ***REMOVED***
@@ -38,10 +38,11 @@ namespace SmartMirror.Core
             catch (ArgumentException ex)
             ***REMOVED***
                 Console.WriteLine(ex.Message);
-***REMOVED***
+                return Task.FromException(ex);
           ***REMOVED***
             _led = new Ws2812b(s***REMOVED***, LedCount);
             TurnOn();
+            return Task.CompletedTask;
       ***REMOVED***
 
         public void TurnOff()

@@ -77,13 +77,13 @@ namespace SmartMirror.Core
           ***REMOVED***
 
             var firstCmd = cmd.First();
-            var otherCommands = cmd.Where(d => !d.Equals(firstCmd)).ToArray();
+            var otherCommands = cmd.Skip(1).ToArray();
             var process = new Process()
             ***REMOVED***
                 StartInfo = new ProcessStartInfo
                 ***REMOVED***
                     FileName = "/bin/bash",
-                    Arguments = $"-c \"***REMOVED***cmd.First()***REMOVED***\"",
+                    Arguments = $"-c \"***REMOVED***firstCmd***REMOVED***\"",
                     RedirectStandardOutput = true,
                     RedirectStandardInput = true,
                     UseShellExecute = false,
