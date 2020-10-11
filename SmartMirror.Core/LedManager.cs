@@ -1,7 +1,6 @@
 ***REMOVED***
 using System.Device.S***REMOVED***;
 using System.Drawing;
-***REMOVED***
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
 ***REMOVED***
@@ -22,7 +21,7 @@ namespace SmartMirror.Core
 ***REMOVED***
       ***REMOVED***
 
-        public Task StartProcessing()
+***REMOVED***
         ***REMOVED***
             var settings = new S***REMOVED***ConnectionSettings(0, 0)
             ***REMOVED***
@@ -38,11 +37,10 @@ namespace SmartMirror.Core
             catch (ArgumentException ex)
             ***REMOVED***
                 Console.WriteLine(ex.Message);
-                return Task.FromException(ex);
+                throw;
           ***REMOVED***
             _led = new Ws2812b(s***REMOVED***, LedCount);
             TurnOn();
-            return Task.CompletedTask;
       ***REMOVED***
 
         public void TurnOff()
