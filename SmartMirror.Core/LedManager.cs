@@ -4,16 +4,23 @@ using System.Drawing;
 ***REMOVED***
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
+***REMOVED***
 
 namespace SmartMirror.Core
 ***REMOVED***
     public class LedManager
     ***REMOVED***
+        private ILogger _logger;
 
         private readonly Random _colorRnd = new Random();
         private const int LedCount = 120;
         private Ws28xx _led;
         private bool _isRunning = true;
+
+        public LedManager(ILogger logger)
+        ***REMOVED***
+***REMOVED***
+      ***REMOVED***
 
         public async Task StartLedProcessing()
         ***REMOVED***
@@ -33,18 +40,23 @@ namespace SmartMirror.Core
                 Console.WriteLine(ex.Message);
 ***REMOVED***
           ***REMOVED***
-            _led = new Ws2812b(s***REMOVED***, LedCount, 1);
+            _led = new Ws2812b(s***REMOVED***, LedCount);
+            TurnOn();
+      ***REMOVED***
 
-            while (_isRunning)
-            ***REMOVED***
-                Color randomColor = Color.FromArgb(_colorRnd.Next(256), _colorRnd.Next(256), _colorRnd.Next(256));
-                Console.WriteLine($"Color iteration started");
-                ColorWipe(_led, randomColor, LedCount);
-                await Task.Delay(1000);
-                Rainbow(_led, LedCount, 3);
-                await Task.Delay(1000);
+        public void TurnOff()
+        ***REMOVED***
+            if (_led == null)
+***REMOVED***
+            ColorWipe(_led, Color.Black, LedCount);
+      ***REMOVED***
 
-          ***REMOVED***
+        public void TurnOn()
+        ***REMOVED***
+
+            if (_led == null)
+***REMOVED***
+            ColorWipe(_led, Color.LightYellow, LedCount);
       ***REMOVED***
 
         private void ColorWipe(Ws28xx neo, Color color, int count)
