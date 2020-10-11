@@ -134,12 +134,10 @@ namespace SmartMirror.Core.VoiceRecognition
         ***REMOVED***
 ***REMOVED***
             Console.WriteLine($"CANCELED: Reason=***REMOVED***cancellation.Reason***REMOVED***");
-            if (cancellation.Reason == CancellationReason.Error)
-            ***REMOVED***
-                Console.WriteLine($"CANCELED: ErrorCode=***REMOVED***cancellation.ErrorCode***REMOVED***");
-                Console.WriteLine($"CANCELED: ErrorDetails=***REMOVED***cancellation.ErrorDetails***REMOVED***");
-                Console.WriteLine($"CANCELED: Did you update the subscription info?");
-          ***REMOVED***
+***REMOVED***
+            Console.WriteLine($"CANCELED: ErrorCode=***REMOVED***cancellation.ErrorCode***REMOVED***");
+            Console.WriteLine($"CANCELED: ErrorDetails=***REMOVED***cancellation.ErrorDetails***REMOVED***");
+            Console.WriteLine($"CANCELED: Did you update the subscription info?");
 
       ***REMOVED***
 ***REMOVED***
