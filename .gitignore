@@ -23,6 +23,13 @@ bld/
 [Ll]og/
 
 [Rr]aspberryDebug/
+[Rr]aspberryDebug/
+
+
+bin/
+obj/
+
+[Rr]aspberryDebug/
 
 # Visual Studio 2015 cache/options directory
 .vs/
