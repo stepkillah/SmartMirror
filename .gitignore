@@ -261,7 +261,6 @@ __pycache__/
 *.pyc
 
 # Files
-EQueue.Web/Properties/PublishProfiles/
-EQueue.Web/wwwroot/images/
+
 
 Design

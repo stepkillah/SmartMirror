@@ -9,6 +9,7 @@
       "SmartMirror.Core/1.0.0": ***REMOVED***
         "dependencies": ***REMOVED***
           "Iot.Device.Bindings": "1.1.0-prerelease.20276.1",
+          "Microsoft.CognitiveServices.Speech": "1.13.0",
           "System.Device.G***REMOVED***o": "1.1.0-prerelease.20276.1"
       ***REMOVED***
         "runtime": ***REMOVED***
@@ -26,6 +27,130 @@
           "lib/netcoreapp2.1/Iot.Device.Bindings.dll": ***REMOVED***
             "assemblyVersion": "1.1.0.0",
             "fileVersion": "1.100.20.27601"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "Microsoft.CognitiveServices.Speech/1.13.0": ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": ***REMOVED***
+            "assemblyVersion": "1.13.0.28",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/linux-arm/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": ***REMOVED***
+            "rid": "linux-arm",
+            "assetType": "runtime",
+            "assemblyVersion": "1.13.0.28",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/linux-arm64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": ***REMOVED***
+            "rid": "linux-arm64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.13.0.28",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/linux-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": ***REMOVED***
+            "rid": "linux-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.13.0.28",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/osx-x64/lib/netstandard2.0/Microsoft.CognitiveServices.Speech.csharp.dll": ***REMOVED***
+            "rid": "osx-x64",
+            "assetType": "runtime",
+            "assemblyVersion": "1.13.0.28",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/linux-arm/native/libMicrosoft.CognitiveServices.Speech.core.so": ***REMOVED***
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-arm/native/libMicrosoft.CognitiveServices.Speech.extension.codec.so": ***REMOVED***
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-arm/native/libMicrosoft.CognitiveServices.Speech.extension.kws.so": ***REMOVED***
+            "rid": "linux-arm",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-arm64/native/libMicrosoft.CognitiveServices.Speech.core.so": ***REMOVED***
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-arm64/native/libMicrosoft.CognitiveServices.Speech.extension.codec.so": ***REMOVED***
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-arm64/native/libMicrosoft.CognitiveServices.Speech.extension.kws.so": ***REMOVED***
+            "rid": "linux-arm64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-x64/native/libMicrosoft.CognitiveServices.Speech.core.so": ***REMOVED***
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-x64/native/libMicrosoft.CognitiveServices.Speech.extension.codec.so": ***REMOVED***
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/linux-x64/native/libMicrosoft.CognitiveServices.Speech.extension.kws.so": ***REMOVED***
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/osx-x64/native/libMicrosoft.CognitiveServices.Speech.core.dylib": ***REMOVED***
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.core.dll": ***REMOVED***
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.extension.codec.dll": ***REMOVED***
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.extension.kws.dll": ***REMOVED***
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/win-x64/native/Microsoft.CognitiveServices.Speech.extension.silk_codec.dll": ***REMOVED***
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.core.dll": ***REMOVED***
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.extension.codec.dll": ***REMOVED***
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+        ***REMOVED***
+          "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.extension.kws.dll": ***REMOVED***
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
+        ***REMOVED***
+          "runtimes/win-x86/native/Microsoft.CognitiveServices.Speech.extension.silk_codec.dll": ***REMOVED***
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.13.0.28"
         ***REMOVED***
       ***REMOVED***
     ***REMOVED***
@@ -224,6 +349,13 @@
       "sha512": "sha512-8n2g6q7BIg8nfczGU+8VvMvq7tP2Kgj0pVPDgeEDerFoWI8L3IRrOjCZLXJxp6lVekgDsf4iToUa16qOGYISgg==",
       "path": "iot.device.bindings/1.1.0-prerelease.20276.1",
       "hashPath": "iot.device.bindings.1.1.0-prerelease.20276.1.nupkg.sha512"
+  ***REMOVED***
+    "Microsoft.CognitiveServices.Speech/1.13.0": ***REMOVED***
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gXWDNbbIDYB41pcCJtps+Pq8OVdZtjgdUj5SEjZgAZEge7QbHsMGmpRklM06A2CVxjNoP+vf4zZ3URANHpYM7A==",
+      "path": "microsoft.cognitiveservices.speech/1.13.0",
+      "hashPath": "microsoft.cognitiveservices.speech.1.13.0.nupkg.sha512"
   ***REMOVED***
     "Microsoft.NETCore.Platforms/3.0.0": ***REMOVED***
       "type": "package",

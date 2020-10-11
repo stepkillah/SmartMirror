@@ -1,10 +1,11 @@
 ***REMOVED***
   "version": 2,
-  "dgSpecHash": "63MrQ94xa/Kd36JBn3NlFMxd9Ai8n5KdrWXlw6XRZEaR17VhaHCvZvdRoyFHSGUbdii6DlcuEXnxIMjrekClIA==",
+  "dgSpecHash": "ORoUzgJP8tgA41iJJeB8tEv3Q96580BrYsIsqLo/hdyf+mQz0wxUUJwx5VeBW8BkhMjT1E7042On5LE27ljURg==",
   "success": true,
   "projectFilePath": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj",
   "expectedPackageFiles": [
     "E:\\NugetCache\\packages\\iot.device.bindings\\1.1.0-prerelease.20276.1\\iot.device.bindings.1.1.0-prerelease.20276.1.nupkg.sha512",
+    "E:\\NugetCache\\packages\\microsoft.cognitiveservices.speech\\1.13.0\\microsoft.cognitiveservices.speech.1.13.0.nupkg.sha512",
     "E:\\NugetCache\\packages\\microsoft.netcore.platforms\\3.0.0\\microsoft.netcore.platforms.3.0.0.nupkg.sha512",
     "E:\\NugetCache\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "E:\\NugetCache\\packages\\microsoft.win32.registry\\4.6.0\\microsoft.win32.registry.4.6.0.nupkg.sha512",

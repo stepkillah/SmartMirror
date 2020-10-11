@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[1.1.0-prerelease.20276.1, )"
           ***REMOVED***
+            "Microsoft.CognitiveServices.Speech": ***REMOVED***
+              "target": "Package",
+              "version": "[1.13.0, )"
+          ***REMOVED***
             "System.Device.G***REMOVED***o": ***REMOVED***
               "target": "Package",
               "version": "[1.1.0-prerelease.20276.1, )"
