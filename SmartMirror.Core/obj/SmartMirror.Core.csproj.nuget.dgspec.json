@@ -1,0 +1,79 @@
+***REMOVED***
+  "format": 1,
+  "restore": ***REMOVED***
+    "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj": ***REMOVED******REMOVED***
+***REMOVED***
+  "projects": ***REMOVED***
+    "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj": ***REMOVED***
+      "version": "1.0.0",
+      "restore": ***REMOVED***
+        "projectUniqueName": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj",
+        "projectName": "SmartMirror.Core",
+        "projectPath": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj",
+        "packagesPath": "E:\\NugetCache\\packages",
+        "outputPath": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\kpaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": ***REMOVED***
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": ***REMOVED******REMOVED***,
+          "E:\\nuget": ***REMOVED******REMOVED***,
+          "https://a***REMOVED***.nuget.org/v3/index.json": ***REMOVED******REMOVED***,
+          "https://evryconsulting.pkgs.visualstudio.com/_packaging/nte/nuget/v3/index.json": ***REMOVED******REMOVED***,
+          "https://pkgs.dev.azure.com/420-solutions/_packaging/420-solutions/nuget/v3/index.json": ***REMOVED******REMOVED***,
+          "https://tmaccess.pkgs.visualstudio.com/_packaging/AccessNuget/nuget/v3/index.json": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "frameworks": ***REMOVED***
+          "netcoreapp3.1": ***REMOVED***
+            "projectReferences": ***REMOVED******REMOVED***
+        ***REMOVED***
+      ***REMOVED***
+        "warningProperties": ***REMOVED***
+          "warnAsError": [
+            "NU1605"
+          ]
+      ***REMOVED***
+    ***REMOVED***
+      "frameworks": ***REMOVED***
+        "netcoreapp3.1": ***REMOVED***
+          "dependencies": ***REMOVED***
+            "Iot.Device.Bindings": ***REMOVED***
+              "target": "Package",
+              "version": "[1.1.0-prerelease.20276.1, )"
+          ***REMOVED***
+            "System.Device.G***REMOVED***o": ***REMOVED***
+              "target": "Package",
+              "version": "[1.1.0-prerelease.20276.1, )"
+          ***REMOVED***
+        ***REMOVED***
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": ***REMOVED***
+            "Microsoft.NETCore.App": ***REMOVED***
+              "privateAssets": "all"
+          ***REMOVED***
+        ***REMOVED***
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+      ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***

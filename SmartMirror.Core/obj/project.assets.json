@@ -1,0 +1,1133 @@
+***REMOVED***
+  "version": 3,
+  "targets": ***REMOVED***
+    ".NETCoreApp,Version=v3.1": ***REMOVED***
+      "Iot.Device.Bindings/1.1.0-prerelease.20276.1": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "System.Device.G***REMOVED***o": "1.1.0-prerelease.20276.1",
+          "System.Drawing.Common": "4.6.0",
+          "System.IO.Ports": "4.6.0",
+          "UnitsNet": "4.58.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "lib/netcoreapp2.1/Iot.Device.Bindings.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netcoreapp2.1/Iot.Device.Bindings.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "Microsoft.NETCore.Platforms/3.0.0": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "lib/netstandard1.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard1.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "Microsoft.NETCore.Targets/1.1.0": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "lib/netstandard1.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard1.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "Microsoft.Win32.Registry/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "System.Security.AccessControl": "4.6.0",
+          "System.Security.Principal.Windows": "4.6.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard2.0/Microsoft.Win32.Registry.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/Microsoft.Win32.Registry.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "unix"
+        ***REMOVED***
+          "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "Microsoft.Win32.SystemEvents/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.NETCore.Platforms": "3.0.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard2.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "runtime.linux-arm.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+        "type": "package",
+        "runtimeTargets": ***REMOVED***
+          "runtimes/linux-arm/native/System.IO.Ports.Native.so": ***REMOVED***
+            "assetType": "native",
+            "rid": "linux-arm"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "runtime.linux-arm64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+        "type": "package",
+        "runtimeTargets": ***REMOVED***
+          "runtimes/linux-arm64/native/System.IO.Ports.Native.so": ***REMOVED***
+            "assetType": "native",
+            "rid": "linux-arm64"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "runtime.linux-x64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+        "type": "package",
+        "runtimeTargets": ***REMOVED***
+          "runtimes/linux-x64/native/System.IO.Ports.Native.so": ***REMOVED***
+            "assetType": "native",
+            "rid": "linux-x64"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "runtime.native.System.IO.Ports/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "runtime.linux-arm.runtime.native.System.IO.Ports": "4.6.0-rc2.19462.14",
+          "runtime.linux-arm64.runtime.native.System.IO.Ports": "4.6.0-rc2.19462.14",
+          "runtime.linux-x64.runtime.native.System.IO.Ports": "4.6.0-rc2.19462.14",
+          "runtime.osx-x64.runtime.native.System.IO.Ports": "4.6.0-rc2.19462.14"
+      ***REMOVED***
+    ***REMOVED***
+      "runtime.osx-x64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+        "type": "package",
+        "runtimeTargets": ***REMOVED***
+          "runtimes/osx-x64/native/System.IO.Ports.Native.dylib": ***REMOVED***
+            "assetType": "native",
+            "rid": "osx-x64"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Device.G***REMOVED***o/1.1.0-prerelease.20276.1": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.Win32.Registry": "4.6.0",
+          "System.Memory": "4.5.3",
+          "System.Runtime.InteropServices.WindowsRuntime": "4.3.0",
+          "System.Runtime.WindowsRuntime": "4.6.0",
+          "System.Threading.Tasks.Extensions": "4.5.3"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "lib/netstandard2.0/System.Device.G***REMOVED***o.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.Device.G***REMOVED***o.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Drawing.Common/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.NETCore.Platforms": "3.0.0",
+          "Microsoft.Win32.SystemEvents": "4.6.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netcoreapp3.0/System.Drawing.Common.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.Drawing.Common.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "unix"
+        ***REMOVED***
+          "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.IO.Ports/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.Win32.Registry": "4.6.0",
+          "runtime.native.System.IO.Ports": "4.6.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard2.0/System.IO.Ports.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.IO.Ports.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/linux/lib/netstandard2.0/System.IO.Ports.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "linux"
+        ***REMOVED***
+          "runtimes/osx/lib/netstandard2.0/System.IO.Ports.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "osx"
+        ***REMOVED***
+          "runtimes/win/lib/netstandard2.0/System.IO.Ports.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Memory/4.5.3": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netcoreapp2.1/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netcoreapp2.1/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Runtime/4.3.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.NETCore.Platforms": "1.1.0",
+          "Microsoft.NETCore.Targets": "1.1.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard1.5/System.Runtime.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Runtime.InteropServices.WindowsRuntime/4.3.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "System.Runtime": "4.3.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard1.0/System.Runtime.InteropServices.WindowsRuntime.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Runtime.WindowsRuntime/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.NETCore.Platforms": "3.0.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard2.0/System.Runtime.WindowsRuntime.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.Runtime.WindowsRuntime.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/win/lib/netcoreapp3.0/System.Runtime.WindowsRuntime.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Security.AccessControl/4.6.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "Microsoft.NETCore.Platforms": "3.0.0",
+          "System.Security.Principal.Windows": "4.6.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netstandard2.0/System.Security.AccessControl.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.Security.AccessControl.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Security.Principal.Windows/4.6.0": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netcoreapp3.0/System.Security.Principal.Windows.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/System.Security.Principal.Windows.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtimeTargets": ***REMOVED***
+          "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "unix"
+        ***REMOVED***
+          "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll": ***REMOVED***
+            "assetType": "runtime",
+            "rid": "win"
+        ***REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.Threading.Tasks.Extensions/4.5.3": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netcoreapp2.1/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netcoreapp2.1/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "System.ValueTuple/4.5.0": ***REMOVED***
+        "type": "package",
+        "com***REMOVED***le": ***REMOVED***
+          "ref/netcoreapp2.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netcoreapp2.0/_._": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "UnitsNet/4.58.0": ***REMOVED***
+        "type": "package",
+        "dependencies": ***REMOVED***
+          "System.ValueTuple": "4.5.0"
+      ***REMOVED***
+        "com***REMOVED***le": ***REMOVED***
+          "lib/netstandard2.0/UnitsNet.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+        "runtime": ***REMOVED***
+          "lib/netstandard2.0/UnitsNet.dll": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+  "libraries": ***REMOVED***
+    "Iot.Device.Bindings/1.1.0-prerelease.20276.1": ***REMOVED***
+      "sha512": "8n2g6q7BIg8nfczGU+8VvMvq7tP2Kgj0pVPDgeEDerFoWI8L3IRrOjCZLXJxp6lVekgDsf4iToUa16qOGYISgg==",
+      "type": "package",
+      "path": "iot.device.bindings/1.1.0-prerelease.20276.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "iot.device.bindings.1.1.0-prerelease.20276.1.nupkg.sha512",
+        "iot.device.bindings.nuspec",
+        "lib/netcoreapp2.1/Iot.Device.Bindings.dll",
+        "lib/netcoreapp2.1/Iot.Device.Bindings.xml"
+      ]
+  ***REMOVED***
+    "Microsoft.NETCore.Platforms/3.0.0": ***REMOVED***
+      "sha512": "TsETIgVJb/AKoYfSP+iCxkuly5d3inZjTdx/ItZLk2CxY85v8083OBS3uai84kK3/baLnS5/b5XGs6zR7SuuHQ==",
+      "type": "package",
+      "path": "microsoft.netcore.platforms/3.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard1.0/_._",
+        "microsoft.netcore.platforms.3.0.0.nupkg.sha512",
+        "microsoft.netcore.platforms.nuspec",
+        "runtime.json",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "Microsoft.NETCore.Targets/1.1.0": ***REMOVED***
+      "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
+      "type": "package",
+      "path": "microsoft.netcore.targets/1.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/netstandard1.0/_._",
+        "microsoft.netcore.targets.1.1.0.nupkg.sha512",
+        "microsoft.netcore.targets.nuspec",
+        "runtime.json"
+      ]
+  ***REMOVED***
+    "Microsoft.Win32.Registry/4.6.0": ***REMOVED***
+      "sha512": "Xuqo5Lf5h1eUAbT8sJwNSEgusyEcQQQcza1R8dxJ6q/1vLSU1SG/WxtgiCPAth14dz/IjBXCxWT/+6E9glX33w==",
+      "type": "package",
+      "path": "microsoft.win32.registry/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.dll",
+        "lib/net461/Microsoft.Win32.Registry.xml",
+        "lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "microsoft.win32.registry.4.6.0.nupkg.sha512",
+        "microsoft.win32.registry.nuspec",
+        "ref/net46/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.dll",
+        "ref/net461/Microsoft.Win32.Registry.xml",
+        "ref/net472/Microsoft.Win32.Registry.dll",
+        "ref/net472/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "ref/netstandard1.3/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/de/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/es/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/fr/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/it/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ja/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ko/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/ru/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hans/Microsoft.Win32.Registry.xml",
+        "ref/netstandard1.3/zh-hant/Microsoft.Win32.Registry.xml",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "ref/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/unix/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/net46/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/net461/Microsoft.Win32.Registry.xml",
+        "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.dll",
+        "runtimes/win/lib/netstandard2.0/Microsoft.Win32.Registry.xml",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "Microsoft.Win32.SystemEvents/4.6.0": ***REMOVED***
+      "sha512": "Edg+pFW5C8WJb680Za2kTV8TqUi6Ahl/WldRVoOVJ23UQLpDHFspa+umgFjkWZw24ETsU99Cg+ErZz683M4chg==",
+      "type": "package",
+      "path": "microsoft.win32.systemevents/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Win32.SystemEvents.dll",
+        "lib/net461/Microsoft.Win32.SystemEvents.xml",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "lib/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "microsoft.win32.systemevents.4.6.0.nupkg.sha512",
+        "microsoft.win32.systemevents.nuspec",
+        "ref/net461/Microsoft.Win32.SystemEvents.dll",
+        "ref/net461/Microsoft.Win32.SystemEvents.xml",
+        "ref/net472/Microsoft.Win32.SystemEvents.dll",
+        "ref/net472/Microsoft.Win32.SystemEvents.xml",
+        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.dll",
+        "ref/netstandard2.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/netcoreapp2.0/Microsoft.Win32.SystemEvents.xml",
+        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.dll",
+        "runtimes/win/lib/netcoreapp3.0/Microsoft.Win32.SystemEvents.xml",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "runtime.linux-arm.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+      "sha512": "iPSWmmEhl0TNIVKHEOvgYEwpXoL7+KRxINcP9ni8JmfdeYPDVzTZXK/d0/1BxlLZIqXC3uMKjFhXFSFLxVlLAg==",
+      "type": "package",
+      "path": "runtime.linux-arm.runtime.native.system.io.ports/4.6.0-rc2.19462.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "runtime.linux-arm.runtime.native.system.io.ports.4.6.0-rc2.19462.14.nupkg.sha512",
+        "runtime.linux-arm.runtime.native.system.io.ports.nuspec",
+        "runtimes/linux-arm/native/System.IO.Ports.Native.so",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "runtime.linux-arm64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+      "sha512": "Ii8t2RrqsHoBwnvpN8CwQYiukabVJnBYHE6ee/Yl+jKRpkbavlnA9pktxLQARsL1YJ4AKrNT/pAdQCuxTKECBA==",
+      "type": "package",
+      "path": "runtime.linux-arm64.runtime.native.system.io.ports/4.6.0-rc2.19462.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "runtime.linux-arm64.runtime.native.system.io.ports.4.6.0-rc2.19462.14.nupkg.sha512",
+        "runtime.linux-arm64.runtime.native.system.io.ports.nuspec",
+        "runtimes/linux-arm64/native/System.IO.Ports.Native.so",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "runtime.linux-x64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+      "sha512": "zc0JugELjZ3MCPzYAroQyuTiChrw8lVUQlMc0bKolAsjpWcCECaLOLd9NRms1sfI52r4ILPvKFlqJwelc88Qhw==",
+      "type": "package",
+      "path": "runtime.linux-x64.runtime.native.system.io.ports/4.6.0-rc2.19462.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "runtime.linux-x64.runtime.native.system.io.ports.4.6.0-rc2.19462.14.nupkg.sha512",
+        "runtime.linux-x64.runtime.native.system.io.ports.nuspec",
+        "runtimes/linux-x64/native/System.IO.Ports.Native.so",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "runtime.native.System.IO.Ports/4.6.0": ***REMOVED***
+      "sha512": "rbYF/0jSnO+Q6hY1/e/MGXG2MLMj7Enth1Euma85w/r1R+1u/kuEFYNc5bkqG8mpdY3EbVpGn5RTuRU0kVQ6rw==",
+      "type": "package",
+      "path": "runtime.native.system.io.ports/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "runtime.native.system.io.ports.4.6.0.nupkg.sha512",
+        "runtime.native.system.io.ports.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "runtime.osx-x64.runtime.native.System.IO.Ports/4.6.0-rc2.19462.14": ***REMOVED***
+      "sha512": "t2+r1sZd8zeBh7omYsd1ZnwxVZ8POBR1JmvcwUXK82R+XWtf2/RMFZenJFfuy1ii507hB79JvNCFj7ZF0+WhCQ==",
+      "type": "package",
+      "path": "runtime.osx-x64.runtime.native.system.io.ports/4.6.0-rc2.19462.14",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "runtime.osx-x64.runtime.native.system.io.ports.4.6.0-rc2.19462.14.nupkg.sha512",
+        "runtime.osx-x64.runtime.native.system.io.ports.nuspec",
+        "runtimes/osx-x64/native/System.IO.Ports.Native.dylib",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Device.G***REMOVED***o/1.1.0-prerelease.20276.1": ***REMOVED***
+      "sha512": "PxbnPVk7usl7Xo8w3yGPanP89TuvWZ6lIBDdejHL1VXsfGxWj/kfl4sSGStID48a3dApcgPE60mn+Jzzn4mqAw==",
+      "type": "package",
+      "path": "system.device.g***REMOVED***o/1.1.0-prerelease.20276.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard2.0/System.Device.G***REMOVED***o.dll",
+        "lib/netstandard2.0/System.Device.G***REMOVED***o.xml",
+        "system.device.g***REMOVED***o.1.1.0-prerelease.20276.1.nupkg.sha512",
+        "system.device.g***REMOVED***o.nuspec"
+      ]
+  ***REMOVED***
+    "System.Drawing.Common/4.6.0": ***REMOVED***
+      "sha512": "2A3spjjoPZnvpVh/sDTzd+0H8ZqTdr+hH/6obB8MMfG81EJ85PmxCKDBxhBVQiA25PliKAZ1sKogDcq9mSnFEA==",
+      "type": "package",
+      "path": "system.drawing.common/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.Drawing.Common.dll",
+        "lib/netstandard2.0/System.Drawing.Common.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.Drawing.Common.dll",
+        "ref/netcoreapp3.0/System.Drawing.Common.dll",
+        "ref/netcoreapp3.0/System.Drawing.Common.xml",
+        "ref/netstandard2.0/System.Drawing.Common.dll",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.dll",
+        "runtimes/unix/lib/netcoreapp3.0/System.Drawing.Common.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.dll",
+        "runtimes/win/lib/netcoreapp3.0/System.Drawing.Common.xml",
+        "system.drawing.common.4.6.0.nupkg.sha512",
+        "system.drawing.common.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.IO.Ports/4.6.0": ***REMOVED***
+      "sha512": "9mh48ySrW31fi8JZdcXSKKSrtCH/ZgRkpOMYWwmN//KtCFGIgsyjxpft2wRKlGW/YHG70SG6Xsr/TCLf53fQOA==",
+      "type": "package",
+      "path": "system.io.ports/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.IO.Ports.dll",
+        "lib/net461/System.IO.Ports.xml",
+        "lib/netstandard2.0/System.IO.Ports.dll",
+        "lib/netstandard2.0/System.IO.Ports.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net461/System.IO.Ports.dll",
+        "ref/net461/System.IO.Ports.xml",
+        "ref/netstandard2.0/System.IO.Ports.dll",
+        "ref/netstandard2.0/System.IO.Ports.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/linux/lib/netstandard2.0/System.IO.Ports.dll",
+        "runtimes/linux/lib/netstandard2.0/System.IO.Ports.xml",
+        "runtimes/osx/lib/netstandard2.0/System.IO.Ports.dll",
+        "runtimes/osx/lib/netstandard2.0/System.IO.Ports.xml",
+        "runtimes/win/lib/net461/System.IO.Ports.dll",
+        "runtimes/win/lib/net461/System.IO.Ports.xml",
+        "runtimes/win/lib/netstandard2.0/System.IO.Ports.dll",
+        "runtimes/win/lib/netstandard2.0/System.IO.Ports.xml",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.io.ports.4.6.0.nupkg.sha512",
+        "system.io.ports.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Memory/4.5.3": ***REMOVED***
+      "sha512": "3oDzvc/zzetpTKWMShs1AADwZjQ/36HnsufHRPcOjyRAAMLDlu2iD33MBI2opxnezcVUtXyqDXXjoFMOU9c7SA==",
+      "type": "package",
+      "path": "system.memory/4.5.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.3.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Runtime/4.3.0": ***REMOVED***
+      "sha512": "JufQi0vPQ0xGnAczR13AUFglDyVYt4Kqnz1AZaiKZ5+GICq0/1MH/mO/eAJHt/mHW1zjKBJd7kV26SrxddAhiw==",
+      "type": "package",
+      "path": "system.runtime/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/net462/System.Runtime.dll",
+        "lib/portable-net45+win8+wp80+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/net462/System.Runtime.dll",
+        "ref/netcore50/System.Runtime.dll",
+        "ref/netcore50/System.Runtime.xml",
+        "ref/netcore50/de/System.Runtime.xml",
+        "ref/netcore50/es/System.Runtime.xml",
+        "ref/netcore50/fr/System.Runtime.xml",
+        "ref/netcore50/it/System.Runtime.xml",
+        "ref/netcore50/ja/System.Runtime.xml",
+        "ref/netcore50/ko/System.Runtime.xml",
+        "ref/netcore50/ru/System.Runtime.xml",
+        "ref/netcore50/zh-hans/System.Runtime.xml",
+        "ref/netcore50/zh-hant/System.Runtime.xml",
+        "ref/netstandard1.0/System.Runtime.dll",
+        "ref/netstandard1.0/System.Runtime.xml",
+        "ref/netstandard1.0/de/System.Runtime.xml",
+        "ref/netstandard1.0/es/System.Runtime.xml",
+        "ref/netstandard1.0/fr/System.Runtime.xml",
+        "ref/netstandard1.0/it/System.Runtime.xml",
+        "ref/netstandard1.0/ja/System.Runtime.xml",
+        "ref/netstandard1.0/ko/System.Runtime.xml",
+        "ref/netstandard1.0/ru/System.Runtime.xml",
+        "ref/netstandard1.0/zh-hans/System.Runtime.xml",
+        "ref/netstandard1.0/zh-hant/System.Runtime.xml",
+        "ref/netstandard1.2/System.Runtime.dll",
+        "ref/netstandard1.2/System.Runtime.xml",
+        "ref/netstandard1.2/de/System.Runtime.xml",
+        "ref/netstandard1.2/es/System.Runtime.xml",
+        "ref/netstandard1.2/fr/System.Runtime.xml",
+        "ref/netstandard1.2/it/System.Runtime.xml",
+        "ref/netstandard1.2/ja/System.Runtime.xml",
+        "ref/netstandard1.2/ko/System.Runtime.xml",
+        "ref/netstandard1.2/ru/System.Runtime.xml",
+        "ref/netstandard1.2/zh-hans/System.Runtime.xml",
+        "ref/netstandard1.2/zh-hant/System.Runtime.xml",
+        "ref/netstandard1.3/System.Runtime.dll",
+        "ref/netstandard1.3/System.Runtime.xml",
+        "ref/netstandard1.3/de/System.Runtime.xml",
+        "ref/netstandard1.3/es/System.Runtime.xml",
+        "ref/netstandard1.3/fr/System.Runtime.xml",
+        "ref/netstandard1.3/it/System.Runtime.xml",
+        "ref/netstandard1.3/ja/System.Runtime.xml",
+        "ref/netstandard1.3/ko/System.Runtime.xml",
+        "ref/netstandard1.3/ru/System.Runtime.xml",
+        "ref/netstandard1.3/zh-hans/System.Runtime.xml",
+        "ref/netstandard1.3/zh-hant/System.Runtime.xml",
+        "ref/netstandard1.5/System.Runtime.dll",
+        "ref/netstandard1.5/System.Runtime.xml",
+        "ref/netstandard1.5/de/System.Runtime.xml",
+        "ref/netstandard1.5/es/System.Runtime.xml",
+        "ref/netstandard1.5/fr/System.Runtime.xml",
+        "ref/netstandard1.5/it/System.Runtime.xml",
+        "ref/netstandard1.5/ja/System.Runtime.xml",
+        "ref/netstandard1.5/ko/System.Runtime.xml",
+        "ref/netstandard1.5/ru/System.Runtime.xml",
+        "ref/netstandard1.5/zh-hans/System.Runtime.xml",
+        "ref/netstandard1.5/zh-hant/System.Runtime.xml",
+        "ref/portable-net45+win8+wp80+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.runtime.4.3.0.nupkg.sha512",
+        "system.runtime.nuspec"
+      ]
+  ***REMOVED***
+    "System.Runtime.InteropServices.WindowsRuntime/4.3.0": ***REMOVED***
+      "sha512": "J4GUi3xZQLUBasNwZnjrffN8i5wpHrBtZoLG+OhRyGo/+YunMRWWtwoMDlUAIdmX0uRfpHIBDSV6zyr3yf00TA==",
+      "type": "package",
+      "path": "system.runtime.interopservices.windowsruntime/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "lib/netstandard1.3/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios1/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "ref/netcore50/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/de/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/es/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/fr/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/it/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ja/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ko/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/ru/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/zh-hans/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netcore50/zh-hant/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "ref/netstandard1.0/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/de/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/es/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/fr/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/it/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ja/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ko/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/ru/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hans/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hant/System.Runtime.InteropServices.WindowsRuntime.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "runtimes/aot/lib/netcore50/System.Runtime.InteropServices.WindowsRuntime.dll",
+        "system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
+        "system.runtime.interopservices.windowsruntime.nuspec"
+      ]
+  ***REMOVED***
+    "System.Runtime.WindowsRuntime/4.6.0": ***REMOVED***
+      "sha512": "IWrs1TmbxP65ZZjIglNyvDkFNoV5q2Pofg5WO7I8RKQOpLdFprQSh3xesOoClBqR4JHr4nEB1Xk1MqLPW1jPuQ==",
+      "type": "package",
+      "path": "system.runtime.windowsruntime/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "build/net45/System.Runtime.WindowsRuntime.targets",
+        "build/net451/System.Runtime.WindowsRuntime.targets",
+        "build/net461/System.Runtime.WindowsRuntime.targets",
+        "buildTransitive/net45/System.Runtime.WindowsRuntime.targets",
+        "buildTransitive/net451/System.Runtime.WindowsRuntime.targets",
+        "buildTransitive/net461/System.Runtime.WindowsRuntime.targets",
+        "lib/net45/_._",
+        "lib/netstandard1.0/System.Runtime.WindowsRuntime.dll",
+        "lib/netstandard1.0/System.Runtime.WindowsRuntime.xml",
+        "lib/netstandard1.2/System.Runtime.WindowsRuntime.dll",
+        "lib/netstandard1.2/System.Runtime.WindowsRuntime.xml",
+        "lib/netstandard2.0/System.Runtime.WindowsRuntime.dll",
+        "lib/netstandard2.0/System.Runtime.WindowsRuntime.xml",
+        "lib/portable-win8+wp8+wpa81/_._",
+        "lib/uap10.0.16299/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "ref/net45/_._",
+        "ref/netcore50/System.Runtime.WindowsRuntime.dll",
+        "ref/netcore50/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/de/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/es/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/fr/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/it/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/ja/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/ko/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/ru/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/zh-hans/System.Runtime.WindowsRuntime.xml",
+        "ref/netcore50/zh-hant/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/System.Runtime.WindowsRuntime.dll",
+        "ref/netstandard1.0/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/de/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/es/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/fr/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/it/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/ja/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/ko/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/ru/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hans/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.0/zh-hant/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/System.Runtime.WindowsRuntime.dll",
+        "ref/netstandard1.2/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/de/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/es/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/fr/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/it/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/ja/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/ko/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/ru/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/zh-hans/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard1.2/zh-hant/System.Runtime.WindowsRuntime.xml",
+        "ref/netstandard2.0/System.Runtime.WindowsRuntime.dll",
+        "ref/netstandard2.0/System.Runtime.WindowsRuntime.xml",
+        "ref/portable-win8+wp8+wpa81/_._",
+        "ref/uap10.0.16299/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "runtimes/win-aot/lib/netcore50/System.Runtime.WindowsRuntime.dll",
+        "runtimes/win-aot/lib/uap10.0.16299/_._",
+        "runtimes/win/lib/netcore50/System.Runtime.WindowsRuntime.dll",
+        "runtimes/win/lib/netcoreapp3.0/System.Runtime.WindowsRuntime.dll",
+        "runtimes/win/lib/netcoreapp3.0/System.Runtime.WindowsRuntime.xml",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.runtime.windowsruntime.4.6.0.nupkg.sha512",
+        "system.runtime.windowsruntime.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Security.AccessControl/4.6.0": ***REMOVED***
+      "sha512": "gmlk6khICtVhiUnVBBtlsH0H/5QFDqhTZgtpp3AX14wWE6OIE+BX95NLD+X4AolXnIy/oXpNNmXYnsNfW1KuDQ==",
+      "type": "package",
+      "path": "system.security.accesscontrol/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.Security.AccessControl.dll",
+        "lib/net461/System.Security.AccessControl.dll",
+        "lib/net461/System.Security.AccessControl.xml",
+        "lib/netstandard1.3/System.Security.AccessControl.dll",
+        "lib/netstandard2.0/System.Security.AccessControl.dll",
+        "lib/netstandard2.0/System.Security.AccessControl.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net46/System.Security.AccessControl.dll",
+        "ref/net461/System.Security.AccessControl.dll",
+        "ref/net461/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/System.Security.AccessControl.dll",
+        "ref/netstandard1.3/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/de/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/es/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/fr/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/it/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ja/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ko/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/ru/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.AccessControl.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.AccessControl.xml",
+        "ref/netstandard2.0/System.Security.AccessControl.dll",
+        "ref/netstandard2.0/System.Security.AccessControl.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/win/lib/net46/System.Security.AccessControl.dll",
+        "runtimes/win/lib/net461/System.Security.AccessControl.dll",
+        "runtimes/win/lib/net461/System.Security.AccessControl.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.AccessControl.xml",
+        "runtimes/win/lib/netstandard1.3/System.Security.AccessControl.dll",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.security.accesscontrol.4.6.0.nupkg.sha512",
+        "system.security.accesscontrol.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Security.Principal.Windows/4.6.0": ***REMOVED***
+      "sha512": "Mdukseovp0YIGaz16FMH6nbfgZkrCFOJbtXQptv0aeBO9h775Ilb9+TDwLVTKikoW7y7CY7lpoXl9zmZ5G3ndA==",
+      "type": "package",
+      "path": "system.security.principal.windows/4.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net46/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.dll",
+        "lib/net461/System.Security.Principal.Windows.xml",
+        "lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.dll",
+        "lib/netstandard2.0/System.Security.Principal.Windows.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net46/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.dll",
+        "ref/net461/System.Security.Principal.Windows.xml",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.dll",
+        "ref/netcoreapp3.0/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/System.Security.Principal.Windows.dll",
+        "ref/netstandard1.3/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/de/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/es/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/fr/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/it/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ja/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ko/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/ru/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hans/System.Security.Principal.Windows.xml",
+        "ref/netstandard1.3/zh-hant/System.Security.Principal.Windows.xml",
+        "ref/netstandard2.0/System.Security.Principal.Windows.dll",
+        "ref/netstandard2.0/System.Security.Principal.Windows.xml",
+        "ref/uap10.0.16299/_._",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/unix/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/net46/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/net461/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.0/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/netcoreapp2.1/System.Security.Principal.Windows.xml",
+        "runtimes/win/lib/netstandard1.3/System.Security.Principal.Windows.dll",
+        "runtimes/win/lib/uap10.0.16299/_._",
+        "system.security.principal.windows.4.6.0.nupkg.sha512",
+        "system.security.principal.windows.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.Threading.Tasks.Extensions/4.5.3": ***REMOVED***
+      "sha512": "+MvhNtcvIbqmhANyKu91jQnvIRVSTiaOiFNfKWwXGHG48YAb4I/TyH8spsySiPYla7gKal5ZnF3teJqZAximyQ==",
+      "type": "package",
+      "path": "system.threading.tasks.extensions/4.5.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.0/System.Threading.Tasks.Extensions.dll",
+        "lib/netstandard1.0/System.Threading.Tasks.Extensions.xml",
+        "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll",
+        "lib/netstandard2.0/System.Threading.Tasks.Extensions.xml",
+        "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.dll",
+        "lib/portable-net45+win8+wp8+wpa81/System.Threading.Tasks.Extensions.xml",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/netcoreapp2.1/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.threading.tasks.extensions.4.5.3.nupkg.sha512",
+        "system.threading.tasks.extensions.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "System.ValueTuple/4.5.0": ***REMOVED***
+      "sha512": "okurQJO6NRE/apDIP23ajJ0h***REMOVED***NmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
+      "type": "package",
+      "path": "system.valuetuple/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net461/System.ValueTuple.dll",
+        "lib/net461/System.ValueTuple.xml",
+        "lib/net47/System.ValueTuple.dll",
+        "lib/net47/System.ValueTuple.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.0/System.ValueTuple.dll",
+        "lib/netstandard1.0/System.ValueTuple.xml",
+        "lib/netstandard2.0/_._",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "lib/portable-net40+sl4+win8+wp8/System.ValueTuple.xml",
+        "lib/uap10.0.16299/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net461/System.ValueTuple.dll",
+        "ref/net47/System.ValueTuple.dll",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard2.0/_._",
+        "ref/portable-net40+sl4+win8+wp8/System.ValueTuple.dll",
+        "ref/uap10.0.16299/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "system.valuetuple.4.5.0.nupkg.sha512",
+        "system.valuetuple.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+  ***REMOVED***
+    "UnitsNet/4.58.0": ***REMOVED***
+      "sha512": "y3qx+YJJrouOR1edR4aWB061YhiDHrS24jwFQ9QrDm4hySOa3SHvOhtfSGury1/y0PQx153t+aUMHY69xOuDsg==",
+      "type": "package",
+      "path": "unitsnet/4.58.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/UnitsNet.dll",
+        "lib/net40/UnitsNet.pdb",
+        "lib/net40/UnitsNet.xml",
+        "lib/netstandard2.0/UnitsNet.dll",
+        "lib/netstandard2.0/UnitsNet.pdb",
+        "lib/netstandard2.0/UnitsNet.xml",
+        "unitsnet.4.58.0.nupkg.sha512",
+        "unitsnet.nuspec"
+      ]
+  ***REMOVED***
+***REMOVED***
+  "projectFileDependencyGroups": ***REMOVED***
+    ".NETCoreApp,Version=v3.1": [
+      "Iot.Device.Bindings >= 1.1.0-prerelease.20276.1",
+      "System.Device.G***REMOVED***o >= 1.1.0-prerelease.20276.1"
+    ]
+***REMOVED***
+  "packageFolders": ***REMOVED***
+    "E:\\NugetCache\\packages": ***REMOVED******REMOVED***,
+    "C:\\Microsoft\\Xamarin\\NuGet\\": ***REMOVED******REMOVED***,
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": ***REMOVED******REMOVED***
+***REMOVED***
+  "project": ***REMOVED***
+    "version": "1.0.0",
+    "restore": ***REMOVED***
+      "projectUniqueName": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj",
+      "projectName": "SmartMirror.Core",
+      "projectPath": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\SmartMirror.Core.csproj",
+      "packagesPath": "E:\\NugetCache\\packages",
+      "outputPath": "E:\\Job\\SmartMirror\\SmartMirror\\SmartMirror.Core\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\kpaka\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": ***REMOVED***
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": ***REMOVED******REMOVED***,
+        "E:\\nuget": ***REMOVED******REMOVED***,
+        "https://a***REMOVED***.nuget.org/v3/index.json": ***REMOVED******REMOVED***,
+        "https://evryconsulting.pkgs.visualstudio.com/_packaging/nte/nuget/v3/index.json": ***REMOVED******REMOVED***,
+        "https://pkgs.dev.azure.com/420-solutions/_packaging/420-solutions/nuget/v3/index.json": ***REMOVED******REMOVED***,
+        "https://tmaccess.pkgs.visualstudio.com/_packaging/AccessNuget/nuget/v3/index.json": ***REMOVED******REMOVED***
+    ***REMOVED***
+      "frameworks": ***REMOVED***
+        "netcoreapp3.1": ***REMOVED***
+          "projectReferences": ***REMOVED******REMOVED***
+      ***REMOVED***
+    ***REMOVED***
+      "warningProperties": ***REMOVED***
+        "warnAsError": [
+          "NU1605"
+        ]
+    ***REMOVED***
+  ***REMOVED***
+    "frameworks": ***REMOVED***
+      "netcoreapp3.1": ***REMOVED***
+        "dependencies": ***REMOVED***
+          "Iot.Device.Bindings": ***REMOVED***
+            "target": "Package",
+            "version": "[1.1.0-prerelease.20276.1, )"
+        ***REMOVED***
+          "System.Device.G***REMOVED***o": ***REMOVED***
+            "target": "Package",
+            "version": "[1.1.0-prerelease.20276.1, )"
+        ***REMOVED***
+      ***REMOVED***
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": ***REMOVED***
+          "Microsoft.NETCore.App": ***REMOVED***
+            "privateAssets": "all"
+        ***REMOVED***
+      ***REMOVED***
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
