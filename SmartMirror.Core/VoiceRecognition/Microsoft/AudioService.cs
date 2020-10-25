@@ -12,7 +12,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
     public class AudioService : IAudioService, IDisposable
     ***REMOVED***
-        private ILogger _logger;
+***REMOVED***
 
 ***REMOVED***
 ***REMOVED***
@@ -78,11 +78,11 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
                 ***REMOVED***
 ***REMOVED***
-                        Console.WriteLine($"We recognized: ***REMOVED***result.Text***REMOVED***");
+                        _logger.LogInformation($"We recognized: ***REMOVED***result.Text***REMOVED***");
                         RecognizeCommand(result.Text);
 ***REMOVED***
 ***REMOVED***
-                        Console.WriteLine($"NOMATCH: Speech could not be recognized.");
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
                         ***REMOVED***
@@ -107,11 +107,11 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
             ***REMOVED***
 ***REMOVED***
-                    Console.WriteLine($"We recognized keyword: ***REMOVED***result.Text***REMOVED***");
+                    _logger.LogInformation($"We recognized keyword: ***REMOVED***result.Text***REMOVED***");
                     await RecognizeCommandAsync();
 ***REMOVED***
 ***REMOVED***
-                    Console.WriteLine($"NOMATCH: Speech could not be recognized.");
+***REMOVED***
     ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -135,11 +135,11 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
-            Console.WriteLine($"CANCELED: Reason=***REMOVED***cancellation.Reason***REMOVED***");
+            _logger.LogInformation($"CANCELED: Reason=***REMOVED***cancellation.Reason***REMOVED***");
 ***REMOVED***
-            Console.WriteLine($"CANCELED: ErrorCode=***REMOVED***cancellation.ErrorCode***REMOVED***");
-            Console.WriteLine($"CANCELED: ErrorDetails=***REMOVED***cancellation.ErrorDetails***REMOVED***");
-            Console.WriteLine($"CANCELED: Did you update the subscription info?");
+            _logger.LogInformation($"CANCELED: ErrorCode=***REMOVED***cancellation.ErrorCode***REMOVED***");
+            _logger.LogInformation($"CANCELED: ErrorDetails=***REMOVED***cancellation.ErrorDetails***REMOVED***");
+***REMOVED***
 
       ***REMOVED***
 ***REMOVED***
