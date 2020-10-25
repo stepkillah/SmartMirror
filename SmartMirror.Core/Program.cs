@@ -45,10 +45,17 @@ namespace SmartMirror.Core
                     var line = Console.ReadLine();
                     if (!string.IsNullOrEmpty(line) && line.StartsWith("led color"))
                     ***REMOVED***
-                        var color = line.Substring(10, line.Length - 10);
-                        Color ledColor = ColorTranslator.FromHtml(color);
-                        var ledManager = Container.GetService<ILedManager>();
-                        ledManager.TurnOn(ledColor);
+            ***REMOVED***
+                        ***REMOVED***
+                            var color = line.Substring(10, line.Length - 10);
+                            Color ledColor = ColorTranslator.FromHtml(color);
+                            var ledManager = Container.GetService<ILedManager>();
+                            ledManager.TurnOn(ledColor);
+                      ***REMOVED***
+                        catch (Exception e)
+                        ***REMOVED***
+                            ProgramLogger.LogError(e, "Waiting for command");
+                      ***REMOVED***
                   ***REMOVED***
               ***REMOVED***
           ***REMOVED***

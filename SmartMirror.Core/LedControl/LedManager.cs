@@ -1,6 +1,7 @@
 ***REMOVED***
 using System.Device.S***REMOVED***;
 using System.Drawing;
+using System.Linq;
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
 ***REMOVED***
@@ -15,12 +16,16 @@ namespace SmartMirror.Core.LedControl
 
         private readonly Random _colorRnd = new Random();
         private const int LedCount = 120;
+
+        private static readonly int[] MissingLed = ***REMOVED***0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17***REMOVED***;
+
         private Ws28xx _led;
         private S***REMOVED***Device _s***REMOVED***Device;
         private bool _isRunning = true;
 
         public LedManager(ILogger<LedManager> logger)
         ***REMOVED***
+
 ***REMOVED***
             var settings = new S***REMOVED***ConnectionSettings(0, 0)
             ***REMOVED***
@@ -61,6 +66,12 @@ namespace SmartMirror.Core.LedControl
             BitmapImage img = neo.Image;
             for (var i = 0; i < count; i++)
             ***REMOVED***
+                if (MissingLed.Contains(i))
+                ***REMOVED***
+                    img.SetPixel(i, 0, Color.Black);
+                    neo.Update();
+                    continue;
+              ***REMOVED***
                 img.SetPixel(i, 0, color);
                 neo.Update();
           ***REMOVED***
