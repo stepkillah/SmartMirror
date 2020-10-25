@@ -1,99 +1,131 @@
 ***REMOVED***
 ***REMOVED***
+using Microsoft.Extensions.DependencyInjection;
 ***REMOVED***
-using Microsoft.Extensions.Logging.Abstractions;
 using SmartMirror.Core.Common;
-using SmartMirror.Core.VoiceRecognition;
+using SmartMirror.Core.LedControl;
+using SmartMirror.Core.VoiceRecognition.Microsoft;
 
 namespace SmartMirror.Core
 ***REMOVED***
     class Program
     ***REMOVED***
-        private static LedManager _ledManager;
-        private static AudioService _audioService;
-        private static MagicMirrorRunner _magicMirrorRunner;
-        private static ILoggerFactory _loggerFactory;
-        private static ILogger _mainLogger;
+        public static IServiceProvider Container ***REMOVED*** get; private set; ***REMOVED***
+        public static ILogger ProgramLogger;
 
         private static bool _isRunning = true;
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         ***REMOVED***
-            Console.Clear();
-            Console.WriteLine("SmartMirror");
-            var osInfo = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            Console.WriteLine($"OS Information: ***REMOVED***osInfo***REMOVED***");
-            Console.CancelKeyPress += ConsoleOnCancelKeyPress;
-            Init();
-            await StartProgram();
+            InitContainer();
+            if (Container == null)
+                throw new ArgumentNullException(nameof(Container));
 
+            ConfigureConsole();
+
+            ProgramLogger.LogInformation("SmartMirror");
+
+            var osInfo = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
+            ProgramLogger.LogWarning($"OS Information: ***REMOVED***osInfo***REMOVED***");
+            StartProgram();
             while (_isRunning)
-            ***REMOVED***
-                await Task.Delay(50);
-          ***REMOVED***
+                Console.ReadKey();
       ***REMOVED***
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
         ***REMOVED***
             e.Cancel = true;
-            CleanupAndClose();
+            CleanupAndClose().ConfigureAwait(false);
       ***REMOVED***
 
         private static async Task CleanupAndClose()
         ***REMOVED***
-            Console.WriteLine("Cleaning started");
-            if (_audioService != null)
-                await _audioService.StopProcessing();
+            ProgramLogger.LogInformation("Cleaning started");
+
+            await Container.GetService<IAudioService>().StopProcessing();
             //_magicMirrorRunner?.StopProcessing();
-            Console.WriteLine("Cleaning finished\nClosing app...");
+
+            ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
             _isRunning = false;
             Environment.Exit(0);
       ***REMOVED***
 
 
-        private static async Task StartProgram()
+        private static void StartProgram()
         ***REMOVED***
-            //_magicMirrorRunner?.StartProcessing();
-            _audioService?.StartProcessing();
-            await _ledManager.StartProcessing();
+            Container.GetService<IAudioService>().StartProcessing();
+            Container.GetService<ILedManager>().StartProcessing();
       ***REMOVED***
 
-        private static void Init()
+        private static void ConfigureConsole()
         ***REMOVED***
-            _loggerFactory = NullLoggerFactory.Instance;
-            _mainLogger = _loggerFactory.CreateLogger<Program>();
-            DirectoryInitializer.EnsureCorrectWorkingDirectory(_mainLogger);
-            _ledManager = new LedManager(_loggerFactory.CreateLogger<LedManager>());
-            //_magicMirrorRunner = new MagicMirrorRunner();
-            StartAudioService();
+            Console.CancelKeyPress += ConsoleOnCancelKeyPress;
+            DirectoryInitializer.EnsureCorrectWorkingDirectory(ProgramLogger);
       ***REMOVED***
 
-        private static void StartAudioService()
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                _audioService = new AudioService(_loggerFactory.CreateLogger<AudioService>());
-                _audioService.CommandRecognized += AudioServiceOnCommandRecognized;
-          ***REMOVED***
-            catch (Exception e)
-            ***REMOVED***
-                Console.WriteLine($"Audio service initialization failed: ***REMOVED***e.Message***REMOVED***");
-          ***REMOVED***
-      ***REMOVED***
 
-        private static void AudioServiceOnCommandRecognized(object? sender, CommandRecognizedEventArgs e)
+        private static void AudioServiceOnCommandRecognized(object sender, CommandRecognizedEventArgs e)
         ***REMOVED***
+            var ledManager = Container.GetService<ILedManager>();
             switch (e.Command)
             ***REMOVED***
                 case VoiceCommands.LedOn:
-                    _ledManager.TurnOn();
+                    ledManager.TurnOn();
 ***REMOVED***
                 case VoiceCommands.LedOff:
-                    _ledManager.TurnOff();
+                    ledManager.TurnOff();
 ***REMOVED***
                 default:
 ***REMOVED***
           ***REMOVED***
       ***REMOVED***
+
+        #region DI
+
+
+        private static void InitContainer()
+        ***REMOVED***
+
+            //setup our DI
+            Container = new ServiceCollection()
+                .AddLogging(builder => builder.AddConsole())
+                .AddSingleton(InitAudioService)
+                .AddSingleton(InitLedManager)
+                .BuildServiceProvider();
+
+
+            ProgramLogger = Container.GetService<ILoggerFactory>()
+                .CreateLogger<Program>();
+
+            ProgramLogger.LogDebug("Container initialized");
+      ***REMOVED***
+
+        private static IAudioService InitAudioService(IServiceProvider arg)
+        ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                var audioService = new AudioService(arg.GetService<ILogger<AudioService>>());
+                audioService.CommandRecognized += AudioServiceOnCommandRecognized;
+                return audioService;
+          ***REMOVED***
+            catch (Exception e)
+            ***REMOVED***
+                ProgramLogger.LogError(e, nameof(InitAudioService));
+                return new NullAudioService();
+          ***REMOVED***
+      ***REMOVED***
+        private static ILedManager InitLedManager(IServiceProvider arg)
+        ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                return new LedManager(arg.GetService<ILogger<LedManager>>());
+          ***REMOVED***
+            catch (Exception e)
+            ***REMOVED***
+                ProgramLogger.LogError(e, nameof(InitLedManager));
+                return new NullLedManager();
+          ***REMOVED***
+      ***REMOVED***
+***REMOVED***
   ***REMOVED***
 ***REMOVED***

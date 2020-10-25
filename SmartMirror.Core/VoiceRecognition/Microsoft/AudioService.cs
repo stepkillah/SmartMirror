@@ -8,9 +8,9 @@ using System.ComponentModel;
 ***REMOVED***
 using SmartMirror.Core.Helpers;
 
-namespace SmartMirror.Core.VoiceRecognition
+namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
-    public class AudioService : IDisposable
+    public class AudioService : IAudioService, IDisposable
     ***REMOVED***
         private ILogger _logger;
 
@@ -30,7 +30,7 @@ namespace SmartMirror.Core.VoiceRecognition
             ***REMOVED***VoiceCommands.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedOff***REMOVED***
       ***REMOVED***;
 
-        public AudioService(ILogger logger)
+        public AudioService(ILogger<AudioService> logger)
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -49,7 +49,7 @@ namespace SmartMirror.Core.VoiceRecognition
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
-            WaitForVoiceActivation();
+***REMOVED***
       ***REMOVED***
 
 ***REMOVED***
@@ -91,7 +91,7 @@ namespace SmartMirror.Core.VoiceRecognition
           ***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                WaitForVoiceActivation();
+***REMOVED***
           ***REMOVED***
       ***REMOVED***
 
@@ -110,7 +110,7 @@ namespace SmartMirror.Core.VoiceRecognition
 ***REMOVED***
 ***REMOVED***
                     Console.WriteLine($"NOMATCH: Speech could not be recognized.");
-                    WaitForVoiceActivation();
+    ***REMOVED***
 ***REMOVED***
 ***REMOVED***
                     ***REMOVED***
@@ -166,5 +166,7 @@ namespace SmartMirror.Core.VoiceRecognition
 ***REMOVED***
       ***REMOVED***
 ***REMOVED***
+
+
   ***REMOVED***
 ***REMOVED***

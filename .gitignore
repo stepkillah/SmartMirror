@@ -25,6 +25,8 @@ bld/
 [Rr]aspberryDebug/
 [Rr]aspberryDebug/
 
+*.pbmm
+*.tflite
 
 bin/
 obj/

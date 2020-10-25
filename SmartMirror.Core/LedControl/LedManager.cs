@@ -5,57 +5,55 @@ using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
 ***REMOVED***
 
-namespace SmartMirror.Core
+namespace SmartMirror.Core.LedControl
 ***REMOVED***
-    public class LedManager
+    public class LedManager : ILedManager, IDisposable
     ***REMOVED***
-        private ILogger _logger;
+***REMOVED***
+
+***REMOVED***
 
         private readonly Random _colorRnd = new Random();
         private const int LedCount = 120;
         private Ws28xx _led;
+        private S***REMOVED***Device _s***REMOVED***Device;
         private bool _isRunning = true;
 
-        public LedManager(ILogger logger)
+        public LedManager(ILogger<LedManager> logger)
         ***REMOVED***
 ***REMOVED***
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
             var settings = new S***REMOVED***ConnectionSettings(0, 0)
             ***REMOVED***
                 ClockFrequency = 2_400_000,
                 Mode = S***REMOVED***Mode.Mode0,
                 DataBitLength = 8
           ***REMOVED***;
-            S***REMOVED***Device s***REMOVED***;
+            _s***REMOVED***Device = S***REMOVED***Device.Create(settings);
+
+            _led = new Ws2812b(_s***REMOVED***Device, LedCount);
+      ***REMOVED***
+
 ***REMOVED***
-            ***REMOVED***
-                s***REMOVED*** = S***REMOVED***Device.Create(settings);
-          ***REMOVED***
-            catch (ArgumentException ex)
-            ***REMOVED***
-                Console.WriteLine(ex.Message);
-                throw;
-          ***REMOVED***
-            _led = new Ws2812b(s***REMOVED***, LedCount);
+        ***REMOVED***
             TurnOn();
       ***REMOVED***
 
         public void TurnOff()
         ***REMOVED***
-            if (_led == null)
+            if (_led == null || !_isRunning)
 ***REMOVED***
             ColorWipe(_led, Color.Black, LedCount);
+            _isRunning = false;
+            _logger.LogWarning("LED Turned OFF");
       ***REMOVED***
 
         public void TurnOn()
         ***REMOVED***
-
             if (_led == null)
 ***REMOVED***
             ColorWipe(_led, Color.LightYellow, LedCount);
+***REMOVED***
+            _logger.LogWarning("LED Turned ON");
       ***REMOVED***
 
         private void ColorWipe(Ws28xx neo, Color color, int count)
@@ -165,5 +163,30 @@ namespace SmartMirror.Core
             device.Update();
 
       ***REMOVED***
+
+        #region disposing
+        protected virtual void Dispose(bool disposing)
+        ***REMOVED***
+***REMOVED***
+
+***REMOVED***
+            ***REMOVED***
+***REMOVED***
+                    TurnOff();
+
+                _led = null;
+                _s***REMOVED***Device.Dispose();
+                _s***REMOVED***Device = null;
+          ***REMOVED***
+***REMOVED***
+      ***REMOVED***
+
+***REMOVED***
+        ***REMOVED***
+            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+***REMOVED***
+***REMOVED***
+      ***REMOVED***
+***REMOVED***
   ***REMOVED***
 ***REMOVED***

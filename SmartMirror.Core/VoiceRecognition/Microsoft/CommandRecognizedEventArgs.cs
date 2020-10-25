@@ -1,6 +1,6 @@
 ***REMOVED***
 
-namespace SmartMirror.Core.VoiceRecognition
+namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
     public class CommandRecognizedEventArgs : EventArgs
     ***REMOVED***

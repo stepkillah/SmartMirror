@@ -8,18 +8,28 @@
 
     <ItemGroup>
       <None Remove="Assets\mirror_activation.table" />
+      <None Remove="VoiceRecognition\DeepSpeech\arctic_a0024.wav" />
+      <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
+      <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
     </ItemGroup>
 
     <ItemGroup>
       <Content Include="Assets\mirror_activation.table">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
+      <Content Include="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Iot.Device.Bindings" Version="1.1.0-prerelease.20276.1" />
         <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.13.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.8" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.9" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.9" />
+        <PackageReference Include="NAudio" Version="1.10.0" />
         <PackageReference Include="System.Device.G***REMOVED***o" Version="1.1.0-prerelease.20276.1" />
     </ItemGroup>
 
