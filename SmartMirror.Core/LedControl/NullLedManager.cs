@@ -1,4 +1,6 @@
-﻿namespace SmartMirror.Core.LedControl
+﻿using System.Drawing;
+
+namespace SmartMirror.Core.LedControl
 ***REMOVED***
     internal class NullLedManager : ILedManager
     ***REMOVED***
@@ -10,8 +12,9 @@
         ***REMOVED***
       ***REMOVED***
 
-        public void TurnOn()
+        public void TurnOn(Color color = default)
         ***REMOVED***
+            
       ***REMOVED***
 
 ***REMOVED***

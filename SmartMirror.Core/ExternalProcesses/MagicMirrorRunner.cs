@@ -6,7 +6,7 @@ namespace SmartMirror.Core.ExternalProcesses
 ***REMOVED***
     public class MagicMirrorRunner : IMagicMirrorRunner
     ***REMOVED***
-        private const string DefaultUserName = "***REMOVED***";
+        private const string DefaultUserName = "magicmirror";
 
 ***REMOVED***
 ***REMOVED***
@@ -22,19 +22,9 @@ namespace SmartMirror.Core.ExternalProcesses
             if (_magicMirrorRunProcess != null)
 ***REMOVED***
 
-            string defaultUser;
-            using (var proc = new Process() ***REMOVED*** StartInfo = new ProcessStartInfo("whoami") ***REMOVED*** RedirectStandardOutput = true ***REMOVED*** ***REMOVED***)
-            ***REMOVED***
-                proc.Start();
-                defaultUser = proc.StandardOutput.ReadToEnd().TrimEnd('\n');
-          ***REMOVED***
-
-            if (string.IsNullOrEmpty(defaultUser))
-                defaultUser = DefaultUserName;
-
             _magicMirrorRunProcess = new Process()
             ***REMOVED***
-                StartInfo = new ProcessStartInfo("sudo", $"-u ***REMOVED***defaultUser***REMOVED*** npm start")
+                StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** -g nogroup DISPLAY=:0.0 npm start")
                 ***REMOVED***
                     RedirectStandardOutput = true,
                     RedirectStandardInput = false,
@@ -50,6 +40,7 @@ namespace SmartMirror.Core.ExternalProcesses
         ***REMOVED***
             if (_magicMirrorRunProcess == null)
 ***REMOVED***
+            
             _magicMirrorRunProcess.Kill();
             _magicMirrorRunProcess.Dispose();
             _magicMirrorRunProcess = null;

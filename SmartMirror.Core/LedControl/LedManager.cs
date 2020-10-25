@@ -47,11 +47,11 @@ namespace SmartMirror.Core.LedControl
             _logger.LogWarning("LED Turned OFF");
       ***REMOVED***
 
-        public void TurnOn()
+        public void TurnOn(Color color = default)
         ***REMOVED***
             if (_led == null)
 ***REMOVED***
-            ColorWipe(_led, Color.LightYellow, LedCount);
+            ColorWipe(_led, color == default ? Color.White : color, LedCount);
 ***REMOVED***
             _logger.LogWarning("LED Turned ON");
       ***REMOVED***

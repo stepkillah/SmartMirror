@@ -1,4 +1,6 @@
 ***REMOVED***
+using System.Diagnostics;
+using System.Drawing;
 ***REMOVED***
 using Microsoft.Extensions.DependencyInjection;
 ***REMOVED***
@@ -32,7 +34,24 @@ namespace SmartMirror.Core
             ProgramLogger.LogWarning($"OS Information: ***REMOVED***osInfo***REMOVED***");
             StartProgram();
             while (_isRunning)
-                Console.Read();
+            ***REMOVED***
+                if (Debugger.IsAttached)
+                ***REMOVED***
+                    Console.Read();
+              ***REMOVED***
+                else
+                ***REMOVED***
+                    Console.WriteLine("Waiting for command");
+                    var line = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(line) && line.StartsWith("led color"))
+                    ***REMOVED***
+                        var color = line.Substring(10, line.Length - 10);
+                        Color ledColor = ColorTranslator.FromHtml(color);
+                        var ledManager = Container.GetService<ILedManager>();
+                        ledManager.TurnOn(ledColor);
+                  ***REMOVED***
+              ***REMOVED***
+          ***REMOVED***
       ***REMOVED***
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -44,6 +63,7 @@ namespace SmartMirror.Core
         private static async Task CleanupAndClose()
         ***REMOVED***
             ProgramLogger.LogInformation("Cleaning started");
+
             var audioService = Container.GetService<IAudioService>();
             await audioService.StopProcessing();
             audioService.Dispose();
@@ -65,9 +85,6 @@ namespace SmartMirror.Core
             Container.GetService<IAudioService>().StartProcessing();
             Container.GetService<ILedManager>().StartProcessing();
             Container.GetService<IMagicMirrorRunner>().StartProcessing();
-            var processes = Container.GetServices<IProcessService>();
-            foreach (var processService in processes)
-                processService.StopProcessing();
       ***REMOVED***
 
         private static void ConfigureConsole()

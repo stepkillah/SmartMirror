@@ -1,4 +1,5 @@
 ***REMOVED***
+using System.Drawing;
 
 namespace SmartMirror.Core.LedControl
 ***REMOVED***
@@ -6,6 +7,6 @@ namespace SmartMirror.Core.LedControl
     ***REMOVED***
         void StartProcessing();
         void TurnOff();
-        void TurnOn();
+        void TurnOn(Color color = default);
   ***REMOVED***
 ***REMOVED***
