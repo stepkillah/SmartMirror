@@ -1,6 +1,8 @@
-﻿namespace SmartMirror.Core.LedControl
 ***REMOVED***
-    public interface ILedManager
+
+namespace SmartMirror.Core.LedControl
+***REMOVED***
+    public interface ILedManager : IDisposable
     ***REMOVED***
         void StartProcessing();
         void TurnOff();

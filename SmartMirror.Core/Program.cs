@@ -41,8 +41,13 @@ namespace SmartMirror.Core
         private static async Task CleanupAndClose()
         ***REMOVED***
             ProgramLogger.LogInformation("Cleaning started");
+            var audioService = Container.GetService<IAudioService>();
+            await audioService.StopProcessing();
+            audioService.Dispose();
 
-            await Container.GetService<IAudioService>().StopProcessing();
+            var ledManager =  Container.GetService<ILedManager>();
+            ledManager.Dispose();
+            
             //_magicMirrorRunner?.StopProcessing();
 
             ProgramLogger.LogInformation("Cleaning finished\nClosing app...");

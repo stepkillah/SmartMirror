@@ -2,8 +2,7 @@
 
 namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
-
-    public class NullAudioService : IAudioService
+    internal class NullAudioService : IAudioService
     ***REMOVED***
 ***REMOVED***
         ***REMOVED***
@@ -13,6 +12,10 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
         public Task StopProcessing()
         ***REMOVED***
             return Task.CompletedTask;
+      ***REMOVED***
+
+***REMOVED***
+        ***REMOVED***
       ***REMOVED***
   ***REMOVED***
 ***REMOVED***
