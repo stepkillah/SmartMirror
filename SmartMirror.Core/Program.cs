@@ -3,6 +3,8 @@
 using Microsoft.Extensions.DependencyInjection;
 ***REMOVED***
 using SmartMirror.Core.Common;
+using SmartMirror.Core.ExternalProcesses;
+***REMOVED***
 using SmartMirror.Core.LedControl;
 using SmartMirror.Core.VoiceRecognition.DeepSpeech;
 using SmartMirror.Core.VoiceRecognition.Microsoft;
@@ -30,7 +32,7 @@ namespace SmartMirror.Core
             ProgramLogger.LogWarning($"OS Information: ***REMOVED***osInfo***REMOVED***");
             StartProgram();
             while (_isRunning)
-                Console.ReadKey();
+                Console.Read();
       ***REMOVED***
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -48,8 +50,9 @@ namespace SmartMirror.Core
 
             var ledManager =  Container.GetService<ILedManager>();
             ledManager.Dispose();
-            
-            //_magicMirrorRunner?.StopProcessing();
+
+            var magicMirrorRunner = Container.GetService<IMagicMirrorRunner>();
+            magicMirrorRunner.Dispose();
 
             ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
             _isRunning = false;
@@ -61,6 +64,10 @@ namespace SmartMirror.Core
         ***REMOVED***
             Container.GetService<IAudioService>().StartProcessing();
             Container.GetService<ILedManager>().StartProcessing();
+            Container.GetService<IMagicMirrorRunner>().StartProcessing();
+            var processes = Container.GetServices<IProcessService>();
+            foreach (var processService in processes)
+                processService.StopProcessing();
       ***REMOVED***
 
         private static void ConfigureConsole()
@@ -91,13 +98,13 @@ namespace SmartMirror.Core
 
         private static void InitContainer()
         ***REMOVED***
-
             //setup our DI
             Container = new ServiceCollection()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(InitAudioService)
                 //.AddSingleton(InitDeepSpeechAudioService)
                 .AddSingleton(InitLedManager)
+                .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>()
                 .BuildServiceProvider();
 
 
