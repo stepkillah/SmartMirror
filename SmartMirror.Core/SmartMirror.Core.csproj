@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;RaspberryDebug</Configurations>
+        <Configurations>Debug;Release;RaspberryDebug;RaspberryDebugRsync</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,12 +17,10 @@
       <Content Include="Assets\mirror_activation.table">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
-      <Content Include="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="DeepSpeech" Version="0.8.2" />
         <PackageReference Include="Iot.Device.Bindings" Version="1.1.0-prerelease.20276.1" />
         <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.13.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
@@ -40,7 +38,15 @@
     <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
         <DebugType>portable</DebugType>
     </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsync'">
+      <DebugType>portable</DebugType>
+    </PropertyGroup>
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
     </Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsync'">
+		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; E:\raspbery\cwrsync E:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+	</Target>
 </Project>

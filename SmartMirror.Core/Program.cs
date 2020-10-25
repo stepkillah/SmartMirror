@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 ***REMOVED***
 using SmartMirror.Core.Common;
 using SmartMirror.Core.LedControl;
+using SmartMirror.Core.VoiceRecognition.DeepSpeech;
 using SmartMirror.Core.VoiceRecognition.Microsoft;
 
 namespace SmartMirror.Core
@@ -95,6 +96,7 @@ namespace SmartMirror.Core
             Container = new ServiceCollection()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(InitAudioService)
+                //.AddSingleton(InitDeepSpeechAudioService)
                 .AddSingleton(InitLedManager)
                 .BuildServiceProvider();
 
@@ -119,6 +121,21 @@ namespace SmartMirror.Core
                 return new NullAudioService();
           ***REMOVED***
       ***REMOVED***
+
+        private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
+        ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                var audioService = new DeepSpeechAudioManager(arg.GetService<ILogger<DeepSpeechAudioManager>>());
+                return audioService;
+          ***REMOVED***
+            catch (Exception e)
+            ***REMOVED***
+                ProgramLogger.LogError(e, nameof(InitAudioService));
+                return new NullAudioService();
+          ***REMOVED***
+      ***REMOVED***
+
         private static ILedManager InitLedManager(IServiceProvider arg)
         ***REMOVED***
 ***REMOVED***
