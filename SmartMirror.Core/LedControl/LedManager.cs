@@ -179,6 +179,8 @@ namespace SmartMirror.Core.LedControl
                 _s***REMOVED***Device = null;
           ***REMOVED***
 ***REMOVED***
+
+            _logger.LogInformation($"***REMOVED***nameof(LedManager)***REMOVED*** disposed.");
       ***REMOVED***
 
 ***REMOVED***

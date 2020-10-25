@@ -50,6 +50,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** started.");
       ***REMOVED***
 
 ***REMOVED***
@@ -61,6 +62,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
           ***REMOVED***
 
             _isRunning = false;
+            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** stopped.");
       ***REMOVED***
 
 
@@ -157,6 +159,8 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
           ***REMOVED***
 
 ***REMOVED***
+
+            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** disposed.");
       ***REMOVED***
 
 
