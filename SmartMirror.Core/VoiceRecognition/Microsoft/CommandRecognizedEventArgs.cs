@@ -9,6 +9,12 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             Command = command;
       ***REMOVED***
 
+        public CommandRecognizedEventArgs(VoiceCommands command, object data) : this(command)
+        ***REMOVED***
+            Data = data;
+      ***REMOVED***
+
+        public object Data ***REMOVED*** get; ***REMOVED***
         public VoiceCommands Command ***REMOVED*** get; ***REMOVED***
   ***REMOVED***
 ***REMOVED***

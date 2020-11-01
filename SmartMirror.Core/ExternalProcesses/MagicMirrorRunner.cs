@@ -26,7 +26,7 @@ namespace SmartMirror.Core.ExternalProcesses
 
                 _magicMirrorRunProcess = new Process()
                 ***REMOVED***
-                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** -g nogroup DISPLAY=:0.0 npm start")
+                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
                     ***REMOVED***
                         RedirectStandardOutput = true,
                         RedirectStandardInput = false,

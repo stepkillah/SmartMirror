@@ -8,6 +8,8 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
         [Description("light on")]
         LedOn = 1,
         [Description("light off")]
-        LedOff = 2
+        LedOff = 2,
+        [Description("color")]
+        LedColorSet = 3
   ***REMOVED***
 ***REMOVED***

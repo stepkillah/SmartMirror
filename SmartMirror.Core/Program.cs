@@ -18,6 +18,7 @@ namespace SmartMirror.Core
         public static ILogger ProgramLogger;
 
         private static bool _isRunning = true;
+        private static bool _isCleaning;
 
         static void Main(string[] args)
         ***REMOVED***
@@ -68,21 +69,31 @@ namespace SmartMirror.Core
 
         private static async Task CleanupAndClose()
         ***REMOVED***
-            ProgramLogger.LogInformation("Cleaning started");
+            if (_isCleaning)
+                ProgramLogger.LogInformation("Cleaning already started.");
+***REMOVED***
+            ***REMOVED***
+                _isCleaning = true;
+                ProgramLogger.LogInformation("Cleaning started");
 
-            var audioService = Container.GetService<IAudioService>();
-            await audioService.StopProcessing();
-            audioService.Dispose();
+                var audioService = Container.GetService<IAudioService>();
+                await audioService.StopProcessing();
+                audioService.Dispose();
 
-            var ledManager =  Container.GetService<ILedManager>();
-            ledManager.Dispose();
+                var ledManager = Container.GetService<ILedManager>();
+                ledManager.Dispose();
 
-            var magicMirrorRunner = Container.GetService<IMagicMirrorRunner>();
-            magicMirrorRunner.Dispose();
+                var magicMirrorRunner = Container.GetService<IMagicMirrorRunner>();
+                magicMirrorRunner.Dispose();
 
-            ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
-            _isRunning = false;
-            Environment.Exit(0);
+                ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
+***REMOVED***
+                Environment.Exit(0);
+          ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                _isCleaning = false;
+          ***REMOVED***
       ***REMOVED***
 
 
@@ -110,6 +121,10 @@ namespace SmartMirror.Core
 ***REMOVED***
                 case VoiceCommands.LedOff:
                     ledManager.TurnOff();
+***REMOVED***
+                case VoiceCommands.LedColorSet:
+                    if (e.Data is Color color)
+                        ledManager.TurnOn(color);
 ***REMOVED***
                 default:
 ***REMOVED***
