@@ -30,7 +30,7 @@ namespace SmartMirror.Core.ExternalProcesses
                     ***REMOVED***
                         RedirectStandardOutput = true,
                         RedirectStandardInput = false,
-                        UseShellExecute = true,
+                        UseShellExecute = false,
                         CreateNoWindow = false,
                         WorkingDirectory = "/home/***REMOVED***/Projects/MagicMirror"
                   ***REMOVED***
