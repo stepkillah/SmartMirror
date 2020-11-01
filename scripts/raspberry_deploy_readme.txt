@@ -25,9 +25,9 @@ Linux:
 1. Setup ssh
 2. Install VSDBG by running the following command. Replace '~/vsdbg' with wherever you want vsdbg installed to.
 # Using cURL
-curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v vs2017u5 -l ~/vsdbg
+curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg
 # Alternatively, wget
-wget https://aka.ms/getvsdbgsh -O - 2>/dev/null | /bin/sh /dev/stdin -v vs2017u5 -l ~/vsdbg
+wget https://aka.ms/getvsdbgsh -O - 2>/dev/null | /bin/sh /dev/stdin -v latest -l ~/vsdbg
 3. Configure ssh auto-login
 sudo nano /etc/ssh/sshd_config
 #PermitRootLogin yes
@@ -77,7 +77,7 @@ https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-task
         <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
     </Target> 
 6. Start debug using following command in VisualStudio command line
-DebugAdapterHost.Launch /LaunchJson:"E:\Job\SmartMirror\SmartMirror.LedStripe\.vs\launch.vs.json" /EngineGuid:541B8A8A-6081-4506-9F0A-1CE771DEBC04
+DebugAdapterHost.Launch /LaunchJson:"E:\Job\SmartMirror\SmartMirror\.vs\launch.vs.json" /EngineGuid:541B8A8A-6081-4506-9F0A-1CE771DEBC04
 
 
 

@@ -13,6 +13,8 @@ Global
 		RaspberryDebug|x64 = RaspberryDebug|x64
 		RaspberryDebugRsync|Any CPU = RaspberryDebugRsync|Any CPU
 		RaspberryDebugRsync|x64 = RaspberryDebugRsync|x64
+		RaspberryDebugRsyncX64|Any CPU = RaspberryDebugRsyncX64|Any CPU
+		RaspberryDebugRsyncX64|x64 = RaspberryDebugRsyncX64|x64
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 	EndGlobalSection
@@ -29,6 +31,10 @@ Global
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|Any CPU.Build.0 = RaspberryDebugRsync|Any CPU
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|x64.ActiveCfg = RaspberryDebugRsync|Any CPU
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|x64.Build.0 = RaspberryDebugRsync|Any CPU
+		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|Any CPU.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
+		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|Any CPU.Build.0 = RaspberryDebugRsyncX64|Any CPU
+		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|x64.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
+		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|x64.Build.0 = RaspberryDebugRsyncX64|Any CPU
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|x64.ActiveCfg = Release|Any CPU

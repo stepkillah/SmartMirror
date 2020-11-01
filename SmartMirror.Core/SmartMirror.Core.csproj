@@ -1,52 +1,61 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Configurations>Debug;Release;RaspberryDebug;RaspberryDebugRsync</Configurations>
-    </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<Configurations>Debug;Release;RaspberryDebug;RaspberryDebugRsync;RaspberryDebugRsyncX64</Configurations>
+	</PropertyGroup>
 
-    <ItemGroup>
-      <None Remove="Assets\mirror_activation.table" />
-      <None Remove="VoiceRecognition\DeepSpeech\arctic_a0024.wav" />
-      <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
-      <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
-    </ItemGroup>
+	<ItemGroup>
+		<None Remove="Assets\mirror_activation.table" />
+		<None Remove="VoiceRecognition\DeepSpeech\arctic_a0024.wav" />
+		<None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
+		<None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <Content Include="Assets\mirror_activation.table">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </Content>
-    </ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\mirror_activation.table">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="DeepSpeech" Version="0.8.2" />
-        <PackageReference Include="Iot.Device.Bindings" Version="1.1.0-prerelease.20276.1" />
-        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.13.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.9" />
-        <PackageReference Include="NAudio" Version="1.10.0" />
-        <PackageReference Include="System.Device.G***REMOVED***o" Version="1.1.0-prerelease.20276.1" />
-    </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="DeepSpeech" Version="0.8.2" />
+		<PackageReference Include="Iot.Device.Bindings" Version="1.1.0-prerelease.20276.1" />
+		<PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.13.0" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.9" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.9" />
+		<PackageReference Include="NAudio" Version="1.10.0" />
+		<PackageReference Include="System.Device.G***REMOVED***o" Version="1.1.0-prerelease.20276.1" />
+	</ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="EventArgs\" />
-    </ItemGroup>
+	<ItemGroup>
+		<Folder Include="EventArgs\" />
+	</ItemGroup>
 
-    <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <DebugType>portable</DebugType>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
 
-    <PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsync'">
-      <DebugType>portable</DebugType>
-    </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsync'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
 
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
-    </Target>
+	<PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsyncX64'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
+		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
+	</Target>
+
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsync'">
 		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; E:\raspbery\cwrsync E:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+	</Target>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsyncX64'">
+		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; E:\raspbery\cwrsync E:\ssh\***REMOVED***_key_***REMOVED***_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
 	</Target>
 </Project>

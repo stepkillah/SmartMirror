@@ -6,7 +6,7 @@ namespace SmartMirror.Core.ExternalProcesses
 ***REMOVED***
     public class MagicMirrorRunner : IMagicMirrorRunner
     ***REMOVED***
-        private const string DefaultUserName = "magicmirror";
+        private const string DefaultUserName = "***REMOVED***";
 
 ***REMOVED***
 ***REMOVED***
@@ -19,31 +19,48 @@ namespace SmartMirror.Core.ExternalProcesses
         private Process _magicMirrorRunProcess;
 ***REMOVED***
         ***REMOVED***
-            if (_magicMirrorRunProcess != null)
+***REMOVED***
+            ***REMOVED***
+                if (_magicMirrorRunProcess != null)
 ***REMOVED***
 
-            _magicMirrorRunProcess = new Process()
-            ***REMOVED***
-                StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** -g nogroup DISPLAY=:0.0 npm start")
+                _magicMirrorRunProcess = new Process()
                 ***REMOVED***
-                    RedirectStandardOutput = true,
-                    RedirectStandardInput = false,
-                    UseShellExecute = false,
-                    CreateNoWindow = false,
-                    WorkingDirectory = "/home/***REMOVED***/magicmirror"
-              ***REMOVED***
-          ***REMOVED***;
-            _magicMirrorRunProcess.Start();
+                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** -g nogroup DISPLAY=:0.0 npm start")
+                    ***REMOVED***
+                        RedirectStandardOutput = true,
+                        RedirectStandardInput = false,
+                        UseShellExecute = true,
+                        CreateNoWindow = false,
+                        WorkingDirectory = "/home/***REMOVED***/Projects/MagicMirror"
+                  ***REMOVED***
+              ***REMOVED***;
+                _magicMirrorRunProcess.Start();
+          ***REMOVED***
+            catch (Exception e)
+            ***REMOVED***
+                _magicMirrorRunProcess = null;
+                _logger.LogError(e, nameof(StartProcessing));
+          ***REMOVED***
       ***REMOVED***
 
         public void StopProcessing()
         ***REMOVED***
-            if (_magicMirrorRunProcess == null)
 ***REMOVED***
-            
-            _magicMirrorRunProcess.Kill();
-            _magicMirrorRunProcess.Dispose();
-            _magicMirrorRunProcess = null;
+            ***REMOVED***
+                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng");
+
+                if (_magicMirrorRunProcess == null)
+***REMOVED***
+
+                _magicMirrorRunProcess.Kill();
+                _magicMirrorRunProcess.Dispose();
+                _magicMirrorRunProcess = null;
+          ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                _logger.LogError(ex,$"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng error");
+          ***REMOVED***
       ***REMOVED***
 
 

@@ -55,14 +55,22 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 ***REMOVED***
         ***REMOVED***
-            if (_isRunning)
-            ***REMOVED***
 ***REMOVED***
-                    await _keywordRecognizer.StopRecognitionAsync();
-          ***REMOVED***
+            ***REMOVED***
+                _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED***: Stop***REMOVED***ng");
+***REMOVED***
+                ***REMOVED***
+***REMOVED***
+***REMOVED***
+              ***REMOVED***
 
-            _isRunning = false;
-            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** stopped.");
+***REMOVED***
+                _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED***: Stopped");
+          ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+                _logger.LogError(ex, $"***REMOVED***nameof(AudioService)***REMOVED***: Stop***REMOVED***ng error");
+          ***REMOVED***
       ***REMOVED***
 
 

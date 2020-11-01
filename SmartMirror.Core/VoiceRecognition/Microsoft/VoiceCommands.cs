@@ -5,9 +5,9 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
     public enum VoiceCommands : byte
     ***REMOVED***
         Unknown = 0,
-        [Description("led light on")]
+        [Description("light on")]
         LedOn = 1,
-        [Description("led light off")]
+        [Description("light off")]
         LedOff = 2
   ***REMOVED***
 ***REMOVED***
