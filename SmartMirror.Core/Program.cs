@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 ***REMOVED***
 using SmartMirror.Core.Common;
 using SmartMirror.Core.ExternalProcesses;
+***REMOVED***
 using SmartMirror.Core.LedControl;
 using SmartMirror.Core.VoiceRecognition.DeepSpeech;
 using SmartMirror.Core.VoiceRecognition.Microsoft;
@@ -131,6 +132,10 @@ namespace SmartMirror.Core
           ***REMOVED***
       ***REMOVED***
 
+
+        private static void AudioServiceOnKeywordCommandRecognized(object? sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.SuccessSoundPath);
+
+        private static void AudioServiceOnCommandRecognitionError(object? sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.ErrorSoundPath);
         #region DI
 
 
@@ -139,6 +144,7 @@ namespace SmartMirror.Core
             //setup our DI
             Container = new ServiceCollection()
                 .AddLogging(builder => builder.AddConsole())
+                .AddSingleton<IAPlayRunner, APlayRunner>()
                 .AddSingleton(InitAudioService)
                 //.AddSingleton(InitDeepSpeechAudioService)
                 .AddSingleton(InitLedManager)
@@ -158,6 +164,8 @@ namespace SmartMirror.Core
             ***REMOVED***
                 var audioService = new AudioService(arg.GetService<ILogger<AudioService>>());
                 audioService.CommandRecognized += AudioServiceOnCommandRecognized;
+                audioService.KeywordCommandRecognized += AudioServiceOnKeywordCommandRecognized;
+                audioService.CommandRecognitionError += AudioServiceOnCommandRecognitionError;
                 return audioService;
           ***REMOVED***
             catch (Exception e)
@@ -166,6 +174,7 @@ namespace SmartMirror.Core
                 return new NullAudioService();
           ***REMOVED***
       ***REMOVED***
+
 
         private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
         ***REMOVED***

@@ -50,6 +50,8 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 
         public event EventHandler<CommandRecognizedEventArgs> CommandRecognized;
+        public event EventHandler CommandRecognitionError;
+        public event EventHandler KeywordCommandRecognized;
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
@@ -120,6 +122,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             ***REMOVED***
 ***REMOVED***
                     _logger.LogInformation($"We recognized keyword: ***REMOVED***result.Text***REMOVED***");
+                    KeywordCommandRecognized?.Invoke(this, EventArgs.Empty);
                     await RecognizeCommandAsync();
 ***REMOVED***
 ***REMOVED***
@@ -136,6 +139,12 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
         private void RecognizeCommand(string rawText)
         ***REMOVED***
+            if (rawText == null)
+            ***REMOVED***
+                CommandRecognitionError?.Invoke(this, EventArgs.Empty);
+***REMOVED***
+          ***REMOVED***
+
             var lowerCommand = rawText.ToLowerInvariant().TrimEnd('.').Trim(' ');
             object commandData = null;
             if (lowerCommand.Contains(' ') && lowerCommand.StartsWith("color"))
@@ -145,8 +154,13 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
                 if (parsed.Length > 1)
                     commandData = GetColorFromCommand(parsed[1]);
           ***REMOVED***
+
             if (!_commandsMap.ContainsKey(lowerCommand))
+            ***REMOVED***
+                CommandRecognitionError?.Invoke(this, EventArgs.Empty);
 ***REMOVED***
+          ***REMOVED***
+
             var command = _commandsMap[lowerCommand];
             CommandRecognized?.Invoke(this, new CommandRecognizedEventArgs(command, commandData));
       ***REMOVED***

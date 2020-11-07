@@ -1,6 +1,7 @@
 ***REMOVED***
 using System.Diagnostics;
 ***REMOVED***
+***REMOVED***
 
 namespace SmartMirror.Core.ExternalProcesses
 ***REMOVED***

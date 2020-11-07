@@ -1,6 +1,4 @@
-﻿***REMOVED***
-
-namespace SmartMirror.Core.ExternalProcesses
+﻿namespace SmartMirror.Core.Interfaces
 ***REMOVED***
     public interface IMagicMirrorRunner : IProcessService
     ***REMOVED***

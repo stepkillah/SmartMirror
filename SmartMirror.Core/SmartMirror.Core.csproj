@@ -7,15 +7,23 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<None Remove="Assets\error.wav" />
 		<None Remove="Assets\mirror_activation.table" />
+		<None Remove="Assets\success.wav" />
 		<None Remove="VoiceRecognition\DeepSpeech\arctic_a0024.wav" />
 		<None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
 		<None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
 	</ItemGroup>
 
 	<ItemGroup>
+		<Content Include="Assets\error.wav">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
 		<Content Include="Assets\mirror_activation.table">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\success.wav">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 
