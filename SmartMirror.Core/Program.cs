@@ -8,7 +8,7 @@ using SmartMirror.Core.Common;
 using SmartMirror.Core.ExternalProcesses;
 ***REMOVED***
 using SmartMirror.Core.LedControl;
-using SmartMirror.Core.VoiceRecognition.DeepSpeech;
+//using SmartMirror.Core.VoiceRecognition.DeepSpeech;
 using SmartMirror.Core.VoiceRecognition.Microsoft;
 
 namespace SmartMirror.Core
@@ -51,7 +51,7 @@ namespace SmartMirror.Core
                             var color = line.Substring(10, line.Length - 10);
                             Color ledColor = ColorTranslator.FromHtml(color);
                             var ledManager = Container.GetService<ILedManager>();
-                            ledManager.TurnOn(ledColor);
+                            ledManager?.TurnOn(ledColor);
                       ***REMOVED***
                         catch (Exception e)
                         ***REMOVED***
@@ -78,14 +78,17 @@ namespace SmartMirror.Core
                 ProgramLogger.LogInformation("Cleaning started");
 
                 var audioService = Container.GetService<IAudioService>();
-                await audioService.StopProcessing();
-                audioService.Dispose();
+                if (audioService != null)
+                ***REMOVED***
+                    await audioService.StopProcessing();
+                    audioService.Dispose();
+              ***REMOVED***
 
                 var ledManager = Container.GetService<ILedManager>();
-                ledManager.Dispose();
+                ledManager?.Dispose();
 
                 var magicMirrorRunner = Container.GetService<IMagicMirrorRunner>();
-                magicMirrorRunner.Dispose();
+                magicMirrorRunner?.Dispose();
 
                 ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
 ***REMOVED***
@@ -100,9 +103,9 @@ namespace SmartMirror.Core
 
         private static void StartProgram()
         ***REMOVED***
-            Container.GetService<IAudioService>().StartProcessing();
-            Container.GetService<ILedManager>().StartProcessing();
-            Container.GetService<IMagicMirrorRunner>().StartProcessing();
+            Container.GetService<IAudioService>()?.StartProcessing();
+            Container.GetService<ILedManager>()?.StartProcessing();
+            Container.GetService<IMagicMirrorRunner>()?.StartProcessing();
       ***REMOVED***
 
         private static void ConfigureConsole()
@@ -118,14 +121,14 @@ namespace SmartMirror.Core
             switch (e.Command)
             ***REMOVED***
                 case VoiceCommands.LedOn:
-                    ledManager.TurnOn();
+                    ledManager?.TurnOn();
 ***REMOVED***
                 case VoiceCommands.LedOff:
-                    ledManager.TurnOff();
+                    ledManager?.TurnOff();
 ***REMOVED***
                 case VoiceCommands.LedColorSet:
                     if (e.Data is Color color)
-                        ledManager.TurnOn(color);
+                        ledManager?.TurnOn(color);
 ***REMOVED***
                 default:
 ***REMOVED***
@@ -133,9 +136,9 @@ namespace SmartMirror.Core
       ***REMOVED***
 
 
-        private static void AudioServiceOnKeywordCommandRecognized(object? sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.SuccessSoundPath);
+        private static void AudioServiceOnKeywordCommandRecognized(object sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.SuccessSoundPath);
 
-        private static void AudioServiceOnCommandRecognitionError(object? sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.ErrorSoundPath);
+        private static void AudioServiceOnCommandRecognitionError(object sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.ErrorSoundPath);
         #region DI
 
 
@@ -176,19 +179,19 @@ namespace SmartMirror.Core
       ***REMOVED***
 
 
-        private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                var audioService = new DeepSpeechAudioManager(arg.GetService<ILogger<DeepSpeechAudioManager>>());
-                return audioService;
-          ***REMOVED***
-            catch (Exception e)
-            ***REMOVED***
-                ProgramLogger.LogError(e, nameof(InitAudioService));
-                return new NullAudioService();
-          ***REMOVED***
-      ***REMOVED***
+        //private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
+        //***REMOVED***
+        //    try
+        //    ***REMOVED***
+        //        var audioService = new DeepSpeechAudioManager(arg.GetService<ILogger<DeepSpeechAudioManager>>());
+        //        return audioService;
+        //  ***REMOVED***
+        //    catch (Exception e)
+        //    ***REMOVED***
+        //        ProgramLogger.LogError(e, nameof(InitAudioService));
+        //        return new NullAudioService();
+        //  ***REMOVED***
+        //***REMOVED***
 
         private static ILedManager InitLedManager(IServiceProvider arg)
         ***REMOVED***
