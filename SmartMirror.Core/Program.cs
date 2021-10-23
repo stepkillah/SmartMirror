@@ -10,6 +10,7 @@ using SmartMirror.Core.Common;
 using SmartMirror.Core.ExternalProcesses;
 ***REMOVED***
 using SmartMirror.Core.LedControl;
+using SmartMirror.Core.Services;
 //using SmartMirror.Core.VoiceRecognition.DeepSpeech;
 using SmartMirror.Core.VoiceRecognition.Microsoft;
 
@@ -37,45 +38,10 @@ namespace SmartMirror.Core
             var osInfo = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
             ProgramLogger.LogInformation($"OS Information: ***REMOVED***osInfo***REMOVED***");
             StartProgram();
+            ProgramLogger.LogInformation("Program services started");
             await host.StartAsync(AppCancellationTokenSource.Token);
-            ProgramLogger.LogInformation("Host Started");
-            _ = Task.Run(() => StartListenKeyCommands(AppCancellationTokenSource.Token), AppCancellationTokenSource.Token).ConfigureAwait(false);
-
             ProgramLogger.LogInformation("App successfully started");
             await host.WaitForShutdownAsync(AppCancellationTokenSource.Token);
-      ***REMOVED***
-
-        private static Task StartListenKeyCommands(CancellationToken cancellationToken)
-        ***REMOVED***
-            ProgramLogger.LogInformation("Starting waiting for keyboard commands");
-            while (!cancellationToken.IsCancellationRequested)
-            ***REMOVED***
-                if (Debugger.IsAttached)
-                ***REMOVED***
-                    Console.Read();
-              ***REMOVED***
-                else
-                ***REMOVED***
-                    Console.WriteLine("Waiting for command");
-                    var line = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(line) && line.StartsWith("led color"))
-                    ***REMOVED***
-            ***REMOVED***
-                        ***REMOVED***
-                            var color = line.Substring(10, line.Length - 10);
-                            Color ledColor = ColorTranslator.FromHtml(color);
-                            var ledManager = Container.GetService<ILedManager>();
-                            ledManager?.TurnOff();
-                      ***REMOVED***
-                        catch (Exception e)
-                        ***REMOVED***
-                            ProgramLogger.LogError(e, "Waiting for command");
-                      ***REMOVED***
-                  ***REMOVED***
-              ***REMOVED***
-          ***REMOVED***
-
-            return Task.CompletedTask;
       ***REMOVED***
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -87,7 +53,11 @@ namespace SmartMirror.Core
         private static async Task CleanupAndClose()
         ***REMOVED***
             if (_isCleaning)
+            ***REMOVED***
                 ProgramLogger.LogInformation("Cleaning already started.");
+***REMOVED***
+          ***REMOVED***
+
 ***REMOVED***
             ***REMOVED***
                 _isCleaning = true;
@@ -121,6 +91,7 @@ namespace SmartMirror.Core
             Container.GetService<IAudioService>()?.StartProcessing();
             Container.GetService<ILedManager>()?.StartProcessing();
             Container.GetService<IMagicMirrorRunner>()?.StartProcessing();
+            _ = Task.Run(() => Container.GetService<IKeyboardCommandsService>()?.StartListenKeyCommands(AppCancellationTokenSource.Token));
       ***REMOVED***
 
         private static void ConfigureConsole()
@@ -163,7 +134,8 @@ namespace SmartMirror.Core
                         .AddSingleton<IAPlayRunner, APlayRunner>()
                         .AddSingleton(InitAudioService)
                         .AddSingleton(InitLedManager)
-                        .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>());
+                        .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>()
+                        .AddSingleton<IKeyboardCommandsService, KeyboardCommandsService>());
 
         private static IAudioService InitAudioService(IServiceProvider arg)
         ***REMOVED***

@@ -1,14 +1,10 @@
 ***REMOVED***
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 using SmartMirror.Core.Helpers;
-using Color = System.Drawing.Color;
 
 namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
@@ -26,12 +22,6 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
 ***REMOVED***
 
-        private readonly Dictionary<string, VoiceCommands> _commandsMap = new Dictionary<string, VoiceCommands>()
-        ***REMOVED***
-            ***REMOVED***VoiceCommands.LedOn.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedOn***REMOVED***,
-            ***REMOVED***VoiceCommands.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedOff***REMOVED***,
-            ***REMOVED***VoiceCommands.LedColorSet.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedColorSet***REMOVED***
-      ***REMOVED***;
 
         public AudioService(ILogger<AudioService> logger)
         ***REMOVED***
@@ -138,30 +128,14 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
         private void RecognizeCommand(string rawText)
         ***REMOVED***
-            if (rawText == null)
+            var result = MirrorCommandsHelper.RecognizeCommand(rawText, _logger);
+***REMOVED***
             ***REMOVED***
                 CommandRecognitionError?.Invoke(this, EventArgs.Empty);
 ***REMOVED***
           ***REMOVED***
 
-            var lowerCommand = rawText.ToLowerInvariant().TrimEnd('.').Trim(' ');
-            object commandData = null;
-            if (lowerCommand.Contains(' ') && lowerCommand.StartsWith("color"))
-            ***REMOVED***
-                var parsed = lowerCommand.Split(' ');
-                lowerCommand = parsed[0];
-                if (parsed.Length > 1)
-                    commandData = GetColorFromCommand(parsed[1]);
-          ***REMOVED***
-
-            if (!_commandsMap.ContainsKey(lowerCommand))
-            ***REMOVED***
-                CommandRecognitionError?.Invoke(this, EventArgs.Empty);
-***REMOVED***
-          ***REMOVED***
-
-            var command = _commandsMap[lowerCommand];
-            CommandRecognized?.Invoke(this, new CommandRecognizedEventArgs(command, commandData));
+            CommandRecognized?.Invoke(this, new CommandRecognizedEventArgs(result.Command, result.CommandData));
       ***REMOVED***
 
 
@@ -175,21 +149,6 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
 
       ***REMOVED***
-
-        private Color? GetColorFromCommand(string command)
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                return ColorTranslator.FromHtml(command);
-          ***REMOVED***
-            catch (Exception e)
-            ***REMOVED***
-                _logger.LogError(e, $"***REMOVED***nameof(AudioService)***REMOVED***: Parsing color failed");
-                return null;
-          ***REMOVED***
-      ***REMOVED***
-
-
 
 ***REMOVED***
 

@@ -53,7 +53,7 @@
     <PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsyncX64'">
         <DebugType>portable</DebugType>
     </PropertyGroup>
-
+    
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
         <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
     </Target>
