@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Drawing;
 ***REMOVED***
 ***REMOVED***
-using Iot.Device.BrickPi3.Sensors;
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -13,7 +12,7 @@ using Color = System.Drawing.Color;
 
 namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
-    public class AudioService : IAudioService, IDisposable
+    public class AudioService : IAudioService, IDisposable, IAsyncDisposable
     ***REMOVED***
 ***REMOVED***
 
@@ -24,7 +23,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 ***REMOVED***
 ***REMOVED***
-        private readonly KeywordRecognitionModel _keywordModel;
+***REMOVED***
 ***REMOVED***
 
         private readonly Dictionary<string, VoiceCommands> _commandsMap = new Dictionary<string, VoiceCommands>()
@@ -189,9 +188,13 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
                 return null;
           ***REMOVED***
       ***REMOVED***
+
+
+
 ***REMOVED***
 
 ***REMOVED***
+
         protected virtual void Dispose(bool disposing)
         ***REMOVED***
 ***REMOVED***
@@ -199,8 +202,9 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-                _keywordRecognizer?.Dispose();
-                _keywordRecognizer = null;
+***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
           ***REMOVED***
@@ -210,11 +214,65 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** disposed.");
       ***REMOVED***
 
+        protected virtual async ValueTask DisposeAsync(bool disposing)
+        ***REMOVED***
+***REMOVED***
+***REMOVED***
+            ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+          ***REMOVED***
+
+***REMOVED***
+
+            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** disposed.");
+      ***REMOVED***
 
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+      ***REMOVED***
+
+***REMOVED***
+        ***REMOVED***
+***REMOVED***
+***REMOVED***
+
+      ***REMOVED***
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
+        ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+***REMOVED***
+                ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
+                    _keywordRecognizer.Dispose();
+***REMOVED***
+***REMOVED***
+              ***REMOVED***
+          ***REMOVED***
+***REMOVED***
+            ***REMOVED***
+***REMOVED***
+                ***REMOVED***
+                    _logger.LogError(e, $"Keyword recognizer disposing failed 3 of 3");
+***REMOVED***
+              ***REMOVED***
+***REMOVED***
+                _logger.LogWarning(e, $"Keyword recognizer disposing failed. Trying ***REMOVED***_triesCount***REMOVED*** of ***REMOVED***_maxTriesCount***REMOVED*** tries");
+***REMOVED***
+          ***REMOVED***
       ***REMOVED***
 ***REMOVED***
 

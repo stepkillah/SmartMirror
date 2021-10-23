@@ -3,5 +3,10 @@
     "SmartMirror.LedStripe": ***REMOVED***
       "commandName": "Project"
   ***REMOVED***
+    "WSL": ***REMOVED***
+      "commandName": "WSL2",
+      "environmentVariables": ***REMOVED******REMOVED***,
+      "distributionName": ""
+  ***REMOVED***
 ***REMOVED***
 ***REMOVED***

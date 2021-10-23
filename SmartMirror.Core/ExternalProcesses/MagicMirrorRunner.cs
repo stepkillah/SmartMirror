@@ -1,4 +1,5 @@
 ***REMOVED***
+using System.ComponentModel;
 using System.Diagnostics;
 ***REMOVED***
 ***REMOVED***
@@ -54,7 +55,14 @@ namespace SmartMirror.Core.ExternalProcesses
                 if (_magicMirrorRunProcess == null)
 ***REMOVED***
 
-                _magicMirrorRunProcess.Kill();
+    ***REMOVED***
+                ***REMOVED***
+                    _magicMirrorRunProcess.Kill();
+              ***REMOVED***
+                catch (Win32Exception e) when(e.NativeErrorCode == 1)
+                ***REMOVED***
+                    _logger.LogError(e, $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Failed to properly kill process");
+              ***REMOVED***
                 _magicMirrorRunProcess.Dispose();
                 _magicMirrorRunProcess = null;
           ***REMOVED***

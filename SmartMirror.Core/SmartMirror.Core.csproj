@@ -28,13 +28,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Iot.Device.Bindings" Version="1.4.0" />
-        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.16.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+        <PackageReference Include="Iot.Device.Bindings" Version="1.5.0" />
+        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.18.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-        <PackageReference Include="System.Device.G***REMOVED***o" Version="1.4.0" />
+        <PackageReference Include="System.Device.G***REMOVED***o" Version="1.5.0" />
     </ItemGroup>
 
     <ItemGroup>
@@ -58,10 +59,10 @@
     </Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsync'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; E:\raspbery\cwrsync E:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
     </Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsyncX64'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; E:\raspbery\cwrsync E:\ssh\***REMOVED***_key_***REMOVED***_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\***REMOVED***_key_***REMOVED***_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
     </Target>
 </Project>

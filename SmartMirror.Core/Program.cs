@@ -1,8 +1,10 @@
 ***REMOVED***
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading;
 ***REMOVED***
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 ***REMOVED***
 using SmartMirror.Core.Common;
 using SmartMirror.Core.ExternalProcesses;
@@ -17,24 +19,36 @@ namespace SmartMirror.Core
     ***REMOVED***
         public static IServiceProvider Container ***REMOVED*** get; private set; ***REMOVED***
         public static ILogger ProgramLogger;
-
-        private static bool _isRunning = true;
         private static bool _isCleaning;
+        private static readonly CancellationTokenSource AppCancellationTokenSource = new CancellationTokenSource();
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         ***REMOVED***
-            InitContainer();
+            using IHost host = CreateHostBuilder(args).Build();
+            Container = host.Services;
             if (Container == null)
                 throw new ArgumentNullException(nameof(Container));
+            ProgramLogger = Container.GetService<ILoggerFactory>()
+                .CreateLogger<Program>();
 
+            ProgramLogger.LogDebug("Container initialized");
             ConfigureConsole();
-
             ProgramLogger.LogInformation("SmartMirror");
-
             var osInfo = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            ProgramLogger.LogWarning($"OS Information: ***REMOVED***osInfo***REMOVED***");
+            ProgramLogger.LogInformation($"OS Information: ***REMOVED***osInfo***REMOVED***");
             StartProgram();
-            while (_isRunning)
+            await host.StartAsync(AppCancellationTokenSource.Token);
+            ProgramLogger.LogInformation("Host Started");
+            _ = Task.Run(() => StartListenKeyCommands(AppCancellationTokenSource.Token), AppCancellationTokenSource.Token).ConfigureAwait(false);
+
+            ProgramLogger.LogInformation("App successfully started");
+            await host.WaitForShutdownAsync(AppCancellationTokenSource.Token);
+      ***REMOVED***
+
+        private static Task StartListenKeyCommands(CancellationToken cancellationToken)
+        ***REMOVED***
+            ProgramLogger.LogInformation("Starting waiting for keyboard commands");
+            while (!cancellationToken.IsCancellationRequested)
             ***REMOVED***
                 if (Debugger.IsAttached)
                 ***REMOVED***
@@ -51,7 +65,7 @@ namespace SmartMirror.Core
                             var color = line.Substring(10, line.Length - 10);
                             Color ledColor = ColorTranslator.FromHtml(color);
                             var ledManager = Container.GetService<ILedManager>();
-                            ledManager?.TurnOn(ledColor);
+                            ledManager?.TurnOff();
                       ***REMOVED***
                         catch (Exception e)
                         ***REMOVED***
@@ -60,6 +74,8 @@ namespace SmartMirror.Core
                   ***REMOVED***
               ***REMOVED***
           ***REMOVED***
+
+            return Task.CompletedTask;
       ***REMOVED***
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
@@ -91,8 +107,7 @@ namespace SmartMirror.Core
                 magicMirrorRunner?.Dispose();
 
                 ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
-***REMOVED***
-                Environment.Exit(0);
+                AppCancellationTokenSource.Cancel();
           ***REMOVED***
 ***REMOVED***
             ***REMOVED***
@@ -136,30 +151,19 @@ namespace SmartMirror.Core
       ***REMOVED***
 
 
-        private static void AudioServiceOnKeywordCommandRecognized(object sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.SuccessSoundPath);
+        private static void AudioServiceOnKeywordCommandRecognized(object sender, EventArgs e) => Container.GetService<IAPlayRunner>()?.Play(Constants.SuccessSoundPath);
 
-        private static void AudioServiceOnCommandRecognitionError(object sender, EventArgs e) => Container.GetService<IAPlayRunner>().Play(Constants.ErrorSoundPath);
+        private static void AudioServiceOnCommandRecognitionError(object sender, EventArgs e) => Container.GetService<IAPlayRunner>()?.Play(Constants.ErrorSoundPath);
         #region DI
 
-
-        private static void InitContainer()
-        ***REMOVED***
-            //setup our DI
-            Container = new ServiceCollection()
-                .AddLogging(builder => builder.AddConsole())
-                .AddSingleton<IAPlayRunner, APlayRunner>()
-                .AddSingleton(InitAudioService)
-                //.AddSingleton(InitDeepSpeechAudioService)
-                .AddSingleton(InitLedManager)
-                .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>()
-                .BuildServiceProvider();
-
-
-            ProgramLogger = Container.GetService<ILoggerFactory>()
-                .CreateLogger<Program>();
-
-            ProgramLogger.LogDebug("Container initialized");
-      ***REMOVED***
+        static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureServices((_, services) =>
+                    services.AddLogging(builder => builder.AddConsole())
+                        .AddSingleton<IAPlayRunner, APlayRunner>()
+                        .AddSingleton(InitAudioService)
+                        .AddSingleton(InitLedManager)
+                        .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>());
 
         private static IAudioService InitAudioService(IServiceProvider arg)
         ***REMOVED***
