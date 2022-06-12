@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFrameworks>net5.0</TargetFrameworks>
+        <TargetFrameworks>net6.0</TargetFrameworks>
         <Configurations>Debug;Release;RaspberryDebug;RaspberryDebugRsync;RaspberryDebugRsyncX64</Configurations>
     </PropertyGroup>
 
@@ -28,14 +28,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Iot.Device.Bindings" Version="1.5.0" />
-        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.18.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-        <PackageReference Include="System.Device.G***REMOVED***o" Version="1.5.0" />
+        <PackageReference Include="Iot.Device.Bindings" Version="2.1.0" />
+        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.22.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+        <PackageReference Include="System.Device.G***REMOVED***o" Version="2.1.0" />
     </ItemGroup>
 
     <ItemGroup>

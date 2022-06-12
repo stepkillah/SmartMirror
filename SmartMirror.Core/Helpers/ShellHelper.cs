@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Linq;
 ***REMOVED***
 
-namespace SmartMirror.Core
+namespace SmartMirror.Core.Helpers
 ***REMOVED***
     public static class ShellHelper
     ***REMOVED***
@@ -45,7 +45,7 @@ namespace SmartMirror.Core
           ***REMOVED***;
             process.Start();
             string result = await process.StandardOutput.ReadToEndAsync();
-            process.WaitForExit();
+            await process.WaitForExitAsync();
             return result;
       ***REMOVED***
 
@@ -98,7 +98,7 @@ namespace SmartMirror.Core
                 await process.StandardInput.WriteLineAsync(command);
                 result = await process.StandardOutput.ReadToEndAsync();
           ***REMOVED***
-            process.WaitForExit();
+            await process.WaitForExitAsync();
             return result;
       ***REMOVED***
   ***REMOVED***
