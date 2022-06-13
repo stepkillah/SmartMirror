@@ -29,7 +29,7 @@ namespace SmartMirror.Core
             Container = host.Services;
             if (Container == null)
                 throw new ArgumentNullException(nameof(Container));
-            ProgramLogger = Container.GetService<ILoggerFactory>()
+            ProgramLogger = Container.GetRequiredService<ILoggerFactory>()
                 .CreateLogger<Program>();
 
             ProgramLogger.LogDebug("Container initialized");

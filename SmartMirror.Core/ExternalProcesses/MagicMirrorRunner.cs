@@ -1,6 +1,6 @@
 ***REMOVED***
-using System.ComponentModel;
 using System.Diagnostics;
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 
@@ -19,13 +19,14 @@ namespace SmartMirror.Core.ExternalProcesses
       ***REMOVED***
 
         private Process _magicMirrorRunProcess;
-***REMOVED***
+        public ValueTask StartProcessing()
         ***REMOVED***
 ***REMOVED***
             ***REMOVED***
                 if (_magicMirrorRunProcess != null)
-***REMOVED***
+                    return ValueTask.CompletedTask;
 
+                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Starting");
                 _magicMirrorRunProcess = new Process()
                 ***REMOVED***
                     StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
@@ -38,38 +39,35 @@ namespace SmartMirror.Core.ExternalProcesses
                   ***REMOVED***
               ***REMOVED***;
                 _magicMirrorRunProcess.Start();
+                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Started");
+
           ***REMOVED***
             catch (Exception e)
             ***REMOVED***
                 _magicMirrorRunProcess = null;
                 _logger.LogError(e, nameof(StartProcessing));
           ***REMOVED***
+            return ValueTask.CompletedTask;
       ***REMOVED***
 
-        public void StopProcessing()
+        public ValueTask StopProcessing()
         ***REMOVED***
 ***REMOVED***
             ***REMOVED***
                 _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng");
 
                 if (_magicMirrorRunProcess == null)
-***REMOVED***
-
-    ***REMOVED***
-                ***REMOVED***
-                    _magicMirrorRunProcess.Kill();
-              ***REMOVED***
-                catch (Win32Exception e) when(e.NativeErrorCode == 1)
-                ***REMOVED***
-                    _logger.LogError(e, $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Failed to properly kill process");
-              ***REMOVED***
+                    return ValueTask.CompletedTask;
+                _magicMirrorRunProcess.Close();
                 _magicMirrorRunProcess.Dispose();
                 _magicMirrorRunProcess = null;
+                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stopped");
           ***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                _logger.LogError(ex,$"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng error");
+                _logger.LogError(ex, $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng error");
           ***REMOVED***
+            return ValueTask.CompletedTask;
       ***REMOVED***
 
 

@@ -216,7 +216,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-                    _keywordRecognizer.Dispose();
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
               ***REMOVED***

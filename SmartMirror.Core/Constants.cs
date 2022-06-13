@@ -1,8 +1,4 @@
-***REMOVED***
-using System.Collections.Generic;
-using System.Text;
-
-namespace SmartMirror.Core
+﻿namespace SmartMirror.Core
 ***REMOVED***
     public static class Constants
     ***REMOVED***
