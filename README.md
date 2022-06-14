@@ -35,7 +35,7 @@ Current active speech recognition technology is Microsoft one, but there also po
 For speech recognition app uses [Microsoft Cognitive Services](https://docs.microsoft.com/en-us/azure/cognitive-services/speech-service/) ([GitHub](https://github.com/Azure-Samples/cognitive-services-speech-sdk))  
 Speech recognition is split into two parts - keyword recognition and actual command recognition.  
 Keyword recognition works offline and uses `Assets/mirror_activation.table` table created in Azure Portal, trained to use `Hey mirror` as an activation word.  
-After the application recognizes the keyword - it will start listening for an actual command that is described above and if the command is recognized successfully - it will be executed.  
+After the application recognizes the keyword - it will start listening for an actual command that is described above and if the command is recognized successfully by the Microsoft Azure Cognitive Services - it will be executed.  
 All actions will be confirmed with appropriate sound
 
 #### DeepSpeech
