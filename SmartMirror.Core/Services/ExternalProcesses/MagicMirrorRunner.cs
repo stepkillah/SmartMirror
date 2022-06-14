@@ -4,7 +4,7 @@ using System.Diagnostics;
 ***REMOVED***
 ***REMOVED***
 
-namespace SmartMirror.Core.ExternalProcesses
+namespace SmartMirror.Core.Services.ExternalProcesses
 ***REMOVED***
     public class MagicMirrorRunner : IMagicMirrorRunner
     ***REMOVED***
@@ -31,16 +31,16 @@ namespace SmartMirror.Core.ExternalProcesses
                 ***REMOVED***
                     StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
                     ***REMOVED***
-                        RedirectStandardOutput = true,
+                        RedirectStandardOutput = false,
                         RedirectStandardInput = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
                         WorkingDirectory = "/home/***REMOVED***/Projects/MagicMirror"
                   ***REMOVED***
               ***REMOVED***;
-                _magicMirrorRunProcess.Start();
-                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Started");
-
+                _logger.LogInformation(_magicMirrorRunProcess.Start()
+                    ? $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Started"
+                    : $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Start failed");
           ***REMOVED***
             catch (Exception e)
             ***REMOVED***

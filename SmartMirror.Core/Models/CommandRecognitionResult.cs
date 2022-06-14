@@ -1,4 +1,4 @@
-﻿using SmartMirror.Core.VoiceRecognition.Microsoft;
+﻿using SmartMirror.Core.Enums;
 
 namespace SmartMirror.Core.Models
 ***REMOVED***

@@ -1,9 +1,9 @@
 ***REMOVED***
 ***REMOVED***
 
-namespace SmartMirror.Core.VoiceRecognition.Microsoft
+namespace SmartMirror.Core.Interfaces
 ***REMOVED***
-    public interface IAudioService : IDisposable
+    public interface ISpeechRecognitionService : IDisposable
     ***REMOVED***
         void StartProcessing();
         Task StopProcessing();

@@ -1,8 +1,9 @@
 ﻿***REMOVED***
-
-namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
-    internal class NullAudioService : IAudioService
+
+namespace SmartMirror.Core.Services.SpeechRecognition
+***REMOVED***
+    internal class NullSpeechRecognitionService : ISpeechRecognitionService
     ***REMOVED***
 ***REMOVED***
         ***REMOVED***

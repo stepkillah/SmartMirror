@@ -2,7 +2,7 @@
 
 namespace SmartMirror.Core.Interfaces
 ***REMOVED***
-    public interface IKeyboardCommandsService
+    public interface IKeyboardListener
     ***REMOVED***
         void StartListenKeyCommands(CancellationToken cancellationToken);
   ***REMOVED***

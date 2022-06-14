@@ -10,9 +10,9 @@
         <None Remove="Assets\error.wav" />
         <None Remove="Assets\mirror_activation.table" />
         <None Remove="Assets\success.wav" />
-        <None Remove="VoiceRecognition\DeepSpeech\arctic_a0024.wav" />
-        <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
-        <None Remove="VoiceRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
+        <None Remove="Services\SpeechRecognition\DeepSpeech\arctic_a0024.wav" />
+        <None Remove="Services\SpeechRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
+        <None Remove="Services\SpeechRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,11 +35,8 @@
         <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+        <PackageReference Include="NAudio" Version="2.1.0" />
         <PackageReference Include="System.Device.G***REMOVED***o" Version="2.1.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="EventArgs\" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">

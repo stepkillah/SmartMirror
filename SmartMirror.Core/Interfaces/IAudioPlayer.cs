@@ -3,7 +3,7 @@
 
 namespace SmartMirror.Core.Interfaces
 ***REMOVED***
-    public interface IAPlayRunner
+    public interface IAudioPlayer
     ***REMOVED***
         Task Play(string path, CancellationToken cancellationToken = default);
   ***REMOVED***

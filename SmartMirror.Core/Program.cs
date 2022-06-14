@@ -1,24 +1,19 @@
 ***REMOVED***
-using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
 ***REMOVED***
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 ***REMOVED***
 using SmartMirror.Core.Common;
-using SmartMirror.Core.ExternalProcesses;
+using SmartMirror.Core.Extensions;
 ***REMOVED***
-using SmartMirror.Core.LedControl;
-using SmartMirror.Core.Services;
-//using SmartMirror.Core.VoiceRecognition.DeepSpeech;
-using SmartMirror.Core.VoiceRecognition.Microsoft;
+using SmartMirror.Core.Services.LedControl;
 
 namespace SmartMirror.Core
 ***REMOVED***
     class Program
     ***REMOVED***
-        public static IServiceProvider Container ***REMOVED*** get; private set; ***REMOVED***
+        private static IServiceProvider Container ***REMOVED*** get; set; ***REMOVED***
         public static ILogger ProgramLogger;
         private static bool _isCleaning;
         private static readonly CancellationTokenSource AppCancellationTokenSource = new CancellationTokenSource();
@@ -29,14 +24,13 @@ namespace SmartMirror.Core
             Container = host.Services;
             if (Container == null)
                 throw new ArgumentNullException(nameof(Container));
-            ProgramLogger = Container.GetRequiredService<ILoggerFactory>()
+            ProgramLogger = host.Services.GetRequiredService<ILoggerFactory>()
                 .CreateLogger<Program>();
 
             ProgramLogger.LogDebug("Container initialized");
             ConfigureConsole();
             ProgramLogger.LogInformation("SmartMirror");
-            var osInfo = System.Runtime.InteropServices.RuntimeInformation.OSDescription;
-            ProgramLogger.LogInformation($"OS Information: ***REMOVED***osInfo***REMOVED***");
+            ProgramLogger.LogInformation($"OS Information: ***REMOVED***System.Runtime.InteropServices.RuntimeInformation.OSDescription***REMOVED***");
             StartProgram();
             ProgramLogger.LogInformation("Program services started");
             await host.StartAsync(AppCancellationTokenSource.Token);
@@ -63,7 +57,7 @@ namespace SmartMirror.Core
                 _isCleaning = true;
                 ProgramLogger.LogInformation("Cleaning started");
 
-                var audioService = Container.GetService<IAudioService>();
+                var audioService = Container.GetService<ISpeechRecognitionService>();
                 if (audioService != null)
                 ***REMOVED***
                     await audioService.StopProcessing();
@@ -88,10 +82,10 @@ namespace SmartMirror.Core
 
         private static void StartProgram()
         ***REMOVED***
-            Container.GetService<IAudioService>()?.StartProcessing();
+            Container.GetService<ISpeechRecognitionService>()?.StartProcessing();
             Container.GetService<ILedManager>()?.StartProcessing();
             Container.GetService<IMagicMirrorRunner>()?.StartProcessing();
-            _ = Task.Run(() => Container.GetService<IKeyboardCommandsService>()?.StartListenKeyCommands(AppCancellationTokenSource.Token));
+            _ = Task.Run(() => Container.GetService<IKeyboardListener>()?.StartListenKeyCommands(AppCancellationTokenSource.Token));
       ***REMOVED***
 
         private static void ConfigureConsole()
@@ -100,87 +94,14 @@ namespace SmartMirror.Core
             DirectoryInitializer.EnsureCorrectWorkingDirectory(ProgramLogger);
       ***REMOVED***
 
-
-        private static void AudioServiceOnCommandRecognized(object sender, CommandRecognizedEventArgs e)
-        ***REMOVED***
-            var ledManager = Container.GetService<ILedManager>();
-            switch (e.Command)
-            ***REMOVED***
-                case VoiceCommands.LedOn:
-                    ledManager?.TurnOn();
-***REMOVED***
-                case VoiceCommands.LedOff:
-                    ledManager?.TurnOff();
-***REMOVED***
-                case VoiceCommands.LedColorSet:
-                    if (e.Data is Color color)
-                        ledManager?.TurnOn(color);
-***REMOVED***
-                default:
-***REMOVED***
-          ***REMOVED***
-      ***REMOVED***
-
-
-        private static void AudioServiceOnKeywordCommandRecognized(object sender, EventArgs e) => Container.GetService<IAPlayRunner>()?.Play(Constants.SuccessSoundPath);
-
-        private static void AudioServiceOnCommandRecognitionError(object sender, EventArgs e) => Container.GetService<IAPlayRunner>()?.Play(Constants.ErrorSoundPath);
         #region DI
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((_, services) =>
                     services.AddLogging(builder => builder.AddConsole())
-                        .AddSingleton<IAPlayRunner, APlayRunner>()
-                        .AddSingleton(InitAudioService)
-                        .AddSingleton(InitLedManager)
-                        .AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>()
-                        .AddSingleton<IKeyboardCommandsService, KeyboardCommandsService>());
+                        .AddSmartMirrorServices());
 
-        private static IAudioService InitAudioService(IServiceProvider arg)
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                var audioService = new AudioService(arg.GetService<ILogger<AudioService>>());
-                audioService.CommandRecognized += AudioServiceOnCommandRecognized;
-                audioService.KeywordCommandRecognized += AudioServiceOnKeywordCommandRecognized;
-                audioService.CommandRecognitionError += AudioServiceOnCommandRecognitionError;
-                return audioService;
-          ***REMOVED***
-            catch (Exception e)
-            ***REMOVED***
-                ProgramLogger.LogError(e, nameof(InitAudioService));
-                return new NullAudioService();
-          ***REMOVED***
-      ***REMOVED***
-
-
-        //private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
-        //***REMOVED***
-        //    try
-        //    ***REMOVED***
-        //        var audioService = new DeepSpeechAudioManager(arg.GetService<ILogger<DeepSpeechAudioManager>>());
-        //        return audioService;
-        //  ***REMOVED***
-        //    catch (Exception e)
-        //    ***REMOVED***
-        //        ProgramLogger.LogError(e, nameof(InitAudioService));
-        //        return new NullAudioService();
-        //  ***REMOVED***
-        //***REMOVED***
-
-        private static ILedManager InitLedManager(IServiceProvider arg)
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                return new LedManager(arg.GetService<ILogger<LedManager>>());
-          ***REMOVED***
-            catch (Exception e)
-            ***REMOVED***
-                ProgramLogger.LogError(e, nameof(InitLedManager));
-                return new NullLedManager();
-          ***REMOVED***
-      ***REMOVED***
 ***REMOVED***
   ***REMOVED***
 ***REMOVED***

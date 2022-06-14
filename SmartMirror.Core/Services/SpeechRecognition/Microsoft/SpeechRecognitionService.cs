@@ -4,12 +4,14 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-using SmartMirror.Core.Helpers;
-
-namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
-    public class AudioService : IAudioService, IDisposable, IAsyncDisposable
+
+***REMOVED***
+***REMOVED***
+***REMOVED***
     ***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
@@ -23,8 +25,13 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 ***REMOVED***
 
 
-        public AudioService(ILogger<AudioService> logger)
+***REMOVED***
+***REMOVED***
+***REMOVED***
+            IAudioPlayer audioPlayer)
         ***REMOVED***
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -36,23 +43,19 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             var config = SpeechConfig.FromSubscription("***REMOVED***", "***REMOVED***");
 ***REMOVED***
       ***REMOVED***
-
-
-        public event EventHandler<CommandRecognizedEventArgs> CommandRecognized;
-        public event EventHandler CommandRecognitionError;
-        public event EventHandler KeywordCommandRecognized;
+        
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** started.");
+            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** started.");
       ***REMOVED***
 
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED***: Stop***REMOVED***ng");
+                _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stop***REMOVED***ng");
 ***REMOVED***
                 ***REMOVED***
 ***REMOVED***
@@ -60,11 +63,11 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
               ***REMOVED***
 
 ***REMOVED***
-                _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED***: Stopped");
+                _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stopped");
           ***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                _logger.LogError(ex, $"***REMOVED***nameof(AudioService)***REMOVED***: Stop***REMOVED***ng error");
+                _logger.LogError(ex, $"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stop***REMOVED***ng error");
           ***REMOVED***
       ***REMOVED***
 
@@ -82,16 +85,14 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
                 ***REMOVED***
 ***REMOVED***
                         _logger.LogInformation($"We recognized: ***REMOVED***result.Text***REMOVED***");
-                        RecognizeCommand(result.Text);
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-                        ***REMOVED***
-    ***REMOVED***
-    ***REMOVED***
-                      ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
               ***REMOVED***
           ***REMOVED***
 ***REMOVED***
@@ -111,8 +112,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
             ***REMOVED***
 ***REMOVED***
                     _logger.LogInformation($"We recognized keyword: ***REMOVED***result.Text***REMOVED***");
-                    KeywordCommandRecognized?.Invoke(this, EventArgs.Empty);
-                    await RecognizeCommandAsync();
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -126,16 +126,16 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
           ***REMOVED***
       ***REMOVED***
 
-        private void RecognizeCommand(string rawText)
+***REMOVED***
         ***REMOVED***
-            var result = MirrorCommandsHelper.RecognizeCommand(rawText, _logger);
+***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                CommandRecognitionError?.Invoke(this, EventArgs.Empty);
+***REMOVED***
 ***REMOVED***
           ***REMOVED***
 
-            CommandRecognized?.Invoke(this, new CommandRecognizedEventArgs(result.Command, result.CommandData));
+***REMOVED***
       ***REMOVED***
 
 
@@ -154,7 +154,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 ***REMOVED***
 
-        protected virtual void Dispose(bool disposing)
+***REMOVED***
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -170,10 +170,10 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 ***REMOVED***
 
-            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** disposed.");
+            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** disposed.");
       ***REMOVED***
 
-        protected virtual async ValueTask DisposeAsync(bool disposing)
+***REMOVED***
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -189,7 +189,7 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
 
 ***REMOVED***
 
-            _logger.LogInformation($"***REMOVED***nameof(AudioService)***REMOVED*** disposed.");
+            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** disposed.");
       ***REMOVED***
 
 ***REMOVED***

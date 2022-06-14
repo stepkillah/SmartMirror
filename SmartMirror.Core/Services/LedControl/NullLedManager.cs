@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace SmartMirror.Core.LedControl
+namespace SmartMirror.Core.Services.LedControl
 ***REMOVED***
     internal class NullLedManager : ILedManager
     ***REMOVED***

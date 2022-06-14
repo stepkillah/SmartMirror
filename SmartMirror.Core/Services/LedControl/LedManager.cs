@@ -6,7 +6,7 @@ using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
 ***REMOVED***
 
-namespace SmartMirror.Core.LedControl
+namespace SmartMirror.Core.Services.LedControl
 ***REMOVED***
     public class LedManager : ILedManager, IDisposable
     ***REMOVED***

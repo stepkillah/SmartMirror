@@ -1,7 +1,7 @@
 ***REMOVED***
 using System.Drawing;
 
-namespace SmartMirror.Core.LedControl
+namespace SmartMirror.Core.Services.LedControl
 ***REMOVED***
     public interface ILedManager : IDisposable
     ***REMOVED***

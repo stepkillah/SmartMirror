@@ -1,6 +1,7 @@
 ***REMOVED***
+using SmartMirror.Core.Enums;
 
-namespace SmartMirror.Core.VoiceRecognition.Microsoft
+***REMOVED***
 ***REMOVED***
     public class CommandRecognizedEventArgs : EventArgs
     ***REMOVED***

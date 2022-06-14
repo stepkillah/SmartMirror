@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace SmartMirror.Core.VoiceRecognition.Microsoft
+namespace SmartMirror.Core.Enums
 ***REMOVED***
     public enum VoiceCommands : byte
     ***REMOVED***
@@ -10,6 +10,8 @@ namespace SmartMirror.Core.VoiceRecognition.Microsoft
         [Description("light off")]
         LedOff = 2,
         [Description("color")]
-        LedColorSet = 3
+        LedColorSet = 3,
+        [Description("sound test")]
+        PlayTestSound = 4
   ***REMOVED***
 ***REMOVED***

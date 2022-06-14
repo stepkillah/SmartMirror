@@ -5,9 +5,9 @@ using System.Threading;
 ***REMOVED***
 ***REMOVED***
 
-namespace SmartMirror.Core.ExternalProcesses
+namespace SmartMirror.Core.Services.ExternalProcesses
 ***REMOVED***
-    public class APlayRunner : IAPlayRunner
+    public class APlayRunner : IAudioPlayer
     ***REMOVED***
 ***REMOVED***
 

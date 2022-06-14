@@ -1,17 +1,14 @@
 ﻿//using System;
 //using System.Diagnostics;
 //***REMOVED***
-//using System.Linq;
 //***REMOVED***
-//using DeepSpeechClient.Interfaces;
-//using DeepSpeechClient.Models;
 //***REMOVED***
 //using NAudio.Wave;
 //using SmartMirror.Core.VoiceRecognition.Microsoft;
 
-//namespace SmartMirror.Core.VoiceRecognition.DeepSpeech
+//namespace SmartMirror.Core.Services.VoiceRecognition.DeepSpeech
 //***REMOVED***
-//    public class DeepSpeechAudioManager : IAudioService
+//    public class DeepSpeechAudioManager : ISpeechRecognitionService
 //    ***REMOVED***
 //***REMOVED***
 //        private bool _disposedValue;
@@ -129,7 +126,7 @@
 //            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
 //***REMOVED***
 //***REMOVED***
-//      ***REMOVED*** 
+//      ***REMOVED***
 //***REMOVED***
 //  ***REMOVED***
 //***REMOVED***
