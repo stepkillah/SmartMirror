@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Remove="appsettings.json" />
         <None Remove="Assets\error.wav" />
         <None Remove="Assets\mirror_activation.table" />
         <None Remove="Assets\success.wav" />
@@ -16,6 +17,9 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="appsettings.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
         <Content Include="Assets\error.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
