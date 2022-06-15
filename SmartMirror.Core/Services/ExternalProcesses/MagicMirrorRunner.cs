@@ -3,19 +3,21 @@ using System.Diagnostics;
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
 
 namespace SmartMirror.Core.Services.ExternalProcesses
 ***REMOVED***
-    public class MagicMirrorRunner : IMagicMirrorRunner
+    public class MagicMirrorRunner : IMagicMirrorRunner, IDisposable
     ***REMOVED***
-        private const string DefaultUserName = "***REMOVED***";
-
 ***REMOVED***
 ***REMOVED***
+        private readonly MagicMirrorOptions _mirrorOptions;
 
-        public MagicMirrorRunner(ILogger<MagicMirrorRunner> logger)
+        public MagicMirrorRunner(ILogger<MagicMirrorRunner> logger, IOptions<MagicMirrorOptions> magicMirrorOptions)
         ***REMOVED***
 ***REMOVED***
+            _mirrorOptions = magicMirrorOptions.Value;
       ***REMOVED***
 
         private Process _magicMirrorRunProcess;
@@ -29,13 +31,13 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                 _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Starting");
                 _magicMirrorRunProcess = new Process()
                 ***REMOVED***
-                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
+                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***_mirrorOptions.DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
                     ***REMOVED***
                         RedirectStandardOutput = false,
                         RedirectStandardInput = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
-                        WorkingDirectory = "/home/***REMOVED***/Projects/MagicMirror"
+                        WorkingDirectory = _mirrorOptions.WorkingDirectory
                   ***REMOVED***
               ***REMOVED***;
                 _logger.LogInformation(_magicMirrorRunProcess.Start()

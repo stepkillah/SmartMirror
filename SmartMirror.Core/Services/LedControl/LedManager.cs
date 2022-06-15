@@ -5,29 +5,27 @@ using System.Linq;
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
 ***REMOVED***
+***REMOVED***
+***REMOVED***
 
 namespace SmartMirror.Core.Services.LedControl
 ***REMOVED***
-    public class LedManager : ILedManager, IDisposable
+    public class LedManager : ILedManager
     ***REMOVED***
 ***REMOVED***
 
 ***REMOVED***
-
-        private readonly Random _colorRnd = new Random();
-        private const int LedCount = 120;
-
-        private static readonly int[] MissingLed = ***REMOVED***0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17***REMOVED***;
+        private readonly LedOptions _ledOptions;
 
         private Ws28xx _led;
         private S***REMOVED***Device _s***REMOVED***Device;
         private bool _isRunning = true;
 
-        public LedManager(ILogger<LedManager> logger)
+        public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions)
         ***REMOVED***
-
 ***REMOVED***
-            var settings = new S***REMOVED***ConnectionSettings(0, 0)
+            _ledOptions = ledOptions.Value;
+            var settings = new S***REMOVED***ConnectionSettings(_ledOptions.BusId, _ledOptions.ChipSelectLine)
             ***REMOVED***
                 ClockFrequency = 2_400_000,
                 Mode = S***REMOVED***Mode.Mode0,
@@ -35,7 +33,7 @@ namespace SmartMirror.Core.Services.LedControl
           ***REMOVED***;
             _s***REMOVED***Device = S***REMOVED***Device.Create(settings);
 
-            _led = new Ws2812b(_s***REMOVED***Device, LedCount);
+            _led = new Ws2812b(_s***REMOVED***Device, _ledOptions.Count);
       ***REMOVED***
 
 ***REMOVED***
@@ -47,7 +45,7 @@ namespace SmartMirror.Core.Services.LedControl
         ***REMOVED***
             if (_led == null || !_isRunning)
 ***REMOVED***
-            ColorWipe(_led, Color.Black, LedCount);
+            ColorWipe(_led, Color.Black, _ledOptions.Count);
             _isRunning = false;
             _logger.LogWarning("LED Turned OFF");
       ***REMOVED***
@@ -56,7 +54,7 @@ namespace SmartMirror.Core.Services.LedControl
         ***REMOVED***
             if (_led == null)
 ***REMOVED***
-            ColorWipe(_led, color == default ? Color.White : color, LedCount);
+            ColorWipe(_led, color == default ? Color.White : color, _ledOptions.Count);
 ***REMOVED***
             _logger.LogWarning("LED Turned ON");
       ***REMOVED***
@@ -66,7 +64,7 @@ namespace SmartMirror.Core.Services.LedControl
             BitmapImage img = neo.Image;
             for (var i = 0; i < count; i++)
             ***REMOVED***
-                if (MissingLed.Contains(i))
+                if (_ledOptions.Missing.Contains(i))
                 ***REMOVED***
                     img.SetPixel(i, 0, Color.Black);
                     neo.Update();

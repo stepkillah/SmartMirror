@@ -57,11 +57,11 @@ namespace SmartMirror.Core
                 _isCleaning = true;
                 ProgramLogger.LogInformation("Cleaning started");
 
-                var audioService = Container.GetService<ISpeechRecognitionService>();
-                if (audioService != null)
+                var speechService = Container.GetService<ISpeechRecognitionService>();
+                if (speechService != null)
                 ***REMOVED***
-                    await audioService.StopProcessing();
-                    audioService.Dispose();
+                    await speechService.StopProcessing();
+                    speechService.Dispose();
               ***REMOVED***
 
                 var ledManager = Container.GetService<ILedManager>();
@@ -98,8 +98,9 @@ namespace SmartMirror.Core
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureServices((_, services) =>
+                .ConfigureServices((context, services) =>
                     services.AddLogging(builder => builder.AddConsole())
+                        .ConfigureSmartMirrorOptions(context)
                         .AddSmartMirrorServices());
 
 ***REMOVED***

@@ -5,6 +5,8 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
+***REMOVED***
+***REMOVED***
 
 ***REMOVED***
 ***REMOVED***
@@ -17,8 +19,6 @@
 ***REMOVED***
 ***REMOVED***
 
-        private const string ActivationRecognitionTable = "Assets/mirror_activation.table";
-
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -28,7 +28,8 @@
 ***REMOVED***
 ***REMOVED***
 ***REMOVED***
-            IAudioPlayer audioPlayer)
+***REMOVED***
+***REMOVED***
         ***REMOVED***
 ***REMOVED***
 ***REMOVED***
@@ -36,14 +37,14 @@
 ***REMOVED***
 ***REMOVED***
 
-            var keywordRecognitionTablePath = Path.Combine(Directory.GetCurrentDirectory(), ActivationRecognitionTable);
+***REMOVED***
 ***REMOVED***
 
 
-            var config = SpeechConfig.FromSubscription("***REMOVED***", "***REMOVED***");
+***REMOVED***
 ***REMOVED***
       ***REMOVED***
-        
+
 ***REMOVED***
         ***REMOVED***
 ***REMOVED***
@@ -225,7 +226,7 @@
             ***REMOVED***
 ***REMOVED***
                 ***REMOVED***
-                    _logger.LogError(e, $"Keyword recognizer disposing failed 3 of 3");
+                    _logger.LogError(e, $"Keyword recognizer disposing failed ***REMOVED***_maxTriesCount***REMOVED*** of ***REMOVED***_maxTriesCount***REMOVED***");
 ***REMOVED***
               ***REMOVED***
 ***REMOVED***

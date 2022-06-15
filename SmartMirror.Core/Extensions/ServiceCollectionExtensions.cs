@@ -1,6 +1,9 @@
 ***REMOVED***
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+***REMOVED***
+***REMOVED***
 ***REMOVED***
 ***REMOVED***
 using SmartMirror.Core.Services;
@@ -24,15 +27,24 @@ namespace SmartMirror.Core.Extensions
             return services;
       ***REMOVED***
 
+        public static IServiceCollection ConfigureSmartMirrorOptions(this IServiceCollection services, HostBuilderContext context)
+        ***REMOVED***
+            services.Configure<MagicMirrorOptions>(context.Configuration.GetSection("MagicMirrorRunner"));
+            services.Configure<LedOptions>(context.Configuration.GetSection("LED"));
+            services.Configure<SpeechRecognitionOptions>(context.Configuration.GetSection("SpeechRecognition"));
+
+            return services;
+      ***REMOVED***
 
         private static ISpeechRecognitionService InitSpeechRecognitionService(IServiceProvider arg)
         ***REMOVED***
 ***REMOVED***
             ***REMOVED***
                 var audioService = new SpeechRecognitionService(
-                    arg.GetService<ILogger<SpeechRecognitionService>>(), 
-                    arg.GetService<ICommandsHandler>(), 
-                    arg.GetService<IAudioPlayer>());
+                    arg.GetService<ILogger<SpeechRecognitionService>>(),
+                    arg.GetService<ICommandsHandler>(),
+                    arg.GetService<IAudioPlayer>(),
+                    arg.GetService<IOptions<SpeechRecognitionOptions>>());
                 return audioService;
           ***REMOVED***
             catch (Exception e)
@@ -61,7 +73,9 @@ namespace SmartMirror.Core.Extensions
         ***REMOVED***
 ***REMOVED***
             ***REMOVED***
-                return new LedManager(arg.GetService<ILogger<LedManager>>());
+                return new LedManager(
+                    arg.GetService<ILogger<LedManager>>(),
+                    arg.GetService<IOptions<LedOptions>>());
           ***REMOVED***
             catch (Exception e)
             ***REMOVED***

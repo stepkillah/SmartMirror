@@ -7,18 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="appsettings.json" />
-        <None Remove="Assets\error.wav" />
-        <None Remove="Assets\mirror_activation.table" />
-        <None Remove="Assets\success.wav" />
-        <None Remove="Services\SpeechRecognition\DeepSpeech\arctic_a0024.wav" />
+	    <None Remove="Services\SpeechRecognition\DeepSpeech\arctic_a0024.wav" />
         <None Remove="Services\SpeechRecognition\DeepSpeech\deepspeech-0.8.2-models.pbmm" />
         <None Remove="Services\SpeechRecognition\DeepSpeech\deepspeech-0.8.2-models.tflite" />
     </ItemGroup>
 
     <ItemGroup>
         <Content Include="appsettings.json">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
         <Content Include="Assets\error.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -54,7 +50,7 @@
     <PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsyncX64'">
         <DebugType>portable</DebugType>
     </PropertyGroup>
-    
+
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
         <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
     </Target>
