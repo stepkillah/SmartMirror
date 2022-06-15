@@ -1,3 +1,8 @@
-e:\ssh\pscp.exe -r -P 22 -i e:\ssh\***REMOVED***_key.ppk "%~1\*" %2
-exit 0
+SETLOCAL
+SET SSHKeyFilePath=%1
+SET SourceFilePath=%2
+SET DestinationFilePath=%3
+
+scp -r -P 22 -i %SSHKeyFilePath% %SourceFilePath% %DestinationFilePath%
+pause
 

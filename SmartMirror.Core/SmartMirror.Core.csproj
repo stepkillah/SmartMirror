@@ -3,7 +3,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFrameworks>net6.0</TargetFrameworks>
-        <Configurations>Debug;Release;RaspberryDebug;RaspberryDebugRsync;RaspberryDebugRsyncX64</Configurations>
+        <Configurations>Debug;Release;RaspberryDebug;RaspberryDebugX64;RaspberryDebugRsync;RaspberryDebugRsyncX64</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
@@ -43,6 +43,10 @@
         <DebugType>portable</DebugType>
     </PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebugX64'">
+		<DebugType>portable</DebugType>
+	</PropertyGroup>
+
     <PropertyGroup Condition="'$(Configuration)'=='RaspberryDebugRsync'">
         <DebugType>portable</DebugType>
     </PropertyGroup>
@@ -52,8 +56,12 @@
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\***REMOVED***_key_ssh &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
     </Target>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugX64'">
+		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\***REMOVED***_key_***REMOVED***_ssh &quot;$(TargetDir)/*&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
+	</Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsync'">
         <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />

@@ -4,7 +4,31 @@ Smart mirror helper for [speech recognition](#speech-recognition), led control a
 
 ## Configuration
 
-//TODO To configure different aspect of application you can use `appsettings.json`.
+To configure different aspect of application you can use `appsettings.json`.  
+Here is an example of settings file
+```
+***REMOVED***
+  "MagicMirrorRunner": ***REMOVED***
+    "DefaultUserName": "<Default UserName for sudo command>",
+    "WorkingDirectory": "<MagicMirror root folder path on target device>"
+***REMOVED***
+  "LED": ***REMOVED***
+    "Count": <Total count of LED lights>,
+    "Missing": [<Index of lights that is missing/not working in LED strip>],
+    "BusId": <Physical SPI bus id (0)>,
+    "ChipSelectLine": <SPI line (0)>
+***REMOVED***
+  "SpeechRecognition": ***REMOVED***
+    "ActivationRecognitionTablePath": "<path to .table file for keyword recognition>",
+    "SubscriptionKey": "<A***REMOVED***Key from Azure Portal>",
+    "Region": "<Region from Azure Portal>"
+***REMOVED***
+***REMOVED***
+```
+
+## Debbug and deployment
+
+For debugging and deployment you can check deployment readme located [here](scripts/raspberry_deploy_readme.md). I'm using raspberry as target.
 
 ## Commands
 
@@ -38,11 +62,14 @@ Keyword recognition works offline and uses `Assets/mirror_activation.table` tabl
 After the application recognizes the keyword - it will start listening for an actual command that is described above and if the command is recognized successfully by the Microsoft Azure Cognitive Services - it will be executed.  
 All actions will be confirmed with appropriate sound
 
+**Be aware, Microsoft Cognitive Services [nuget](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech) works only with ARM64. Tested on [Ubuntu server](https://***REMOVED***.com/download/raspberry-***REMOVED***) 18.04 and 20.04, probably will work the same with on latest 22.04**
+
 #### DeepSpeech
 
 Another option for speech recognition is to use [DeepSpeech](https://github.com/mozilla/DeepSpeech), it works offline and does not requires active internet connection.  
 In order to use DeepSpeech - custom C# wrapper should be created that supports .NET6 ([PR](https://github.com/mozilla/DeepSpeech/pull/3373) for .NET Core support)  
-This approach is not tested in real life.
+This approach is not tested in real life.  
+Application source code contains commented DeepSpeech service as an direction how to start
 
 ### MagicMirrorRunner
 
