@@ -26,7 +26,7 @@ Here is an example of settings file
 ***REMOVED***
 ```
 
-## Debbug and deployment
+## Debug and deployment
 
 For debugging and deployment you can check deployment readme located [here](scripts/raspberry_deploy_readme.md). I'm using raspberry as target.
 
