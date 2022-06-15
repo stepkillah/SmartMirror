@@ -1,25 +1,25 @@
-***REMOVED***
+{
   "version": "0.2.1",
   //"adapter": "f:\\ssh\\plink.exe",
   "adapter": "f:\\ssh\\ssh.exe",
-  //"adapterArgs": "-i e:\\ssh\\***REMOVED***_key.ppk ***REMOVED***@***REMOVED***08 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",
-  //"adapterArgs": "-i f:\\ssh\\***REMOVED***_key_***REMOVED***.ppk ***REMOVED***@***REMOVED***08 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",
-  "adapterArgs": "-i f:\\ssh\\***REMOVED***_key_***REMOVED***_ssh ***REMOVED***@***REMOVED***08 \"~/vsdbg/vsdbg --interpreter=vscode\"",
+  //"adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",
+  //"adapterArgs": "-i f:\\ssh\\pi_key_ubuntu.ppk ubuntu@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",
+  "adapterArgs": "-i f:\\ssh\\pi_key_ubuntu_ssh ubuntu@192.168.0.108 \"~/vsdbg/vsdbg --interpreter=vscode\"",
 
   "configurations": [
-    ***REMOVED***
+    {
       "name": "Smart Mirror Raspberry Launch",
       "type": "coreclr",
       "cwd": "~/Projects/SmartMirror",
-      //"program": "/home/***REMOVED***/Projects/SmartMirror/SmartMirror.Core.dll",
-      "program": "/home/***REMOVED***/Projects/SmartMirror/SmartMirror.Core.dll",
+      //"program": "/home/pi/Projects/SmartMirror/SmartMirror.Core.dll",
+      "program": "/home/ubuntu/Projects/SmartMirror/SmartMirror.Core.dll",
       "request": "launch",
       "justMyCode": true,
-      "logging": ***REMOVED***
+      "logging": {
         "engineLogging": true,
         "programOutput": true,
         "exceptions": true
-    ***REMOVED***
-  ***REMOVED***
+      }
+    }
   ]
-***REMOVED***
+}

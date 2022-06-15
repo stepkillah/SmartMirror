@@ -1,44 +1,44 @@
-***REMOVED***
+﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Threading;
-***REMOVED***
-***REMOVED***
+using Microsoft.Extensions.Logging;
+using SmartMirror.Core.Interfaces;
 
 namespace SmartMirror.Core.Services
-***REMOVED***
+{
     public class KeyboardListener : IKeyboardListener
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+        private readonly ILogger _logger;
+        private readonly ICommandsHandler _commandsHandler;
 
         public KeyboardListener(ILogger<KeyboardListener> logger, ICommandsHandler commandsHandler)
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-      ***REMOVED***
+        {
+            _logger = logger;
+            _commandsHandler = commandsHandler;
+        }
 
         public async void StartListenKeyCommands(CancellationToken cancellationToken)
-        ***REMOVED***
+        {
             _logger.LogInformation("Starting waiting for keyboard commands");
             while (!cancellationToken.IsCancellationRequested)
-            ***REMOVED***
+            {
                 if (Debugger.IsAttached && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-                ***REMOVED***
+                {
                     Console.Read();
-              ***REMOVED***
+                }
                 else
-                ***REMOVED***
+                {
                     Console.WriteLine("Waiting for key command");
                     var line = Console.ReadLine();
                     if (line == null)
-    ***REMOVED***
+                        return;
                     var result = await _commandsHandler.RecognizeCommand(line);
-        ***REMOVED***
-    ***REMOVED***
+                    if (!result.Success)
+                        return;
                     await _commandsHandler.HandleCommand(result.Command, result.CommandData, cancellationToken);
-              ***REMOVED***
-          ***REMOVED***
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+                }
+            }
+        }
+    }
+}

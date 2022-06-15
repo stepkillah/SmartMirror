@@ -1,11 +1,11 @@
-***REMOVED***
+﻿using System;
 using System.ComponentModel;
 using System.Reflection;
 
 namespace SmartMirror.Core.Helpers
-***REMOVED***
+{
     public static class EnumHelper
-    ***REMOVED***
+    {
         /// <summary>
         /// Gets an attribute on an enum field value
         /// </summary>
@@ -14,15 +14,15 @@ namespace SmartMirror.Core.Helpers
         /// <returns>The attribute of type T that exists on the enum value</returns>
         /// <example><![CDATA[string desc = myEnumVariable.GetAttributeOfType<DescriptionAttribute>().Description;]]></example>
         public static T GetAttributeOfType<T>(this Enum enumVal) where T : System.Attribute
-        ***REMOVED***
+        {
             var type = enumVal.GetType();
             var memInfo = type.GetMember(enumVal.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             return (attributes.Length > 0) ? (T)attributes[0] : null;
-      ***REMOVED***
+        }
 
         public static string DescriptionAttr<T>(this T source)
-        ***REMOVED***
+        {
             if (source == null)
                 return null;
             FieldInfo fi = source.GetType().GetField(source.ToString());
@@ -31,6 +31,6 @@ namespace SmartMirror.Core.Helpers
                 typeof(DescriptionAttribute), false);
 
             return attributes.Length > 0 ? attributes[0].Description : source.ToString();
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+    }
+}

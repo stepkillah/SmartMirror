@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "SmartMirror.Core", "SmartMirror.Core\SmartMirror.Core.csproj", "***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmartMirror.Core", "SmartMirror.Core\SmartMirror.Core.csproj", "{8642AEDD-D41A-4046-94A7-3667CB72EFD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,35 +21,35 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Debug|x64.ActiveCfg = Debug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Debug|x64.Build.0 = Debug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebug|Any CPU.ActiveCfg = RaspberryDebug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebug|Any CPU.Build.0 = RaspberryDebug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebug|x64.ActiveCfg = RaspberryDebug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebug|x64.Build.0 = RaspberryDebug|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|Any CPU.ActiveCfg = RaspberryDebugRsync|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|Any CPU.Build.0 = RaspberryDebugRsync|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|x64.ActiveCfg = RaspberryDebugRsync|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsync|x64.Build.0 = RaspberryDebugRsync|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|Any CPU.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|Any CPU.Build.0 = RaspberryDebugRsyncX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|x64.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugRsyncX64|x64.Build.0 = RaspberryDebugRsyncX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugX64|Any CPU.ActiveCfg = RaspberryDebugX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugX64|Any CPU.Build.0 = RaspberryDebugX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugX64|x64.ActiveCfg = RaspberryDebugX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.RaspberryDebugX64|x64.Build.0 = RaspberryDebugX64|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|x64.ActiveCfg = Release|Any CPU
-		***REMOVED***8642AEDD-D41A-4046-94A7-3667CB72EFD2***REMOVED***.Release|x64.Build.0 = Release|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Debug|x64.Build.0 = Debug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebug|Any CPU.ActiveCfg = RaspberryDebug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebug|Any CPU.Build.0 = RaspberryDebug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebug|x64.ActiveCfg = RaspberryDebug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebug|x64.Build.0 = RaspberryDebug|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsync|Any CPU.ActiveCfg = RaspberryDebugRsync|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsync|Any CPU.Build.0 = RaspberryDebugRsync|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsync|x64.ActiveCfg = RaspberryDebugRsync|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsync|x64.Build.0 = RaspberryDebugRsync|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsyncX64|Any CPU.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsyncX64|Any CPU.Build.0 = RaspberryDebugRsyncX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsyncX64|x64.ActiveCfg = RaspberryDebugRsyncX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugRsyncX64|x64.Build.0 = RaspberryDebugRsyncX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugX64|Any CPU.ActiveCfg = RaspberryDebugX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugX64|Any CPU.Build.0 = RaspberryDebugX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugX64|x64.ActiveCfg = RaspberryDebugX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.RaspberryDebugX64|x64.Build.0 = RaspberryDebugX64|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Release|x64.ActiveCfg = Release|Any CPU
+		{8642AEDD-D41A-4046-94A7-3667CB72EFD2}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = ***REMOVED***BD8851EB-E565-408F-A189-3704318BD376***REMOVED***
+		SolutionGuid = {BD8851EB-E565-408F-A189-3704318BD376}
 	EndGlobalSection
 EndGlobal

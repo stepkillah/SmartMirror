@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel;
 
 namespace SmartMirror.Core.Enums
-***REMOVED***
+{
     public enum VoiceCommands : byte
-    ***REMOVED***
+    {
         Unknown = 0,
         [Description("light on")]
         LedOn = 1,
@@ -13,5 +13,5 @@ namespace SmartMirror.Core.Enums
         LedColorSet = 3,
         [Description("sound test")]
         PlayTestSound = 4
-  ***REMOVED***
-***REMOVED***
+    }
+}

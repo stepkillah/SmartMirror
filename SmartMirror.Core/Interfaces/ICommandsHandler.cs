@@ -1,13 +1,13 @@
 ﻿using System.Threading;
-***REMOVED***
+using System.Threading.Tasks;
 using SmartMirror.Core.Enums;
-***REMOVED***
+using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Interfaces
-***REMOVED***
+{
     public interface ICommandsHandler
-    ***REMOVED***
+    {
         ValueTask HandleCommand(VoiceCommands command, object data, CancellationToken cancellationToken = default);
         ValueTask<CommandRecognitionResult> RecognizeCommand(string rawText);
-  ***REMOVED***
-***REMOVED***
+    }
+}

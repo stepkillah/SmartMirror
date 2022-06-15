@@ -1,241 +1,241 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.CognitiveServices.Speech.Audio;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using SmartMirror.Core.Interfaces;
+using SmartMirror.Core.Models;
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
+{
+    public sealed class SpeechRecognitionService : ISpeechRecognitionService, IAsyncDisposable
+    {
+        private readonly ILogger _logger;
+        private readonly ICommandsHandler _commandsHandler;
+        private readonly IAudioPlayer _audioPlayer;
 
-***REMOVED***
-***REMOVED***
+        private bool _isDisposed;
+        private bool _isRunning;
 
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-
-***REMOVED***
-***REMOVED***
+        private KeywordRecognizer _keywordRecognizer;
+        private AudioConfig _audioConfig;
+        private KeywordRecognitionModel _keywordModel;
+        private SpeechRecognizer _speechRecognizer;
 
 
-***REMOVED***
-***REMOVED***
-      ***REMOVED***
+        public SpeechRecognitionService(
+            ILogger<SpeechRecognitionService> logger,
+            ICommandsHandler commandsHandler,
+            IAudioPlayer audioPlayer,
+            IOptions<SpeechRecognitionOptions> recognitionOptions)
+        {
+            _logger = logger;
+            _commandsHandler = commandsHandler;
+            _audioPlayer = audioPlayer;
+            _audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+            _keywordRecognizer = new KeywordRecognizer(_audioConfig);
 
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** started.");
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stop***REMOVED***ng");
-***REMOVED***
-                ***REMOVED***
-***REMOVED***
-***REMOVED***
-              ***REMOVED***
-
-***REMOVED***
-                _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stopped");
-          ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                _logger.LogError(ex, $"***REMOVED***nameof(SpeechRecognitionService)***REMOVED***: Stop***REMOVED***ng error");
-          ***REMOVED***
-      ***REMOVED***
+            var keywordRecognitionTablePath = Path.Combine(Directory.GetCurrentDirectory(), recognitionOptions.Value.ActivationRecognitionTablePath);
+            _keywordModel = KeywordRecognitionModel.FromFile(keywordRecognitionTablePath);
 
 
-***REMOVED***
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+            var config = SpeechConfig.FromSubscription(recognitionOptions.Value.SubscriptionKey, recognitionOptions.Value.Region);
+            _speechRecognizer = new SpeechRecognizer(config, _audioConfig);
+        }
 
-***REMOVED***
-                ***REMOVED***
-***REMOVED***
-                        _logger.LogInformation($"We recognized: ***REMOVED***result.Text***REMOVED***");
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-              ***REMOVED***
-          ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-          ***REMOVED***
-      ***REMOVED***
+        public void StartProcessing()
+        {
+            _isRunning = true;
+            WaitForVoiceActivation().ConfigureAwait(false);
+            _logger.LogInformation($"{nameof(SpeechRecognitionService)} started.");
+        }
 
+        public async Task StopProcessing()
+        {
+            try
+            {
+                _logger.LogInformation($"{nameof(SpeechRecognitionService)}: Stopping");
+                if (_isRunning)
+                {
+                    if (_keywordRecognizer != null)
+                        await _keywordRecognizer.StopRecognitionAsync();
+                }
 
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-                    _logger.LogInformation($"We recognized keyword: ***REMOVED***result.Text***REMOVED***");
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
-                    ***REMOVED***
-***REMOVED***
-***REMOVED***
-                  ***REMOVED***
-          ***REMOVED***
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-***REMOVED***
-          ***REMOVED***
-
-***REMOVED***
-      ***REMOVED***
+                _isRunning = false;
+                _logger.LogInformation($"{nameof(SpeechRecognitionService)}: Stopped");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(SpeechRecognitionService)}: Stopping error");
+            }
+        }
 
 
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-            _logger.LogInformation($"CANCELED: Reason=***REMOVED***cancellation.Reason***REMOVED***");
-***REMOVED***
-            _logger.LogInformation($"CANCELED: ErrorCode=***REMOVED***cancellation.ErrorCode***REMOVED***");
-            _logger.LogInformation($"CANCELED: ErrorDetails=***REMOVED***cancellation.ErrorDetails***REMOVED***");
-***REMOVED***
+        #region private methods
+        private async Task RecognizeCommandAsync()
+        {
+            try
+            {
+                if (!_isRunning)
+                    return;
+                var result = await _speechRecognizer.RecognizeOnceAsync();
 
-      ***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-          ***REMOVED***
-
-***REMOVED***
-
-            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** disposed.");
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-          ***REMOVED***
-
-***REMOVED***
-
-            _logger.LogInformation($"***REMOVED***nameof(SpeechRecognitionService)***REMOVED*** disposed.");
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-      ***REMOVED***
-
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-***REMOVED***
-
-      ***REMOVED***
-
-***REMOVED***
-***REMOVED***
-***REMOVED***
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-                ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-              ***REMOVED***
-          ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-***REMOVED***
-                ***REMOVED***
-                    _logger.LogError(e, $"Keyword recognizer disposing failed ***REMOVED***_maxTriesCount***REMOVED*** of ***REMOVED***_maxTriesCount***REMOVED***");
-***REMOVED***
-              ***REMOVED***
-***REMOVED***
-                _logger.LogWarning(e, $"Keyword recognizer disposing failed. Trying ***REMOVED***_triesCount***REMOVED*** of ***REMOVED***_maxTriesCount***REMOVED*** tries");
-***REMOVED***
-          ***REMOVED***
-      ***REMOVED***
-***REMOVED***
+                switch (result.Reason)
+                {
+                    case ResultReason.RecognizedSpeech:
+                        _logger.LogInformation($"We recognized: {result.Text}");
+                        await RecognizeCommand(result.Text);
+                        break;
+                    case ResultReason.NoMatch:
+                        _logger.LogInformation($"NOMATCH: Speech could not be recognized.");
+                        break;
+                    case ResultReason.Canceled:
+                        HandleCancel(result);
+                        break;
+                }
+            }
+            finally
+            {
+                _ = WaitForVoiceActivation().ConfigureAwait(false);
+            }
+        }
 
 
-  ***REMOVED***
-***REMOVED***
+
+        private async Task WaitForVoiceActivation()
+        {
+            if (!_isRunning)
+                return;
+            var result = await _keywordRecognizer.RecognizeOnceAsync(_keywordModel);
+            switch (result.Reason)
+            {
+                case ResultReason.RecognizedKeyword:
+                    _logger.LogInformation($"We recognized keyword: {result.Text}");
+                    await Task.WhenAll(_audioPlayer.Play(Constants.SuccessSoundPath), RecognizeCommandAsync());
+                    break;
+                case ResultReason.NoMatch:
+                    _logger.LogInformation($"NOMATCH: Speech could not be recognized.");
+                    _ = WaitForVoiceActivation().ConfigureAwait(false);
+                    break;
+                case ResultReason.Canceled:
+                    {
+                        HandleCancel(result);
+                        break;
+                    }
+            }
+        }
+
+        private async ValueTask RecognizeCommand(string rawText)
+        {
+            var result = await _commandsHandler.RecognizeCommand(rawText);
+            if (!result.Success)
+            {
+                await _audioPlayer.Play(Constants.ErrorSoundPath);
+                return;
+            }
+
+            await _commandsHandler.HandleCommand(result.Command, result.CommandData);
+        }
+
+
+        private void HandleCancel(RecognitionResult result)
+        {
+            var cancellation = CancellationDetails.FromResult(result);
+            _logger.LogInformation($"CANCELED: Reason={cancellation.Reason}");
+            if (cancellation.Reason != CancellationReason.Error) return;
+            _logger.LogInformation($"CANCELED: ErrorCode={cancellation.ErrorCode}");
+            _logger.LogInformation($"CANCELED: ErrorDetails={cancellation.ErrorDetails}");
+            _logger.LogInformation($"CANCELED: Did you update the subscription info?");
+
+        }
+
+        #endregion
+
+        #region dispose
+
+        private void Dispose(bool disposing)
+        {
+            if (_isDisposed) return;
+            if (disposing)
+            {
+                _audioConfig?.Dispose();
+                _audioConfig = null;
+                _keywordModel?.Dispose();
+                _keywordModel = null;
+                _speechRecognizer?.Dispose();
+                _speechRecognizer = null;
+                SafeDisposeKeywordRecognizer().GetAwaiter().GetResult();
+            }
+
+            _isDisposed = true;
+
+            _logger.LogInformation($"{nameof(SpeechRecognitionService)} disposed.");
+        }
+
+        private async ValueTask DisposeAsync(bool disposing)
+        {
+            if (_isDisposed) return;
+            if (disposing)
+            {
+                _audioConfig?.Dispose();
+                _audioConfig = null;
+                _keywordModel?.Dispose();
+                _keywordModel = null;
+                _speechRecognizer?.Dispose();
+                _speechRecognizer = null;
+                await SafeDisposeKeywordRecognizer();
+            }
+
+            _isDisposed = true;
+
+            _logger.LogInformation($"{nameof(SpeechRecognitionService)} disposed.");
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
+        public async ValueTask DisposeAsync()
+        {
+            await DisposeAsync(disposing: true);
+            GC.SuppressFinalize(this);
+
+        }
+
+        private int _maxTriesCount = 3;
+        private int _triesCount = 0;
+        private async Task SafeDisposeKeywordRecognizer()
+        {
+            try
+            {
+                if (_keywordRecognizer != null)
+                {
+                    await StopProcessing();
+                    _logger.LogInformation("Waiting 1 second while keyword recognizer stops");
+                    await Task.Delay(1000);
+                    _keywordRecognizer?.Dispose();
+                    _logger.LogInformation("Keyword recognizer disposed");
+                    _keywordRecognizer = null;
+                }
+            }
+            catch (InvalidOperationException e)
+            {
+                if (_triesCount >= _maxTriesCount)
+                {
+                    _logger.LogError(e, $"Keyword recognizer disposing failed {_maxTriesCount} of {_maxTriesCount}");
+                    return;
+                }
+                _triesCount++;
+                _logger.LogWarning(e, $"Keyword recognizer disposing failed. Trying {_triesCount} of {_maxTriesCount} tries");
+                await SafeDisposeKeywordRecognizer();
+            }
+        }
+        #endregion
+
+
+    }
+}

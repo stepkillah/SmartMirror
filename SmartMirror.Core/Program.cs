@@ -1,25 +1,25 @@
-***REMOVED***
+﻿using System;
 using System.Threading;
-***REMOVED***
+using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-***REMOVED***
+using Microsoft.Extensions.Logging;
 using SmartMirror.Core.Common;
 using SmartMirror.Core.Extensions;
-***REMOVED***
+using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.Services.LedControl;
 
 namespace SmartMirror.Core
-***REMOVED***
+{
     class Program
-    ***REMOVED***
-        private static IServiceProvider Container ***REMOVED*** get; set; ***REMOVED***
+    {
+        private static IServiceProvider Container { get; set; }
         public static ILogger ProgramLogger;
         private static bool _isCleaning;
         private static readonly CancellationTokenSource AppCancellationTokenSource = new CancellationTokenSource();
 
         static async Task Main(string[] args)
-        ***REMOVED***
+        {
             using IHost host = CreateHostBuilder(args).Build();
             Container = host.Services;
             if (Container == null)
@@ -30,39 +30,39 @@ namespace SmartMirror.Core
             ProgramLogger.LogDebug("Container initialized");
             ConfigureConsole();
             ProgramLogger.LogInformation("SmartMirror");
-            ProgramLogger.LogInformation($"OS Information: ***REMOVED***System.Runtime.InteropServices.RuntimeInformation.OSDescription***REMOVED***");
+            ProgramLogger.LogInformation($"OS Information: {System.Runtime.InteropServices.RuntimeInformation.OSDescription}");
             StartProgram();
             ProgramLogger.LogInformation("Program services started");
             await host.StartAsync(AppCancellationTokenSource.Token);
             ProgramLogger.LogInformation("App successfully started");
             await host.WaitForShutdownAsync(AppCancellationTokenSource.Token);
-      ***REMOVED***
+        }
 
         private static void ConsoleOnCancelKeyPress(object sender, ConsoleCancelEventArgs e)
-        ***REMOVED***
+        {
             e.Cancel = true;
             CleanupAndClose().ConfigureAwait(false);
-      ***REMOVED***
+        }
 
         private static async Task CleanupAndClose()
-        ***REMOVED***
+        {
             if (_isCleaning)
-            ***REMOVED***
+            {
                 ProgramLogger.LogInformation("Cleaning already started.");
-***REMOVED***
-          ***REMOVED***
+                return;
+            }
 
-***REMOVED***
-            ***REMOVED***
+            try
+            {
                 _isCleaning = true;
                 ProgramLogger.LogInformation("Cleaning started");
 
                 var speechService = Container.GetService<ISpeechRecognitionService>();
                 if (speechService != null)
-                ***REMOVED***
+                {
                     await speechService.StopProcessing();
                     speechService.Dispose();
-              ***REMOVED***
+                }
 
                 var ledManager = Container.GetService<ILedManager>();
                 ledManager?.Dispose();
@@ -72,27 +72,27 @@ namespace SmartMirror.Core
 
                 ProgramLogger.LogInformation("Cleaning finished\nClosing app...");
                 AppCancellationTokenSource.Cancel();
-          ***REMOVED***
-***REMOVED***
-            ***REMOVED***
+            }
+            finally
+            {
                 _isCleaning = false;
-          ***REMOVED***
-      ***REMOVED***
+            }
+        }
 
 
         private static void StartProgram()
-        ***REMOVED***
+        {
             Container.GetService<ISpeechRecognitionService>()?.StartProcessing();
             Container.GetService<ILedManager>()?.StartProcessing();
             Container.GetService<IMagicMirrorRunner>()?.StartProcessing();
             _ = Task.Run(() => Container.GetService<IKeyboardListener>()?.StartListenKeyCommands(AppCancellationTokenSource.Token));
-      ***REMOVED***
+        }
 
         private static void ConfigureConsole()
-        ***REMOVED***
+        {
             Console.CancelKeyPress += ConsoleOnCancelKeyPress;
             DirectoryInitializer.EnsureCorrectWorkingDirectory(ProgramLogger);
-      ***REMOVED***
+        }
 
         #region DI
 
@@ -103,6 +103,6 @@ namespace SmartMirror.Core
                         .ConfigureSmartMirrorOptions(context)
                         .AddSmartMirrorServices());
 
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        #endregion
+    }
+}

@@ -1,12 +1,12 @@
-***REMOVED***
-  "profiles": ***REMOVED***
-    "SmartMirror.LedStripe": ***REMOVED***
+{
+  "profiles": {
+    "SmartMirror.LedStripe": {
       "commandName": "Project"
-  ***REMOVED***
-    "WSL": ***REMOVED***
+    },
+    "WSL": {
       "commandName": "WSL2",
-      "environmentVariables": ***REMOVED******REMOVED***,
+      "environmentVariables": {},
       "distributionName": ""
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+    }
+  }
+}

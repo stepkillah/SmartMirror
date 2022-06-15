@@ -16,6 +16,9 @@
         <Content Include="appsettings.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
+        <Content Include="appsettings.Production.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
         <Content Include="Assets\error.wav">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </Content>
@@ -36,7 +39,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
         <PackageReference Include="NAudio" Version="2.1.0" />
-        <PackageReference Include="System.Device.G***REMOVED***o" Version="2.1.0" />
+        <PackageReference Include="System.Device.Gpio" Version="2.1.0" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
@@ -56,18 +59,18 @@
     </PropertyGroup>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\***REMOVED***_key_ssh &quot;$(TargetDir)&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\pi_key_ssh &quot;$(TargetDir)&quot; &quot;pi@192.168.0.108:/home/pi/Projects/SmartMirror&quot;" />
     </Target>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugX64'">
-		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\***REMOVED***_key_***REMOVED***_ssh &quot;$(TargetDir)/*&quot; &quot;***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror&quot;" />
+		<Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;F:\ssh&quot; F:\ssh\pi_key_ubuntu_ssh &quot;$(TargetDir)/*&quot; &quot;ubuntu@192.168.0.108:/home/ubuntu/Projects/SmartMirror&quot;" />
 	</Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsync'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\***REMOVED***_key_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\pi_key_ssh $(TargetDir)/* pi@192.168.0.108:/home/pi/Projects/SmartMirror" />
     </Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsyncX64'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\***REMOVED***_key_***REMOVED***_ssh $(TargetDir)/* ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\pi_key_ubuntu_ssh $(TargetDir)/* ubuntu@192.168.0.108:/home/ubuntu/Projects/SmartMirror" />
     </Target>
 </Project>

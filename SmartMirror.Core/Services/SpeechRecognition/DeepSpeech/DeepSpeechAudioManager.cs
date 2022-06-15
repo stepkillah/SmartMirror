@@ -1,21 +1,21 @@
 ﻿//using System;
 //using System.Diagnostics;
-//***REMOVED***
-//***REMOVED***
-//***REMOVED***
+//using System.IO;
+//using System.Threading.Tasks;
+//using Microsoft.Extensions.Logging;
 //using NAudio.Wave;
 //using SmartMirror.Core.VoiceRecognition.Microsoft;
 
 //namespace SmartMirror.Core.Services.VoiceRecognition.DeepSpeech
-//***REMOVED***
+//{
 //    public class DeepSpeechAudioManager : ISpeechRecognitionService
-//    ***REMOVED***
-//***REMOVED***
+//    {
+//        private readonly ILogger _logger;
 //        private bool _disposedValue;
 
 //        public DeepSpeechAudioManager(ILogger<DeepSpeechAudioManager> logger)
-//        ***REMOVED***
-//***REMOVED***
+//        {
+//            _logger = logger;
 
 //            string scorer = null;
 //            string audio = "VoiceRecognition/DeepSpeech/arctic_a0024.wav";
@@ -23,8 +23,8 @@
 //            string model = "VoiceRecognition/DeepSpeech/deepspeech-0.8.2-models.pbmm";
 //            model = Path.Combine(Directory.GetCurrentDirectory(), model);
 //            Stopwatch stopwatch = new Stopwatch();
-//***REMOVED***
-//            ***REMOVED***
+//            try
+//            {
 //                Console.WriteLine("Loading model...");
 //                stopwatch.Start();
 //                // sphinx-doc: csharp_ref_model_start
@@ -32,18 +32,18 @@
 //                // sphinx-doc: csharp_ref_model_stop
 //                stopwatch.Stop();
 
-//                Console.WriteLine($"Model loaded - ***REMOVED***stopwatch.Elapsed.Milliseconds***REMOVED*** ms");
+//                Console.WriteLine($"Model loaded - {stopwatch.Elapsed.Milliseconds} ms");
 //                stopwatch.Reset();
 //                if (scorer != null)
-//                ***REMOVED***
+//                {
 //                    Console.WriteLine("Loading scorer...");
 //                    sttClient.EnableExternalScorer(scorer ?? "kenlm.scorer");
-//              ***REMOVED***
+//                }
 //                audio = Path.Combine(Directory.GetCurrentDirectory(), audio);
 //                string audioFile = audio;
 //                var waveBuffer = new WaveBuffer(File.ReadAllBytes(audioFile));
 //                using (var waveInfo = new WaveFileReader(audioFile))
-//                ***REMOVED***
+//                {
 //                    Console.WriteLine("Running inference....");
 
 //                    stopwatch.Start();
@@ -51,82 +51,82 @@
 //                    string speechResult;
 //                    // sphinx-doc: csharp_ref_inference_start
 //                    if (extended)
-//                    ***REMOVED***
+//                    {
 //                        Metadata metaResult = sttClient.SpeechToTextWithMetadata(waveBuffer.ShortBuffer,
 //                            Convert.ToUInt32(waveBuffer.MaxSize / 2), 1);
 //                        speechResult = MetadataToString(metaResult.Transcripts[0]);
-//                  ***REMOVED***
+//                    }
 //                    else
-//                    ***REMOVED***
+//                    {
 //                        speechResult = sttClient.SpeechToText(waveBuffer.ShortBuffer,
 //                            Convert.ToUInt32(waveBuffer.MaxSize / 2));
-//                  ***REMOVED***
+//                    }
 //                    // sphinx-doc: csharp_ref_inference_stop
 
 //                    stopwatch.Stop();
 
-//                    Console.WriteLine($"Audio duration: ***REMOVED***waveInfo.TotalTime.ToString()***REMOVED***");
-//                    Console.WriteLine($"Inference took: ***REMOVED***stopwatch.Elapsed.ToString()***REMOVED***");
+//                    Console.WriteLine($"Audio duration: {waveInfo.TotalTime.ToString()}");
+//                    Console.WriteLine($"Inference took: {stopwatch.Elapsed.ToString()}");
 //                    Console.WriteLine((extended ? $"Extended result: " : "Recognized text: ") + speechResult);
-//              ***REMOVED***
+//                }
 //                waveBuffer.Clear();
-//          ***REMOVED***
-//***REMOVED***
-//            ***REMOVED***
+//            }
+//            catch (Exception ex)
+//            {
 //                Console.WriteLine(ex.Message);
-//          ***REMOVED***
-//      ***REMOVED***
+//            }
+//        }
 
 //        static string MetadataToString(CandidateTranscript transcript)
-//        ***REMOVED***
+//        {
 //            var nl = Environment.NewLine;
 //            string retval =
-//                Environment.NewLine + $"Recognized text: ***REMOVED***string.Join("", transcript?.Tokens?.Select(x => x.Text))***REMOVED*** ***REMOVED***nl***REMOVED***"
-//                                    + $"Confidence: ***REMOVED***transcript?.Confidence***REMOVED*** ***REMOVED***nl***REMOVED***"
-//                                    + $"Item count: ***REMOVED***transcript?.Tokens?.Length***REMOVED*** ***REMOVED***nl***REMOVED***"
-//                                    + string.Join(nl, transcript?.Tokens?.Select(x => $"Timestep : ***REMOVED***x.Timestep***REMOVED*** TimeOffset: ***REMOVED***x.StartTime***REMOVED*** Char: ***REMOVED***x.Text***REMOVED***"));
+//                Environment.NewLine + $"Recognized text: {string.Join("", transcript?.Tokens?.Select(x => x.Text))} {nl}"
+//                                    + $"Confidence: {transcript?.Confidence} {nl}"
+//                                    + $"Item count: {transcript?.Tokens?.Length} {nl}"
+//                                    + string.Join(nl, transcript?.Tokens?.Select(x => $"Timestep : {x.Timestep} TimeOffset: {x.StartTime} Char: {x.Text}"));
 //            return retval;
-//      ***REMOVED***
+//        }
 
 
-//***REMOVED***
-//        ***REMOVED***
-//      ***REMOVED***
+//        public void StartProcessing()
+//        {
+//        }
 
 //        public Task StopProcessing()
-//        ***REMOVED***
+//        {
 //            return Task.CompletedTask;
-//      ***REMOVED***
+//        }
 
-//***REMOVED***
+//        #region private methods
 
 //        private void StartKeywordRecognition()
-//        ***REMOVED***
+//        {
 
-//      ***REMOVED***
+//        }
 
-//***REMOVED***
+//        #endregion
 
 //        #region disposing
 //        protected virtual void Dispose(bool disposing)
-//        ***REMOVED***
+//        {
 //            if (_disposedValue) return;
 
-//***REMOVED***
-//            ***REMOVED***
+//            if (disposing)
+//            {
 //                // TODO: dispose managed state (managed objects)
-//          ***REMOVED***
+//            }
 
 //            _disposedValue = true;
-//      ***REMOVED***
+//        }
 
 
-//***REMOVED***
-//        ***REMOVED***
+//        public void Dispose()
+//        {
 //            // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-//***REMOVED***
-//***REMOVED***
-//      ***REMOVED***
-//***REMOVED***
-//  ***REMOVED***
-//***REMOVED***
+//            Dispose(disposing: true);
+//            GC.SuppressFinalize(this);
+//        }
+//        #endregion
+//    }
+//}

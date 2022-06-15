@@ -39,7 +39,7 @@ execute `sudo nano /etc/ssh/sshd_config` and set `#PermitRootLogin yes`
 `nano ~/.ssh/authorized_keys`
 6. Grant another permissions  
 `sudo chmod 644 ~/.ssh/authorized_keys`  
-`sudo chown ***REMOVED***:***REMOVED*** ~/.ssh/authorized_keys`
+`sudo chown pi:pi ~/.ssh/authorized_keys`
 
 ### Windows:
 
@@ -50,7 +50,7 @@ Example:
 3. Create bat file with post build script  
 Example using SCP/PSCP or using [script](raspberry_deploy.bat):  
 ```
-scp -r -P 22 -i e:\ssh\***REMOVED***_key.ppk "path\to\source\*" ***REMOVED***@***REMOVED***08:/home/***REMOVED***/Projects/SmartMirror.LedStripe
+scp -r -P 22 -i e:\ssh\pi_key.ppk "path\to\source\*" pi@192.168.0.108:/home/pi/Projects/SmartMirror.LedStripe
 pause
 ```
 Example using RSync located [here](raspberry_deploy_rsync.bat)
@@ -59,23 +59,23 @@ Example using RSync located [here](raspberry_deploy_rsync.bat)
 https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio
 5. Set ssh or plink addapter in launch.vs.json
 ```
-***REMOVED***
+{
     "version": "0.2.1",
     "adapter": "e:\\ssh\\ssh.exe",
-    "adapterArgs": "-i e:\\ssh\\***REMOVED***_key.ppk ***REMOVED***@***REMOVED***08 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
+    "adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
     "configurations": [
-        ***REMOVED***
+        {
             "name": ".NET Core Raspberry Launch",
             "type": "coreclr",
             "cwd": "~/Projects/SmartMirror.LedStripe",
-            "program": "/home/***REMOVED***/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
+            "program": "/home/pi/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
             "request": "launch",
-            "logging": ***REMOVED***
+            "logging": {
                 "engineLogging": true
-          ***REMOVED***
-      ***REMOVED***
+            }
+        }
     ]
-***REMOVED***
+}
 ```
 6. Set portable debug type in csproj  
 ```

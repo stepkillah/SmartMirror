@@ -1,11 +1,11 @@
 ﻿namespace SmartMirror.Core.Models
-***REMOVED***
+{
     public class LedOptions
-    ***REMOVED***
-        public int[] Missing ***REMOVED*** get; set; ***REMOVED***
-        public int Count ***REMOVED*** get; set; ***REMOVED***
-        public int BusId ***REMOVED*** get; set; ***REMOVED***
-        public int ChipSelectLine ***REMOVED*** get; set; ***REMOVED***
+    {
+        public int[] Missing { get; set; }
+        public int Count { get; set; }
+        public int BusId { get; set; }
+        public int ChipSelectLine { get; set; }
 
-  ***REMOVED***
-***REMOVED***
+    }
+}

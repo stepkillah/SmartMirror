@@ -1,33 +1,33 @@
-﻿***REMOVED***
+﻿using System.IO;
 using System.Reflection;
-***REMOVED***
+using Microsoft.Extensions.Logging;
 
 namespace SmartMirror.Core.Common
-***REMOVED***
+{
     public static class DirectoryInitializer
-    ***REMOVED***
+    {
         public static void EnsureCorrectWorkingDirectory(ILogger log)
-        ***REMOVED***
+        {
             var currentDir = Directory.GetCurrentDirectory();
-            log.LogInformation($"Current working directory: ***REMOVED***currentDir***REMOVED***");
+            log.LogInformation($"Current working directory: {currentDir}");
 
             var assemblyLocation = Assembly.GetEntryAssembly()?.Location;
             if (string.IsNullOrEmpty(assemblyLocation))
-            ***REMOVED***
+            {
                 log.LogInformation($"Empty assembly location");
-***REMOVED***
-          ***REMOVED***
+                return;
+            }
 
             var finalLocation = Path.GetDirectoryName(assemblyLocation);
             if (!string.IsNullOrEmpty(finalLocation))
-            ***REMOVED***
+            {
                 Directory.SetCurrentDirectory(finalLocation);
-                log.LogInformation($"Current working set to: ***REMOVED***finalLocation***REMOVED***");
-          ***REMOVED***
+                log.LogInformation($"Current working set to: {finalLocation}");
+            }
             else
-            ***REMOVED***
+            {
                 log.LogInformation($"Empty final directory location");
-          ***REMOVED***
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+            }
+        }
+    }
+}

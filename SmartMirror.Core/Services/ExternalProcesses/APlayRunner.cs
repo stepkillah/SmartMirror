@@ -1,45 +1,45 @@
-***REMOVED***
+﻿using System;
 using System.Diagnostics;
 using System.Threading;
-***REMOVED***
-***REMOVED***
-***REMOVED***
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using SmartMirror.Core.Interfaces;
 
 namespace SmartMirror.Core.Services.ExternalProcesses
-***REMOVED***
+{
     public class APlayRunner : IAudioPlayer
-    ***REMOVED***
-***REMOVED***
+    {
+        private readonly ILogger _logger;
 
         public APlayRunner(ILogger<APlayRunner> logger)
-        ***REMOVED***
-***REMOVED***
-      ***REMOVED***
+        {
+            _logger = logger;
+        }
 
 
         public async Task Play(string path, CancellationToken cancellationToken = default)
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
+        {
+            try
+            {
                 using var aplayProcess = new Process()
-                ***REMOVED***
+                {
                     StartInfo = new ProcessStartInfo("aplay", path)
-                    ***REMOVED***
+                    {
                         RedirectStandardOutput = true,
                         RedirectStandardInput = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
-                  ***REMOVED***
-              ***REMOVED***;
+                    }
+                };
                 aplayProcess.Start();
                 await aplayProcess.StandardOutput.ReadToEndAsync();
                 aplayProcess.Kill();
-          ***REMOVED***
+            }
             catch (Exception e)
-            ***REMOVED***
+            {
                 _logger.LogError(e, nameof(Play));
-          ***REMOVED***
+            }
 
-      ***REMOVED***
-  ***REMOVED***
-***REMOVED***
+        }
+    }
+}

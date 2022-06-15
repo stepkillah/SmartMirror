@@ -1,98 +1,98 @@
-***REMOVED***
+﻿using System;
 using System.Diagnostics;
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using SmartMirror.Core.Interfaces;
+using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Services.ExternalProcesses
-***REMOVED***
+{
     public class MagicMirrorRunner : IMagicMirrorRunner, IDisposable
-    ***REMOVED***
-***REMOVED***
-***REMOVED***
+    {
+        private bool _isDisposed;
+        private readonly ILogger _logger;
         private readonly MagicMirrorOptions _mirrorOptions;
 
         public MagicMirrorRunner(ILogger<MagicMirrorRunner> logger, IOptions<MagicMirrorOptions> magicMirrorOptions)
-        ***REMOVED***
-***REMOVED***
+        {
+            _logger = logger;
             _mirrorOptions = magicMirrorOptions.Value;
-      ***REMOVED***
+        }
 
         private Process _magicMirrorRunProcess;
         public ValueTask StartProcessing()
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
+        {
+            try
+            {
                 if (_magicMirrorRunProcess != null)
                     return ValueTask.CompletedTask;
 
-                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Starting");
+                _logger.LogInformation($"{nameof(MagicMirrorRunner)} Starting");
                 _magicMirrorRunProcess = new Process()
-                ***REMOVED***
-                    StartInfo = new ProcessStartInfo("sudo", $"-H -u ***REMOVED***_mirrorOptions.DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start")
-                    ***REMOVED***
+                {
+                    StartInfo = new ProcessStartInfo("sudo", $"-H -u {_mirrorOptions.DefaultUserName} DISPLAY=:0.0 npm start")
+                    {
                         RedirectStandardOutput = false,
                         RedirectStandardInput = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
                         WorkingDirectory = _mirrorOptions.WorkingDirectory
-                  ***REMOVED***
-              ***REMOVED***;
+                    }
+                };
                 _logger.LogInformation(_magicMirrorRunProcess.Start()
-                    ? $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Started"
-                    : $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** Start failed");
-          ***REMOVED***
+                    ? $"{nameof(MagicMirrorRunner)} Started"
+                    : $"{nameof(MagicMirrorRunner)} Start failed");
+            }
             catch (Exception e)
-            ***REMOVED***
+            {
                 _magicMirrorRunProcess = null;
                 _logger.LogError(e, nameof(StartProcessing));
-          ***REMOVED***
+            }
             return ValueTask.CompletedTask;
-      ***REMOVED***
+        }
 
         public ValueTask StopProcessing()
-        ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng");
+        {
+            try
+            {
+                _logger.LogInformation($"{nameof(MagicMirrorRunner)}: Stopping");
 
                 if (_magicMirrorRunProcess == null)
                     return ValueTask.CompletedTask;
                 _magicMirrorRunProcess.Close();
                 _magicMirrorRunProcess.Dispose();
                 _magicMirrorRunProcess = null;
-                _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stopped");
-          ***REMOVED***
-***REMOVED***
-            ***REMOVED***
-                _logger.LogError(ex, $"***REMOVED***nameof(MagicMirrorRunner)***REMOVED***: Stop***REMOVED***ng error");
-          ***REMOVED***
+                _logger.LogInformation($"{nameof(MagicMirrorRunner)}: Stopped");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"{nameof(MagicMirrorRunner)}: Stopping error");
+            }
             return ValueTask.CompletedTask;
-      ***REMOVED***
+        }
 
 
 
         #region disposing
         protected virtual void Dispose(bool disposing)
-        ***REMOVED***
-***REMOVED***
+        {
+            if (_isDisposed) return;
 
-***REMOVED***
+            if (disposing)
                 StopProcessing();
 
-***REMOVED***
+            _isDisposed = true;
 
-            _logger.LogInformation($"***REMOVED***nameof(MagicMirrorRunner)***REMOVED*** disposed.");
-      ***REMOVED***
+            _logger.LogInformation($"{nameof(MagicMirrorRunner)} disposed.");
+        }
 
-***REMOVED***
-        ***REMOVED***
+        public void Dispose()
+        {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
-***REMOVED***
-***REMOVED***
-      ***REMOVED***
-***REMOVED***
-  ***REMOVED***
-***REMOVED***
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+    }
+}

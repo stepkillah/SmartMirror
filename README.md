@@ -1,29 +1,29 @@
 # SmartMirror
 
-Smart mirror helper for [speech recognition](#speech-recognition), led control and [MagicMirror](#magicmirrorrunner)
+Smart mirror helper with [speech recognition](#speech-recognition), led control and [MagicMirror](#magicmirrorrunner) written in C#
 
 ## Configuration
 
 To configure different aspect of application you can use `appsettings.json`.  
 Here is an example of settings file
 ```
-***REMOVED***
-  "MagicMirrorRunner": ***REMOVED***
+{
+  "MagicMirrorRunner": {
     "DefaultUserName": "<Default UserName for sudo command>",
     "WorkingDirectory": "<MagicMirror root folder path on target device>"
-***REMOVED***
-  "LED": ***REMOVED***
+  },
+  "LED": {
     "Count": <Total count of LED lights>,
     "Missing": [<Index of lights that is missing/not working in LED strip>],
     "BusId": <Physical SPI bus id (0)>,
     "ChipSelectLine": <SPI line (0)>
-***REMOVED***
-  "SpeechRecognition": ***REMOVED***
+  },
+  "SpeechRecognition": {
     "ActivationRecognitionTablePath": "<path to .table file for keyword recognition>",
-    "SubscriptionKey": "<A***REMOVED***Key from Azure Portal>",
+    "SubscriptionKey": "<ApiKey from Azure Portal>",
     "Region": "<Region from Azure Portal>"
-***REMOVED***
-***REMOVED***
+  }
+}
 ```
 
 ## Debug and deployment
@@ -36,7 +36,7 @@ To control what is going on with your SmartMirror you can use commands - either 
 
 - `light on` enable led lights
 - `light off` disable led lights
-- `color ***REMOVED***colorName or code***REMOVED***` set led color to specified in command
+- `color {colorName or code}` set led color to specified in command
 - `sound test` play Success sound (used for test purposes)
 
 ## LED Manager
@@ -44,7 +44,7 @@ To control what is going on with your SmartMirror you can use commands - either 
 SmartMirror app designed to work with Ws2812b LED strip
 
 In order to control LED strip, app uses `ws2812b` binding from [this NuGet](https://www.nuget.org/packages/Iot.Device.Bindings/), through SPI interface.  
-Each ***REMOVED***xel is set separately, so in order to change color of the whole LED strip - each ***REMOVED***xel should be set to that color.
+Each pixel is set separately, so in order to change color of the whole LED strip - each pixel should be set to that color.
 
 ## 3rd party services
 
@@ -62,7 +62,7 @@ Keyword recognition works offline and uses `Assets/mirror_activation.table` tabl
 After the application recognizes the keyword - it will start listening for an actual command that is described above and if the command is recognized successfully by the Microsoft Azure Cognitive Services - it will be executed.  
 All actions will be confirmed with appropriate sound
 
-**Be aware, Microsoft Cognitive Services [nuget](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech) works only with ARM64. Tested on [Ubuntu server](https://***REMOVED***.com/download/raspberry-***REMOVED***) 18.04 and 20.04, probably will work the same with on latest 22.04**
+**Be aware, Microsoft Cognitive Services [nuget](https://www.nuget.org/packages/Microsoft.CognitiveServices.Speech) works only with ARM64. Tested on [Ubuntu server](https://ubuntu.com/download/raspberry-pi) 18.04 and 20.04, probably will work the same with on latest 22.04**
 
 #### DeepSpeech
 
@@ -74,8 +74,8 @@ Application source code contains commented DeepSpeech service as an direction ho
 ### MagicMirrorRunner
 
 Service that starts and manages [MagicMirror](https://github.com/MichMich/MagicMirror) electron application.  
-It uses C# `Process` to execute `sudo -H -u ***REMOVED***DefaultUserName***REMOVED*** DISPLAY=:0.0 npm start` command to start MagicMirror on first display (`DISPLAY=:0.0`).   
-The current hardcoded working directory is `/home/***REMOVED***/Projects/MagicMirror`  
+It uses C# `Process` to execute `sudo -H -u {DefaultUserName} DISPLAY=:0.0 npm start` command to start MagicMirror on first display (`DISPLAY=:0.0`).   
+The current hardcoded working directory is `/home/ubuntu/Projects/MagicMirror`  
 MagicMirror itself should be configured separately by following [guides](https://docs.magicmirror.builders/)
 
 ### Audio Player
@@ -90,7 +90,7 @@ SmartMirror app provides a file path to platform-specific player which does all 
 
 #### APlayRunner
 
-On Linux app uses [aplay](http://manpages.***REMOVED***.com/manpages/focal/man1/aplay.1.html).
+On Linux app uses [aplay](http://manpages.ubuntu.com/manpages/focal/man1/aplay.1.html).
 
 #### NAudioPlayerService
 
