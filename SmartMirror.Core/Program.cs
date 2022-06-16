@@ -20,6 +20,7 @@ namespace SmartMirror.Core
 
         static async Task Main(string[] args)
         {
+            ConfigureConsoleAndWorkingDirectory();
             using IHost host = CreateHostBuilder(args).Build();
             Container = host.Services;
             if (Container == null)
@@ -28,7 +29,6 @@ namespace SmartMirror.Core
                 .CreateLogger<Program>();
 
             ProgramLogger.LogDebug("Container initialized");
-            ConfigureConsole();
             ProgramLogger.LogInformation("SmartMirror");
             ProgramLogger.LogInformation($"OS Information: {System.Runtime.InteropServices.RuntimeInformation.OSDescription}");
             StartProgram();
@@ -88,10 +88,10 @@ namespace SmartMirror.Core
             _ = Task.Run(() => Container.GetService<IKeyboardListener>()?.StartListenKeyCommands(AppCancellationTokenSource.Token));
         }
 
-        private static void ConfigureConsole()
+        private static void ConfigureConsoleAndWorkingDirectory()
         {
             Console.CancelKeyPress += ConsoleOnCancelKeyPress;
-            DirectoryInitializer.EnsureCorrectWorkingDirectory(ProgramLogger);
+            DirectoryInitializer.EnsureCorrectWorkingDirectory(LoggerFactory.Create(builder => builder.AddSmartMirrorLogging()).CreateLogger<Program>());
         }
 
         #region DI
@@ -99,7 +99,7 @@ namespace SmartMirror.Core
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((context, services) =>
-                    services.AddLogging(builder => builder.AddConsole())
+                    services.AddLogging(builder => builder.AddSmartMirrorLogging())
                         .ConfigureSmartMirrorOptions(context)
                         .AddSmartMirrorServices());
 

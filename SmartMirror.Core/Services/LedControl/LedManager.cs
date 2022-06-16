@@ -47,7 +47,7 @@ namespace SmartMirror.Core.Services.LedControl
                 return;
             ColorWipe(_led, Color.Black, _ledOptions.Count);
             _isRunning = false;
-            _logger.LogWarning("LED Turned OFF");
+            _logger.LogInformation("LED Turned OFF");
         }
 
         public void TurnOn(Color color = default)
@@ -56,7 +56,7 @@ namespace SmartMirror.Core.Services.LedControl
                 return;
             ColorWipe(_led, color == default ? Color.White : color, _ledOptions.Count);
             _isRunning = true;
-            _logger.LogWarning("LED Turned ON");
+            _logger.LogInformation("LED Turned ON");
         }
 
         private void ColorWipe(Ws28xx neo, Color color, int count)

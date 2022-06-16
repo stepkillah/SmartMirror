@@ -31,7 +31,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)} Starting");
                 _magicMirrorRunProcess = new Process()
                 {
-                    StartInfo = new ProcessStartInfo("sudo", $"-H -u {_mirrorOptions.DefaultUserName} DISPLAY=:0.0 npm start")
+                    StartInfo = new ProcessStartInfo("npm", $"run start")
                     {
                         RedirectStandardOutput = false,
                         RedirectStandardInput = false,
@@ -60,7 +60,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
 
                 if (_magicMirrorRunProcess == null)
                     return ValueTask.CompletedTask;
-                _magicMirrorRunProcess.Close();
+                _magicMirrorRunProcess.Kill();
                 _magicMirrorRunProcess.Dispose();
                 _magicMirrorRunProcess = null;
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)}: Stopped");

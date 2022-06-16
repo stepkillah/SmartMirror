@@ -58,7 +58,7 @@ namespace SmartMirror.Core.Services
                     _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);
                     break;
                 default:
-                    _logger.LogInformation("Unknown command");
+                    _logger.LogWarning("Unknown command");
                     break;
             }
             return ValueTask.CompletedTask;
@@ -89,6 +89,11 @@ namespace SmartMirror.Core.Services
             try
             {
                 return ColorTranslator.FromHtml(command);
+            }
+            catch (ArgumentException e)
+            {
+                _logger.LogWarning(e, $"{nameof(CommandsHandler)}: Parsing color failed");
+                return null;
             }
             catch (Exception e)
             {
