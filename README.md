@@ -1,6 +1,6 @@
 # SmartMirror
 
-Smart mirror helper with [speech recognition](#speech-recognition), led control and [MagicMirror](#magicmirrorrunner) written in C#
+Smart mirror helper with [speech recognition](#speech-recognition), [led control](#led-Manager) and [MagicMirror](#magicmirrorrunner) written in C#
 
 ## Configuration
 
@@ -74,8 +74,8 @@ Application source code contains commented DeepSpeech service as an direction ho
 ### MagicMirrorRunner
 
 Service that starts and manages [MagicMirror](https://github.com/MichMich/MagicMirror) electron application.  
-It uses C# `Process` to execute `sudo -H -u {DefaultUserName} DISPLAY=:0.0 npm start` command to start MagicMirror on first display (`DISPLAY=:0.0`).   
-The current hardcoded working directory is `/home/ubuntu/Projects/MagicMirror`  
+It uses C# `Process` to execute `npm run start` command to start MagicMirror.   
+You can set current working directory in [`appsettings.json`](#configuration)
 MagicMirror itself should be configured separately by following [guides](https://docs.magicmirror.builders/)
 
 ### Audio Player

@@ -7,7 +7,8 @@ namespace SmartMirror.Core.Extensions
 
         public static ILoggingBuilder AddSmartMirrorLogging(this ILoggingBuilder services)
         {
-            services.AddConsole();
+            services
+                .AddConsole();
             return services;
         }
 
