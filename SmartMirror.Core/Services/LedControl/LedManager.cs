@@ -22,6 +22,7 @@ namespace SmartMirror.Core.Services.LedControl
         private Ws28xx _led;
         private SpiDevice _spiDevice;
         private bool _isRunning = true;
+        private Color _currentColor;
 
         public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions, IHostApplicationLifetime hostApplicationLifetime)
         {
@@ -48,7 +49,9 @@ namespace SmartMirror.Core.Services.LedControl
         {
             if (_led == null)
                 return;
-            ColorWipe(_led, color == default ? Color.White : color, _ledOptions.Count);
+            if (color != default)
+                _currentColor = color;
+            ColorWipe(_led, _currentColor == default ? Color.WhiteSmoke : _currentColor, _ledOptions.Count);
             _isRunning = true;
             _logger.LogInformation("LED Turned ON");
         }
