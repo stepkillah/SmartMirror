@@ -2,15 +2,17 @@
 using System.Device.Spi;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using Iot.Device.Graphics;
 using Iot.Device.Ws28xx;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Services.LedControl
 {
-    public class LedManager : ILedManager
+    public class LedManager : ILedManager, IDisposable, IAsyncDisposable
     {
         private bool _isDisposed;
 
@@ -21,25 +23,17 @@ namespace SmartMirror.Core.Services.LedControl
         private SpiDevice _spiDevice;
         private bool _isRunning = true;
 
-        public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions)
+        public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions, IHostApplicationLifetime hostApplicationLifetime)
         {
             _logger = logger;
             _ledOptions = ledOptions.Value;
-            var settings = new SpiConnectionSettings(_ledOptions.BusId, _ledOptions.ChipSelectLine)
-            {
-                ClockFrequency = 2_400_000,
-                Mode = SpiMode.Mode0,
-                DataBitLength = 8
-            };
-            _spiDevice = SpiDevice.Create(settings);
 
-            _led = new Ws2812b(_spiDevice, _ledOptions.Count);
+            hostApplicationLifetime.ApplicationStarted.Register(OnStarted);
+            hostApplicationLifetime.ApplicationStopping.Register(OnStopping);
+
+            InitSpi();
         }
 
-        public void StartProcessing()
-        {
-            TurnOn();
-        }
 
         public void TurnOff()
         {
@@ -58,6 +52,40 @@ namespace SmartMirror.Core.Services.LedControl
             _isRunning = true;
             _logger.LogInformation("LED Turned ON");
         }
+
+
+        #region application lifecycle
+
+        private void OnStarted()
+        {
+            _logger.LogInformation("On started callback");
+            TurnOn();
+        }
+
+        private void OnStopping()
+        {
+            _logger.LogInformation("On stopping callback");
+            TurnOff();
+        }
+
+        #endregion
+
+
+        #region private methods
+
+        private void InitSpi()
+        {
+            var settings = new SpiConnectionSettings(_ledOptions.BusId, _ledOptions.ChipSelectLine)
+            {
+                ClockFrequency = 2_400_000,
+                Mode = SpiMode.Mode0,
+                DataBitLength = 8
+            };
+            _spiDevice = SpiDevice.Create(settings);
+
+            _led = new Ws2812b(_spiDevice, _ledOptions.Count);
+        }
+
 
         private void ColorWipe(Ws28xx neo, Color color, int count)
         {
@@ -172,8 +200,10 @@ namespace SmartMirror.Core.Services.LedControl
             device.Update();
 
         }
+        #endregion
 
         #region disposing
+
         protected virtual void Dispose(bool disposing)
         {
             if (_isDisposed) return;
@@ -192,6 +222,33 @@ namespace SmartMirror.Core.Services.LedControl
             _logger.LogInformation($"{nameof(LedManager)} disposed.");
         }
 
+        protected virtual ValueTask DisposeAsync(bool disposing)
+        {
+            if (_isDisposed) return ValueTask.CompletedTask;
+
+            if (disposing)
+            {
+                if (_isRunning)
+                    TurnOff();
+
+                _led = null;
+                _spiDevice.Dispose();
+                _spiDevice = null;
+            }
+            _isDisposed = true;
+
+            _logger.LogInformation($"{nameof(LedManager)} disposed.");
+            return ValueTask.CompletedTask;
+        }
+
+
+        public async ValueTask DisposeAsync()
+        {
+            // Do not change this code. Put cleanup code in 'DisposeAsync(bool disposing)' method
+            await DisposeAsync(disposing: true);
+            GC.SuppressFinalize(this);
+        }
+
         public void Dispose()
         {
             // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
@@ -199,5 +256,6 @@ namespace SmartMirror.Core.Services.LedControl
             GC.SuppressFinalize(this);
         }
         #endregion
+
     }
 }

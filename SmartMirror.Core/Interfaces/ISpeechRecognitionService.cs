@@ -1,11 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace SmartMirror.Core.Interfaces
 {
-    public interface ISpeechRecognitionService : IDisposable
+    public interface ISpeechRecognitionService
     {
-        void StartProcessing();
-        Task StopProcessing();
+        ValueTask StartProcessing();
+        ValueTask StopProcessing();
     }
 }

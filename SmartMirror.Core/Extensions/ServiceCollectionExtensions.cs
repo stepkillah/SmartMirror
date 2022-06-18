@@ -21,8 +21,9 @@ namespace SmartMirror.Core.Extensions
             services.AddSingleton(InitAudioPlayer);
             services.AddSingleton(InitSpeechRecognitionService);
             services.AddSingleton(InitLedManager);
-            services.AddSingleton<IMagicMirrorRunner, MagicMirrorRunner>();
-            services.AddSingleton<IKeyboardListener, KeyboardListener>();
+            services.AddHostedService<MagicMirrorRunner>();
+            services.AddHostedService<SpeechRecognitionHostedService>();
+            services.AddHostedService<KeyboardListener>();
             services.AddScoped<ICommandsHandler, CommandsHandler>();
             return services;
         }
@@ -75,7 +76,8 @@ namespace SmartMirror.Core.Extensions
             {
                 return new LedManager(
                     arg.GetService<ILogger<LedManager>>(),
-                    arg.GetService<IOptions<LedOptions>>());
+                    arg.GetService<IOptions<LedOptions>>(),
+                    arg.GetService<IHostApplicationLifetime>());
             }
             catch (Exception e)
             {

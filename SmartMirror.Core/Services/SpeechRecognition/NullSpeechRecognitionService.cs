@@ -5,18 +5,9 @@ namespace SmartMirror.Core.Services.SpeechRecognition
 {
     internal class NullSpeechRecognitionService : ISpeechRecognitionService
     {
-        public void StartProcessing()
-        {
+        public ValueTask StartProcessing() => ValueTask.CompletedTask;
 
-        }
+        public ValueTask StopProcessing() => ValueTask.CompletedTask;
 
-        public Task StopProcessing()
-        {
-            return Task.CompletedTask;
-        }
-
-        public void Dispose()
-        {
-        }
     }
 }

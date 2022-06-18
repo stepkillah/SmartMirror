@@ -29,6 +29,10 @@ namespace SmartMirror.Core.Services
                     await Task.Delay(1000, cancellationToken);
                 }
             }
+            catch (TaskCanceledException e)
+            {
+                _logger.LogWarning(e, "NAudio playback canceled");
+            }
             catch (Exception e)
             {
                 _logger.LogError(e, nameof(Play));

@@ -45,14 +45,15 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             _speechRecognizer = new SpeechRecognizer(config, _audioConfig);
         }
 
-        public void StartProcessing()
+        public ValueTask StartProcessing()
         {
             _isRunning = true;
-            WaitForVoiceActivation().ConfigureAwait(false);
+            _ = WaitForVoiceActivation().ConfigureAwait(false);
             _logger.LogInformation($"{nameof(SpeechRecognitionService)} started.");
+            return ValueTask.CompletedTask;
         }
 
-        public async Task StopProcessing()
+        public async ValueTask StopProcessing()
         {
             try
             {
@@ -235,7 +236,6 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             }
         }
         #endregion
-
 
     }
 }

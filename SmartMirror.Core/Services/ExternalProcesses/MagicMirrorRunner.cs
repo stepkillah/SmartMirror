@@ -1,32 +1,35 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Services.ExternalProcesses
 {
-    public class MagicMirrorRunner : IMagicMirrorRunner, IDisposable
+    public class MagicMirrorRunner : IHostedService, IDisposable
     {
         private bool _isDisposed;
         private readonly ILogger _logger;
         private readonly MagicMirrorOptions _mirrorOptions;
 
-        public MagicMirrorRunner(ILogger<MagicMirrorRunner> logger, IOptions<MagicMirrorOptions> magicMirrorOptions)
+        public MagicMirrorRunner(ILogger<MagicMirrorRunner> logger,
+            IOptions<MagicMirrorOptions> magicMirrorOptions)
         {
             _logger = logger;
             _mirrorOptions = magicMirrorOptions.Value;
         }
 
         private Process _magicMirrorRunProcess;
-        public ValueTask StartProcessing()
+
+        public Task StartAsync(CancellationToken cancellationToken)
         {
             try
             {
                 if (_magicMirrorRunProcess != null)
-                    return ValueTask.CompletedTask;
+                    return Task.CompletedTask;
 
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)} Starting");
                 _magicMirrorRunProcess = new Process()
@@ -47,32 +50,29 @@ namespace SmartMirror.Core.Services.ExternalProcesses
             catch (Exception e)
             {
                 _magicMirrorRunProcess = null;
-                _logger.LogError(e, nameof(StartProcessing));
+                _logger.LogError(e, nameof(StartAsync));
             }
-            return ValueTask.CompletedTask;
+            return Task.CompletedTask;
         }
 
-        public ValueTask StopProcessing()
+
+        public Task StopAsync(CancellationToken cancellationToken)
         {
             try
             {
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)}: Stopping");
 
                 if (_magicMirrorRunProcess == null)
-                    return ValueTask.CompletedTask;
+                    return Task.CompletedTask;
                 _magicMirrorRunProcess.Kill();
-                _magicMirrorRunProcess.Dispose();
-                _magicMirrorRunProcess = null;
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)}: Stopped");
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"{nameof(MagicMirrorRunner)}: Stopping error");
             }
-            return ValueTask.CompletedTask;
+            return Task.CompletedTask;
         }
-
-
 
         #region disposing
         protected virtual void Dispose(bool disposing)
@@ -80,7 +80,10 @@ namespace SmartMirror.Core.Services.ExternalProcesses
             if (_isDisposed) return;
 
             if (disposing)
-                StopProcessing();
+            {
+                _magicMirrorRunProcess?.Dispose();
+                _magicMirrorRunProcess = null;
+            }
 
             _isDisposed = true;
 
@@ -94,5 +97,6 @@ namespace SmartMirror.Core.Services.ExternalProcesses
             GC.SuppressFinalize(this);
         }
         #endregion
+
     }
 }
