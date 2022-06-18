@@ -32,12 +32,16 @@ For debugging and deployment you can check deployment readme located [here](scri
 
 ## Commands
 
-To control what is going on with your SmartMirror you can use commands - either using your [voice](#speech-recognition) or keyboard input. For now, application supports these commands:
+To control what is going on with your SmartMirror you can use commands - either using your [voice](#speech-recognition) or [keyboard input](#Keyboard-listener). For now, application supports these commands:
 
 - `light on` enable led lights
 - `light off` disable led lights
 - `color {colorName or code}` set led color to specified in command
 - `sound test` play Success sound (used for test purposes)
+
+## Keyboard listener
+
+You can use a keyboard to pass commands listed above to SmartMirror app. It uses the `KeyboardListener` background service to listen for commands in the background, appropriate responses will be printed in the console.
 
 ## LED Manager
 
