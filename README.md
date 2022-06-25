@@ -9,7 +9,6 @@ Here is an example of settings file
 ```
 {
   "MagicMirrorRunner": {
-    "DefaultUserName": "<Default UserName for sudo command>",
     "WorkingDirectory": "<MagicMirror root folder path on target device>"
   },
   "LED": {
@@ -22,6 +21,10 @@ Here is an example of settings file
     "ActivationRecognitionTablePath": "<path to .table file for keyword recognition>",
     "SubscriptionKey": "<ApiKey from Azure Portal>",
     "Region": "<Region from Azure Portal>"
+  },
+  "ButtonControls": {
+    "LedGPIO": <GPIO pin number>,
+    "DisplayGPIO": <GPIO pin number>
   }
 }
 ```
