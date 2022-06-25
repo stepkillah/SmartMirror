@@ -19,6 +19,7 @@ namespace SmartMirror.Core.Services
 
         private readonly ILedManager _ledManager;
         private readonly IAudioPlayer _audioPlayer;
+        private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;
 
         private readonly Dictionary<string, SmartMirrorCommand> _commandsMapTable = new Dictionary<string, SmartMirrorCommand>()
@@ -26,16 +27,19 @@ namespace SmartMirror.Core.Services
             {SmartMirrorCommand.LedOn.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOn},
             {SmartMirrorCommand.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOff},
             {SmartMirrorCommand.LedColorSet.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedColorSet},
-            {SmartMirrorCommand.PlayTestSound.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.PlayTestSound}
+            {SmartMirrorCommand.PlayTestSound.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.PlayTestSound},
+            {SmartMirrorCommand.DisplayOn.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.DisplayOn},
+            {SmartMirrorCommand.DisplayOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.DisplayOff}
         };
         #endregion
 
         #region ctor
-        public CommandsHandler(ILedManager ledManager, IAudioPlayer audioPlayer, ILogger<CommandsHandler> logger)
+        public CommandsHandler(ILedManager ledManager, IAudioPlayer audioPlayer, ILogger<CommandsHandler> logger, IDisplayManager displayManager)
         {
             _ledManager = ledManager;
             _audioPlayer = audioPlayer;
             _logger = logger;
+            _displayManager = displayManager;
         }
         #endregion
 
@@ -56,6 +60,12 @@ namespace SmartMirror.Core.Services
                     break;
                 case SmartMirrorCommand.PlayTestSound:
                     _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);
+                    break;
+                case SmartMirrorCommand.DisplayOn:
+                    _displayManager.TurnOn();
+                    break;
+                case SmartMirrorCommand.DisplayOff:
+                    _displayManager.TurnOff();
                     break;
                 default:
                     _logger.LogWarning("Unknown command");

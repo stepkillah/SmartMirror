@@ -22,6 +22,7 @@ namespace SmartMirror.Core.Extensions
             services.AddSingleton(InitAudioPlayer);
             services.AddSingleton(InitSpeechRecognitionService);
             services.AddSingleton(InitLedManager);
+            services.AddSingleton<IDisplayManager, DisplayManager>();
             services.AddSingleton<GpioController>();
             services.AddHostedService<GpioButtonListener>();
             services.AddHostedService<MagicMirrorRunner>();

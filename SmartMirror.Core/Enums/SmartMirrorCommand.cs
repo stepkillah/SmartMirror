@@ -12,6 +12,10 @@ namespace SmartMirror.Core.Enums
         [Description("color")]
         LedColorSet = 3,
         [Description("sound test")]
-        PlayTestSound = 4
+        PlayTestSound = 4,
+        [Description("display on")]
+        DisplayOn = 5,
+        [Description("display off")]
+        DisplayOff= 6
     }
 }

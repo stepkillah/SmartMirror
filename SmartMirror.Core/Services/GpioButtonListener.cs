@@ -19,18 +19,21 @@ namespace SmartMirror.Core.Services
         private readonly GpioOptions _gpioOptions;
         private readonly ICommandsHandler _commandsHandler;
         private readonly ILedManager _ledManager;
+        private readonly IDisplayManager _displayManager;
 
         public GpioButtonListener(
             GpioController gpioController,
             ILogger<GpioButtonListener> logger,
             IOptions<GpioOptions> gpioOptions,
             ICommandsHandler commandsHandler,
-            ILedManager ledManager)
+            ILedManager ledManager,
+            IDisplayManager displayManager)
         {
             _gpioController = gpioController;
             _logger = logger;
             _commandsHandler = commandsHandler;
             _ledManager = ledManager;
+            _displayManager = displayManager;
             _gpioOptions = gpioOptions.Value;
         }
 
@@ -93,14 +96,14 @@ namespace SmartMirror.Core.Services
         }
 
 
-        private async void OnButtonReleased(object sender, PinValueChangedEventArgs pinvaluechangedeventargs)
+        private async void OnButtonReleased(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
         {
-            _logger.LogInformation($"Button released on pin: {pinvaluechangedeventargs.PinNumber} with type: {pinvaluechangedeventargs.ChangeType}");
-            if (pinvaluechangedeventargs.PinNumber == _gpioOptions.LedGPIO)
+            _logger.LogInformation($"Button released on pin: {pinValueChangedEventArgs.PinNumber} with type: {pinValueChangedEventArgs.ChangeType}");
+            if (pinValueChangedEventArgs.PinNumber == _gpioOptions.LedGPIO)
             {
                 await CommandExecuted(GpioButton.LED);
             }
-            else if (pinvaluechangedeventargs.PinNumber == _gpioOptions.DisplayGPIO)
+            else if (pinValueChangedEventArgs.PinNumber == _gpioOptions.DisplayGPIO)
             {
                 await CommandExecuted(GpioButton.Display);
             }
@@ -130,6 +133,8 @@ namespace SmartMirror.Core.Services
                         break;
                     case GpioButton.Display:
                         _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
+                        await _commandsHandler.HandleCommand(
+                            _displayManager.IsRunning ? SmartMirrorCommand.DisplayOff : SmartMirrorCommand.DisplayOn, null);
                         break;
                     default:
                         return;
