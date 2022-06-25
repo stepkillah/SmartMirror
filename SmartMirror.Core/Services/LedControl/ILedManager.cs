@@ -6,5 +6,7 @@ namespace SmartMirror.Core.Services.LedControl
     {
         void TurnOff();
         void TurnOn(Color color = default);
+        void Toggle();
+        bool IsRunning { get; }
     }
 }

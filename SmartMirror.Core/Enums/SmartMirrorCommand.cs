@@ -2,7 +2,7 @@
 
 namespace SmartMirror.Core.Enums
 {
-    public enum VoiceCommands : byte
+    public enum SmartMirrorCommand : byte
     {
         Unknown = 0,
         [Description("light on")]

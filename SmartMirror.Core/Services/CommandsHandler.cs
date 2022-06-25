@@ -21,12 +21,12 @@ namespace SmartMirror.Core.Services
         private readonly IAudioPlayer _audioPlayer;
         private readonly ILogger _logger;
 
-        private readonly Dictionary<string, VoiceCommands> _commandsMapTable = new Dictionary<string, VoiceCommands>()
+        private readonly Dictionary<string, SmartMirrorCommand> _commandsMapTable = new Dictionary<string, SmartMirrorCommand>()
         {
-            {VoiceCommands.LedOn.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedOn},
-            {VoiceCommands.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedOff},
-            {VoiceCommands.LedColorSet.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.LedColorSet},
-            {VoiceCommands.PlayTestSound.GetAttributeOfType<DescriptionAttribute>().Description, VoiceCommands.PlayTestSound}
+            {SmartMirrorCommand.LedOn.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOn},
+            {SmartMirrorCommand.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOff},
+            {SmartMirrorCommand.LedColorSet.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedColorSet},
+            {SmartMirrorCommand.PlayTestSound.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.PlayTestSound}
         };
         #endregion
 
@@ -40,21 +40,21 @@ namespace SmartMirror.Core.Services
         #endregion
 
 
-        public ValueTask HandleCommand(VoiceCommands command, object data, CancellationToken cancellationToken = default)
+        public ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken = default)
         {
             switch (command)
             {
-                case VoiceCommands.LedOn:
+                case SmartMirrorCommand.LedOn:
                     _ledManager.TurnOn();
                     break;
-                case VoiceCommands.LedOff:
+                case SmartMirrorCommand.LedOff:
                     _ledManager.TurnOff();
                     break;
-                case VoiceCommands.LedColorSet:
+                case SmartMirrorCommand.LedColorSet:
                     if (data is Color color)
                         _ledManager.TurnOn(color);
                     break;
-                case VoiceCommands.PlayTestSound:
+                case SmartMirrorCommand.PlayTestSound:
                     _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);
                     break;
                 default:

@@ -58,11 +58,8 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             try
             {
                 _logger.LogInformation($"{nameof(SpeechRecognitionService)}: Stopping");
-                if (_isRunning)
-                {
-                    if (_keywordRecognizer != null)
-                        await _keywordRecognizer.StopRecognitionAsync();
-                }
+                if (_isRunning && _keywordRecognizer != null)
+                    await _keywordRecognizer.StopRecognitionAsync();
 
                 _isRunning = false;
                 _logger.LogInformation($"{nameof(SpeechRecognitionService)}: Stopped");

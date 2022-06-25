@@ -35,6 +35,21 @@ namespace SmartMirror.Core.Services.LedControl
             InitSpi();
         }
 
+        public bool IsRunning => _isRunning;
+
+        public void Toggle()
+        {
+            if (_led == null)
+                return;
+            if (_isRunning)
+            {
+                TurnOff();
+            }
+            else
+            {
+                TurnOn();
+            }
+        }
 
         public void TurnOff()
         {

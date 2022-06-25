@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Device.Gpio;
 using System.Runtime.InteropServices;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,8 @@ namespace SmartMirror.Core.Extensions
             services.AddSingleton(InitAudioPlayer);
             services.AddSingleton(InitSpeechRecognitionService);
             services.AddSingleton(InitLedManager);
+            services.AddSingleton<GpioController>();
+            services.AddHostedService<GpioButtonListener>();
             services.AddHostedService<MagicMirrorRunner>();
             services.AddHostedService<SpeechRecognitionHostedService>();
             services.AddHostedService<KeyboardListener>();
@@ -33,6 +36,7 @@ namespace SmartMirror.Core.Extensions
             services.Configure<MagicMirrorOptions>(context.Configuration.GetSection("MagicMirrorRunner"));
             services.Configure<LedOptions>(context.Configuration.GetSection("LED"));
             services.Configure<SpeechRecognitionOptions>(context.Configuration.GetSection("SpeechRecognition"));
+            services.Configure<GpioOptions>(context.Configuration.GetSection("ButtonsControl"));
 
             return services;
         }

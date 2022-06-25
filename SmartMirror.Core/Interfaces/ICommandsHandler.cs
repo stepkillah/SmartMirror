@@ -7,7 +7,7 @@ namespace SmartMirror.Core.Interfaces
 {
     public interface ICommandsHandler
     {
-        ValueTask HandleCommand(VoiceCommands command, object data, CancellationToken cancellationToken = default);
+        ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken = default);
         ValueTask<CommandRecognitionResult> RecognizeCommand(string rawText);
     }
 }

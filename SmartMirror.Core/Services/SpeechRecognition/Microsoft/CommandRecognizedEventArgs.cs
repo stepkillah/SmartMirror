@@ -5,17 +5,17 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
 {
     public class CommandRecognizedEventArgs : EventArgs
     {
-        public CommandRecognizedEventArgs(VoiceCommands command)
+        public CommandRecognizedEventArgs(SmartMirrorCommand command)
         {
             Command = command;
         }
 
-        public CommandRecognizedEventArgs(VoiceCommands command, object data) : this(command)
+        public CommandRecognizedEventArgs(SmartMirrorCommand command, object data) : this(command)
         {
             Data = data;
         }
 
         public object Data { get; }
-        public VoiceCommands Command { get; }
+        public SmartMirrorCommand Command { get; }
     }
 }
