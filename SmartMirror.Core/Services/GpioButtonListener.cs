@@ -36,60 +36,74 @@ namespace SmartMirror.Core.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            try
-            {
-                _logger.LogInformation("Starting listening for buttons");
-                if (!_gpioController.IsPinOpen(_gpioOptions.LedControlGPIO))
-                {
-                    _gpioController.OpenPin(_gpioOptions.LedControlGPIO);
-                    _gpioController.SetPinMode(_gpioOptions.LedControlGPIO,
-                        _gpioController.IsPinModeSupported(_gpioOptions.LedControlGPIO, PinMode.InputPullUp)
-                            ? PinMode.InputPullUp
-                            : PinMode.Input);
-                }
-
-
-                _gpioController.RegisterCallbackForPinValueChangedEvent(_gpioOptions.LedControlGPIO, PinEventTypes.Rising, OnButtonReleased);
-                _gpioController.RegisterCallbackForPinValueChangedEvent(_gpioOptions.LedControlGPIO, PinEventTypes.Falling, OnButtonPressed);
-
-                _logger.LogInformation("Started listening for buttons");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Starting listening for buttons failed");
-            }
+            StartListenGpio(_gpioOptions.LedGPIO, GpioButton.LED);
+            StartListenGpio(_gpioOptions.DisplayGPIO, GpioButton.Display);
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            try
-            {
-                _logger.LogInformation("Stopping listening for buttons");
-                if (!_gpioController.IsPinOpen(_gpioOptions.LedControlGPIO)) return Task.CompletedTask;
-
-                _gpioController.UnregisterCallbackForPinValueChangedEvent(_gpioOptions.LedControlGPIO, OnButtonReleased);
-                _gpioController.UnregisterCallbackForPinValueChangedEvent(_gpioOptions.LedControlGPIO, OnButtonPressed);
-                _gpioController.ClosePin(_gpioOptions.LedControlGPIO);
-                _logger.LogInformation("Stopped listening for buttons");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Stopping listening for buttons failed");
-            }
+            StopListenGpio(_gpioOptions.LedGPIO, GpioButton.LED);
+            StopListenGpio(_gpioOptions.DisplayGPIO, GpioButton.Display);
             return Task.CompletedTask;
         }
 
-        private void OnButtonPressed(object sender, PinValueChangedEventArgs pinvaluechangedeventargs)
+        private void StartListenGpio(int pinNumber, GpioButton button)
         {
-            _logger.LogInformation($"Button pressed: PIN: {pinvaluechangedeventargs.PinNumber}. Type: {pinvaluechangedeventargs.ChangeType}");
+            try
+            {
+                _logger.LogInformation($"Starting listening for {button} button on pin {pinNumber}");
+                if (!_gpioController.IsPinOpen(pinNumber))
+                {
+                    _gpioController.OpenPin(pinNumber);
+                    _gpioController.SetPinMode(pinNumber,
+                        _gpioController.IsPinModeSupported(pinNumber, PinMode.InputPullUp)
+                            ? PinMode.InputPullUp
+                            : PinMode.Input);
+                }
+
+                if (!_gpioController.IsPinOpen(pinNumber)) return;
+
+                _gpioController.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising,
+                    OnButtonReleased);
+                _logger.LogInformation($"Started listening for {button} button on pin {pinNumber}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Starting listening for {button} button failed on pin {pinNumber}");
+            }
         }
+
+        private void StopListenGpio(int pinNumber, GpioButton button)
+        {
+            try
+            {
+                _logger.LogInformation($"Stopping listening for {button} button on pin {pinNumber}");
+
+                if (!_gpioController.IsPinOpen(pinNumber)) return;
+
+                _gpioController.UnregisterCallbackForPinValueChangedEvent(pinNumber, OnButtonReleased);
+                _gpioController.ClosePin(pinNumber);
+                _logger.LogInformation($"Stopped listening for {button} button on pin {pinNumber}");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, $"Stopping listening for {button} button failed on pin {pinNumber}");
+            }
+        }
+
 
         private async void OnButtonReleased(object sender, PinValueChangedEventArgs pinvaluechangedeventargs)
         {
-            _logger.LogInformation($"Button released: PIN: {pinvaluechangedeventargs.PinNumber}. Type: {pinvaluechangedeventargs.ChangeType}");
-            if (pinvaluechangedeventargs.PinNumber == _gpioOptions.LedControlGPIO)
+            _logger.LogInformation($"Button released on pin: {pinvaluechangedeventargs.PinNumber} with type: {pinvaluechangedeventargs.ChangeType}");
+            if (pinvaluechangedeventargs.PinNumber == _gpioOptions.LedGPIO)
+            {
                 await CommandExecuted(GpioButton.LED);
+            }
+            else if (pinvaluechangedeventargs.PinNumber == _gpioOptions.DisplayGPIO)
+            {
+                await CommandExecuted(GpioButton.Display);
+            }
         }
 
         private CancellationTokenSource _cts;
@@ -110,11 +124,12 @@ namespace SmartMirror.Core.Services
                 switch (button)
                 {
                     case GpioButton.LED:
-                        _logger.LogInformation("LED button command recognized");
+                        _logger.LogInformation($"{GpioButton.LED} GPIO command recognized");
                         await _commandsHandler.HandleCommand(
                             _ledManager.IsRunning ? SmartMirrorCommand.LedOff : SmartMirrorCommand.LedOn, null);
                         break;
                     case GpioButton.Display:
+                        _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
                         break;
                     default:
                         return;
@@ -122,8 +137,7 @@ namespace SmartMirror.Core.Services
             }
             catch (TaskCanceledException)
             {
-
-                _logger.LogInformation("GPIO callback dedupe");
+                _logger.LogInformation($"GPIO callback dedupe for {button}");
             }
         }
 
