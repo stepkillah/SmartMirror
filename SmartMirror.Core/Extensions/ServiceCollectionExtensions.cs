@@ -23,7 +23,7 @@ namespace SmartMirror.Core.Extensions
             services.AddSingleton(InitSpeechRecognitionService);
             services.AddSingleton(InitLedManager);
             services.AddSingleton<IDisplayManager, DisplayManager>();
-            services.AddSingleton<GpioController>();
+            services.AddSingleton(InitGpioController);
             services.AddHostedService<GpioButtonListener>();
             services.AddHostedService<MagicMirrorRunner>();
             services.AddHostedService<SpeechRecognitionHostedService>();
@@ -95,5 +95,19 @@ namespace SmartMirror.Core.Extensions
             RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
                 ? new APlayRunner(arg.GetService<ILogger<APlayRunner>>())
                 : new NAudioPlayerService(arg.GetService<ILogger<NAudioPlayerService>>());
+
+        private static GpioController InitGpioController(IServiceProvider arg)
+        {
+            var logger = arg.GetRequiredService<ILogger<GpioController>>();
+            try
+            {
+                return new GpioController();
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "Error initializing GpioController");
+                return null;
+            }
+        }
     }
 }
