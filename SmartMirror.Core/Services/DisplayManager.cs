@@ -1,6 +1,9 @@
 ﻿using System.Device.Gpio;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SmartMirror.Core.Interfaces;
+using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Services
 {
@@ -8,28 +11,24 @@ namespace SmartMirror.Core.Services
     {
         private readonly GpioController _gpioController;
         private readonly ILogger _logger;
-        private bool _isRunning;
+        private readonly GpioOptions _gpioOptions;
 
-        public DisplayManager(GpioController gpioController, ILogger<DisplayManager> logger)
+        public DisplayManager(GpioController gpioController, ILogger<DisplayManager> logger, IOptions<GpioOptions> gpioOptions)
         {
             _gpioController = gpioController;
             _logger = logger;
+            _gpioOptions = gpioOptions.Value;
         }
 
-        public void TurnOff()
+        public async Task Toggle()
         {
-            //TODO implement
-            _logger.LogInformation("Disabling display");
-            _isRunning = false;
+            _logger.LogInformation("Toggling display");
+            if (!_gpioController.IsPinOpen(_gpioOptions.Display.ControlGpio))
+                _gpioController.OpenPin(_gpioOptions.Display.ControlGpio, PinMode.Output);
+            _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.Low);
+            await Task.Delay(300);
+            _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.High);
+            _gpioController.ClosePin(_gpioOptions.Display.ControlGpio);
         }
-
-        public void TurnOn()
-        {
-            //TODO implement
-            _logger.LogInformation("Enabling display");
-            _isRunning = true;
-        }
-
-        public bool IsRunning => _isRunning;
     }
 }

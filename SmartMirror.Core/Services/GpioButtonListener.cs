@@ -19,35 +19,32 @@ namespace SmartMirror.Core.Services
         private readonly GpioOptions _gpioOptions;
         private readonly ICommandsHandler _commandsHandler;
         private readonly ILedManager _ledManager;
-        private readonly IDisplayManager _displayManager;
 
         public GpioButtonListener(
             GpioController gpioController,
             ILogger<GpioButtonListener> logger,
             IOptions<GpioOptions> gpioOptions,
             ICommandsHandler commandsHandler,
-            ILedManager ledManager,
-            IDisplayManager displayManager)
+            ILedManager ledManager)
         {
             _gpioController = gpioController;
             _logger = logger;
             _commandsHandler = commandsHandler;
             _ledManager = ledManager;
-            _displayManager = displayManager;
             _gpioOptions = gpioOptions.Value;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
             StartListenGpio(_gpioOptions.LedGPIO, GpioButton.LED);
-            StartListenGpio(_gpioOptions.DisplayGPIO, GpioButton.Display);
+            StartListenGpio(_gpioOptions.Display.TriggerGpio, GpioButton.Display);
             return Task.CompletedTask;
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
             StopListenGpio(_gpioOptions.LedGPIO, GpioButton.LED);
-            StopListenGpio(_gpioOptions.DisplayGPIO, GpioButton.Display);
+            StopListenGpio(_gpioOptions.Display.TriggerGpio, GpioButton.Display);
             return Task.CompletedTask;
         }
 
@@ -103,7 +100,7 @@ namespace SmartMirror.Core.Services
             {
                 await CommandExecuted(GpioButton.LED);
             }
-            else if (pinValueChangedEventArgs.PinNumber == _gpioOptions.DisplayGPIO)
+            else if (pinValueChangedEventArgs.PinNumber == _gpioOptions.Display.TriggerGpio)
             {
                 await CommandExecuted(GpioButton.Display);
             }
@@ -133,8 +130,7 @@ namespace SmartMirror.Core.Services
                         break;
                     case GpioButton.Display:
                         _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
-                        await _commandsHandler.HandleCommand(
-                            _displayManager.IsRunning ? SmartMirrorCommand.DisplayOff : SmartMirrorCommand.DisplayOn, null);
+                        await _commandsHandler.HandleCommand(SmartMirrorCommand.DisplayToggle, null);
                         break;
                     default:
                         return;

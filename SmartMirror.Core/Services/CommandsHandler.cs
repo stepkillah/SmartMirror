@@ -28,8 +28,7 @@ namespace SmartMirror.Core.Services
             {SmartMirrorCommand.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOff},
             {SmartMirrorCommand.LedColorSet.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedColorSet},
             {SmartMirrorCommand.PlayTestSound.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.PlayTestSound},
-            {SmartMirrorCommand.DisplayOn.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.DisplayOn},
-            {SmartMirrorCommand.DisplayOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.DisplayOff}
+            {SmartMirrorCommand.DisplayToggle.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.DisplayToggle},
         };
         #endregion
 
@@ -44,7 +43,7 @@ namespace SmartMirror.Core.Services
         #endregion
 
 
-        public ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken = default)
+        public async ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken = default)
         {
             switch (command)
             {
@@ -59,19 +58,15 @@ namespace SmartMirror.Core.Services
                         _ledManager.TurnOn(color);
                     break;
                 case SmartMirrorCommand.PlayTestSound:
-                    _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);
+                    await _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);
                     break;
-                case SmartMirrorCommand.DisplayOn:
-                    _displayManager.TurnOn();
-                    break;
-                case SmartMirrorCommand.DisplayOff:
-                    _displayManager.TurnOff();
+                case SmartMirrorCommand.DisplayToggle:
+                    await _displayManager.Toggle();
                     break;
                 default:
                     _logger.LogWarning("Unknown command");
                     break;
             }
-            return ValueTask.CompletedTask;
         }
 
         public ValueTask<CommandRecognitionResult> RecognizeCommand(string rawText)
