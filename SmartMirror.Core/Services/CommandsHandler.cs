@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -81,7 +82,10 @@ namespace SmartMirror.Core.Services
                 var parsed = lowerCommand.Split(' ');
                 lowerCommand = parsed[0];
                 if (parsed.Length > 1)
-                    commandData = GetColorFromCommand(parsed[1]);
+                {
+                    commandData = GetColorFromCommand(
+                        string.Join("", parsed.Skip(1)));
+                }
             }
 
             return !_commandsMapTable.ContainsKey(lowerCommand)
