@@ -29,7 +29,7 @@ namespace SmartMirror.Core
             ProgramLogger.LogInformation("SmartMirror");
             ProgramLogger.LogInformation(
                 $"OS Information: {System.Runtime.InteropServices.RuntimeInformation.OSDescription}");
-            ProgramLogger.LogInformation("Program logger created");
+            ProgramLogger.LogDebug("Program logger created");
             await host.StartAsync(AppCancellationTokenSource.Token);
             ProgramLogger.LogInformation("App successfully started");
             await host.WaitForShutdownAsync(AppCancellationTokenSource.Token);

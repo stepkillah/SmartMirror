@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartMirror.Core.Enums;
+using SmartMirror.Core.Extensions;
 using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.Models;
 using SmartMirror.Core.Services.LedControl;
@@ -55,7 +56,7 @@ namespace SmartMirror.Core.Services
                 _logger.LogInformation($"Starting listening for {button} button on pin {pinNumber}");
                 if (!_gpioController.IsPinOpen(pinNumber))
                 {
-                    _gpioController.OpenPin(pinNumber);
+                    _gpioController.OpenPinWithRetry(pinNumber);
                     _gpioController.SetPinMode(pinNumber,
                         _gpioController.IsPinModeSupported(pinNumber, PinMode.InputPullUp)
                             ? PinMode.InputPullUp
