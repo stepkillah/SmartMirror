@@ -1,20 +1,24 @@
 ﻿using System.Drawing;
+using System.Threading.Tasks;
 
 namespace SmartMirror.Core.Services.LedControl
 {
     internal class NullLedManager : ILedManager
     {
 
-        public void TurnOff()
+        public Task TurnOff()
         {
+            return Task.CompletedTask;
         }
 
-        public void TurnOn(Color color = default)
+        public Task TurnOn(Color color = default)
         {
+            return Task.CompletedTask;
         }
 
-        public void Toggle()
+        public Task Toggle()
         {
+            return Task.CompletedTask;
         }
 
         public bool IsRunning { get; }

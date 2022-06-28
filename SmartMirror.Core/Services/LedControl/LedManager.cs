@@ -8,6 +8,7 @@ using Iot.Device.Ws28xx;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.Models;
 
 namespace SmartMirror.Core.Services.LedControl
@@ -23,10 +24,12 @@ namespace SmartMirror.Core.Services.LedControl
         private SpiDevice _spiDevice;
         private bool _isRunning = true;
         private Color _currentColor;
+        private readonly IStorageService _storageService;
 
-        public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions, IHostApplicationLifetime hostApplicationLifetime)
+        public LedManager(ILogger<LedManager> logger, IOptions<LedOptions> ledOptions, IHostApplicationLifetime hostApplicationLifetime, IStorageService storageService)
         {
             _logger = logger;
+            _storageService = storageService;
             _ledOptions = ledOptions.Value;
 
             hostApplicationLifetime.ApplicationStarted.Register(OnStarted);
@@ -37,35 +40,40 @@ namespace SmartMirror.Core.Services.LedControl
 
         public bool IsRunning => _isRunning;
 
-        public void Toggle()
+        public async Task Toggle()
         {
             if (_led == null)
                 return;
             if (_isRunning)
             {
-                TurnOff();
+                await TurnOff();
             }
             else
             {
-                TurnOn();
+                await TurnOn();
             }
         }
 
-        public void TurnOff()
+        public Task TurnOff()
         {
             if (_led == null || !_isRunning)
-                return;
+                return Task.CompletedTask;
             ColorWipe(_led, Color.Black, _ledOptions.Count);
             _isRunning = false;
             _logger.LogInformation("LED Turned OFF");
+            return Task.CompletedTask;
         }
 
-        public void TurnOn(Color color = default)
+        public async Task TurnOn(Color color = default)
         {
             if (_led == null)
                 return;
             if (color != default)
+            {
                 _currentColor = color;
+                await _storageService.SetLedColor(_currentColor);
+            }
+
             ColorWipe(_led, _currentColor == default ? Color.WhiteSmoke : _currentColor, _ledOptions.Count);
             _isRunning = true;
             _logger.LogInformation("LED Turned ON");
@@ -74,10 +82,11 @@ namespace SmartMirror.Core.Services.LedControl
 
         #region application lifecycle
 
-        private void OnStarted()
+        private async void OnStarted()
         {
             _logger.LogInformation("On started callback");
-            TurnOn();
+            var color = await _storageService.GetLedColor();
+            await TurnOn(color);
         }
 
         private void OnStopping()

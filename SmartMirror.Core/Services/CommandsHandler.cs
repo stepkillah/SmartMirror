@@ -49,14 +49,14 @@ namespace SmartMirror.Core.Services
             switch (command)
             {
                 case SmartMirrorCommand.LedOn:
-                    _ledManager.TurnOn();
+                    await _ledManager.TurnOn();
                     break;
                 case SmartMirrorCommand.LedOff:
-                    _ledManager.TurnOff();
+                    await _ledManager.TurnOff();
                     break;
                 case SmartMirrorCommand.LedColorSet:
                     if (data is Color color)
-                        _ledManager.TurnOn(color);
+                        await _ledManager.TurnOn(color);
                     break;
                 case SmartMirrorCommand.PlayTestSound:
                     await _audioPlayer.Play(Constants.SuccessSoundPath, cancellationToken);

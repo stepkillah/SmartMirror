@@ -29,6 +29,7 @@ namespace SmartMirror.Core.Extensions
             services.AddHostedService<SpeechRecognitionHostedService>();
             services.AddHostedService<KeyboardListener>();
             services.AddScoped<ICommandsHandler, CommandsHandler>();
+            services.AddSingleton<IStorageService, StorageService>();
             return services;
         }
 
@@ -82,7 +83,8 @@ namespace SmartMirror.Core.Extensions
                 return new LedManager(
                     arg.GetService<ILogger<LedManager>>(),
                     arg.GetService<IOptions<LedOptions>>(),
-                    arg.GetService<IHostApplicationLifetime>());
+                    arg.GetService<IHostApplicationLifetime>(),
+                    arg.GetService<IStorageService>());
             }
             catch (Exception e)
             {
