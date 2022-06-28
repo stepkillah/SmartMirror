@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Device.Gpio;
 using System.Threading;
 using System.Threading.Tasks;
@@ -6,10 +7,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SmartMirror.Core.Enums;
-using SmartMirror.Core.Extensions;
 using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.Models;
 using SmartMirror.Core.Services.LedControl;
+using Button = Iot.Device.Button.GpioButton;
 
 namespace SmartMirror.Core.Services
 {
@@ -20,6 +21,9 @@ namespace SmartMirror.Core.Services
         private readonly GpioOptions _gpioOptions;
         private readonly ICommandsHandler _commandsHandler;
         private readonly ILedManager _ledManager;
+
+        private readonly Dictionary<Button, GpioButton> _buttons = new Dictionary<Button, GpioButton>();
+        private readonly Dictionary<int, Button> _pinMapping = new Dictionary<int, Button>();
 
         public GpioButtonListener(
             GpioController gpioController,
@@ -54,19 +58,19 @@ namespace SmartMirror.Core.Services
             try
             {
                 _logger.LogInformation($"Starting listening for {button} button on pin {pinNumber}");
-                if (!_gpioController.IsPinOpen(pinNumber))
+
+
+                Button gpioButton = new Button(pinNumber, _gpioController,
+                    false, PinMode.InputPullUp, TimeSpan.FromMilliseconds(50))
                 {
-                    _gpioController.OpenPinWithRetry(pinNumber);
-                    _gpioController.SetPinMode(pinNumber,
-                        _gpioController.IsPinModeSupported(pinNumber, PinMode.InputPullUp)
-                            ? PinMode.InputPullUp
-                            : PinMode.Input);
-                }
+                    IsDoublePressEnabled = false,
+                    IsHoldingEnabled = false
+                };
 
-                if (!_gpioController.IsPinOpen(pinNumber)) return;
+                gpioButton.Press += GpioButtonOnPress;
+                _buttons.Add(gpioButton, button);
+                _pinMapping.Add(pinNumber, gpioButton);
 
-                _gpioController.RegisterCallbackForPinValueChangedEvent(pinNumber, PinEventTypes.Rising,
-                    OnButtonReleased);
                 _logger.LogInformation($"Started listening for {button} button on pin {pinNumber}");
             }
             catch (Exception e)
@@ -80,12 +84,16 @@ namespace SmartMirror.Core.Services
             try
             {
                 _logger.LogInformation($"Stopping listening for {button} button on pin {pinNumber}");
-
-                if (!_gpioController.IsPinOpen(pinNumber)) return;
-
-                _gpioController.UnregisterCallbackForPinValueChangedEvent(pinNumber, OnButtonReleased);
-                _gpioController.ClosePin(pinNumber);
-                _logger.LogInformation($"Stopped listening for {button} button on pin {pinNumber}");
+                if (_pinMapping.ContainsKey(pinNumber))
+                {
+                    var gpioButton = _pinMapping[pinNumber];
+                    _pinMapping.Remove(pinNumber);
+                    if (_buttons.ContainsKey(gpioButton))
+                        _buttons.Remove(gpioButton);
+                    gpioButton.Press -= GpioButtonOnPress;
+                    gpioButton.Dispose();
+                    _logger.LogInformation($"Stopped listening for {button} button on pin {pinNumber}");
+                }
             }
             catch (Exception e)
             {
@@ -94,59 +102,39 @@ namespace SmartMirror.Core.Services
         }
 
 
-        private async void OnButtonReleased(object sender, PinValueChangedEventArgs pinValueChangedEventArgs)
+        private async void GpioButtonOnPress(object sender, EventArgs e)
         {
-            _logger.LogInformation($"Button released on pin: {pinValueChangedEventArgs.PinNumber} with type: {pinValueChangedEventArgs.ChangeType}");
-            if (pinValueChangedEventArgs.PinNumber == _gpioOptions.LedGPIO)
-            {
-                await CommandExecuted(GpioButton.LED);
-            }
-            else if (pinValueChangedEventArgs.PinNumber == _gpioOptions.Display.TriggerGpio)
-            {
-                await CommandExecuted(GpioButton.Display);
-            }
+            _logger.LogInformation("Button press detected");
+            if (sender is Button button && _buttons.ContainsKey(button))
+                await CommandExecuted(_buttons[button]);
         }
 
-        private CancellationTokenSource _cts;
+
         private async Task CommandExecuted(GpioButton button)
         {
-            try
+            switch (button)
             {
-
-                if (_cts != null)
-                {
-                    _cts.Cancel();
-                    _cts.Dispose();
-                    _cts = null;
-                }
-                _cts = new CancellationTokenSource();
-
-                await Task.Delay(50, _cts.Token);
-                switch (button)
-                {
-                    case GpioButton.LED:
-                        _logger.LogInformation($"{GpioButton.LED} GPIO command recognized");
-                        await _commandsHandler.HandleCommand(
-                            _ledManager.IsRunning ? SmartMirrorCommand.LedOff : SmartMirrorCommand.LedOn, null);
-                        break;
-                    case GpioButton.Display:
-                        _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
-                        await _commandsHandler.HandleCommand(SmartMirrorCommand.DisplayToggle, null);
-                        break;
-                    default:
-                        return;
-                }
-            }
-            catch (TaskCanceledException)
-            {
-                _logger.LogInformation($"GPIO callback dedupe for {button}");
+                case GpioButton.LED:
+                    _logger.LogInformation($"{GpioButton.LED} GPIO command recognized");
+                    await _commandsHandler.HandleCommand(
+                        _ledManager.IsRunning ? SmartMirrorCommand.LedOff : SmartMirrorCommand.LedOn, null);
+                    break;
+                case GpioButton.Display:
+                    _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
+                    await _commandsHandler.HandleCommand(SmartMirrorCommand.DisplayToggle, null);
+                    break;
+                default:
+                    return;
             }
         }
 
 
         public void Dispose()
         {
-            _cts?.Dispose();
+            foreach (var gpioButton in _buttons)
+                gpioButton.Key.Dispose();
+            _buttons.Clear();
+            _pinMapping.Clear();
         }
     }
 }
