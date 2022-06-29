@@ -22,13 +22,26 @@ namespace SmartMirror.Core.Services
 
         public async Task Toggle()
         {
-            _logger.LogInformation("Toggling display");
-            if (!_gpioController.IsPinOpen(_gpioOptions.Display.ControlGpio))
-                _gpioController.OpenPin(_gpioOptions.Display.ControlGpio, PinMode.Output);
-            _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.Low);
-            await Task.Delay(300);
-            _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.High);
-            _gpioController.ClosePin(_gpioOptions.Display.ControlGpio);
+            try
+            {
+                _logger.LogInformation("Toggling display");
+                if (!_gpioController.IsPinOpen(_gpioOptions.Display.ControlGpio))
+                    _gpioController.OpenPin(_gpioOptions.Display.ControlGpio, PinMode.Output);
+                if (!_gpioController.IsPinOpen(_gpioOptions.Display.ControlGpio))
+                {
+                    _logger.LogInformation("Pin open failed");
+                    return;
+                }
+
+                _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.Low);
+                await Task.Delay(300);
+                _gpioController.Write(_gpioOptions.Display.ControlGpio, PinValue.High);
+                _gpioController.ClosePin(_gpioOptions.Display.ControlGpio);
+            }
+            catch (System.Exception e)
+            {
+                _logger.LogError(e, "Display toggle failed");
+            }
         }
     }
 }

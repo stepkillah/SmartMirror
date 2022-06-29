@@ -110,21 +110,37 @@ namespace SmartMirror.Core.Services
         }
 
 
+        private CancellationTokenSource _cts;
         private async Task CommandExecuted(GpioButton button)
         {
-            switch (button)
+            try
             {
-                case GpioButton.LED:
-                    _logger.LogInformation($"{GpioButton.LED} GPIO command recognized");
-                    await _commandsHandler.HandleCommand(
-                        _ledManager.IsRunning ? SmartMirrorCommand.LedOff : SmartMirrorCommand.LedOn, null);
-                    break;
-                case GpioButton.Display:
-                    _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
-                    await _commandsHandler.HandleCommand(SmartMirrorCommand.DisplayToggle, null);
-                    break;
-                default:
-                    return;
+                if (_cts != null)
+                {
+                    _cts.Cancel();
+                    _cts.Dispose();
+                    _cts = null;
+                }
+                _cts = new CancellationTokenSource();
+                await Task.Delay(50, _cts.Token);
+                switch (button)
+                {
+                    case GpioButton.LED:
+                        _logger.LogInformation($"{GpioButton.LED} GPIO command recognized");
+                        await _commandsHandler.HandleCommand(
+                            _ledManager.IsRunning ? SmartMirrorCommand.LedOff : SmartMirrorCommand.LedOn, null);
+                        break;
+                    case GpioButton.Display:
+                        _logger.LogInformation($"{GpioButton.Display} GPIO command recognized");
+                        await _commandsHandler.HandleCommand(SmartMirrorCommand.DisplayToggle, null);
+                        break;
+                    default:
+                        return;
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                _logger.LogInformation($"GPIO callback dedupe for {button}");
             }
         }
 

@@ -24,13 +24,11 @@ namespace SmartMirror.Core.Services
             }
         };
 
-        public StorageService(IHostApplicationLifetime hostApplicationLifetime, ILogger<StorageService> logger)
+        public StorageService(ILogger<StorageService> logger)
         {
             _logger = logger;
-            hostApplicationLifetime.ApplicationStopping.Register(OnStopping);
         }
 
-        private async void OnStopping() => await Save();
 
         public async ValueTask<Color> GetLedColor()
         {
@@ -50,6 +48,7 @@ namespace SmartMirror.Core.Services
                 return;
             _userData.LedColor = color;
             _isDataSaved = false;
+            _ = Task.Run(Save);
         }
 
         private async Task Load()
@@ -85,7 +84,7 @@ namespace SmartMirror.Core.Services
                     return;
                 }
 
-                await using var file = File.OpenWrite("userdata.json");
+                await using var file = File.Open("userdata.json", FileMode.Truncate);
                 await JsonSerializer.SerializeAsync(file, _userData, _jsonSerializerOptions);
                 _logger.LogInformation("User data saved successfully");
                 _isDataSaved = true;

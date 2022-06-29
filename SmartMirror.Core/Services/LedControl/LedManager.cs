@@ -219,14 +219,6 @@ namespace SmartMirror.Core.Services.LedControl
             }
         }
 
-        private void SetLastPixel(Ws28xx device)
-        {
-            BitmapImage image = device.Image;
-            image.Clear(Color.Blue);
-            image.SetPixel(15, 0, Color.Red);
-            device.Update();
-
-        }
         #endregion
 
         #region disposing
