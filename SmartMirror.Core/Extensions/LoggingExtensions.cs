@@ -7,8 +7,8 @@ namespace SmartMirror.Core.Extensions
 
         public static ILoggingBuilder AddSmartMirrorLogging(this ILoggingBuilder services)
         {
-            services
-                .AddConsole();
+            services.AddSimpleConsole(options => options.TimestampFormat = "[HH:mm:ss] ");
+            services.AddFile("logs/smartMirror-{Date}.txt", retainedFileCountLimit: 3, minimumLevel: LogLevel.Warning);
             return services;
         }
 

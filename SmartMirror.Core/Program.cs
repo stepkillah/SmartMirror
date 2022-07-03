@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using SmartMirror.Core.Common;
 using SmartMirror.Core.Extensions;
 
 namespace SmartMirror.Core
@@ -17,8 +16,6 @@ namespace SmartMirror.Core
 
         static async Task Main(string[] args)
         {
-
-            DirectoryInitializer.EnsureCorrectWorkingDirectory(LoggerFactory.Create(builder => builder.AddSmartMirrorLogging()).CreateLogger<Program>());
             using IHost host = CreateHostBuilder(args).Build();
             Container = host.Services;
             if (Container == null)
@@ -34,12 +31,13 @@ namespace SmartMirror.Core
             ProgramLogger.LogInformation("App successfully started");
             await host.WaitForShutdownAsync(AppCancellationTokenSource.Token);
         }
-        
+
 
         #region DI
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureHostConfiguration(builder => builder.SetSmartMirrorBasePath())
                 .ConfigureServices((context, services) =>
                     services.AddLogging(builder => builder.AddSmartMirrorLogging())
                         .ConfigureSmartMirrorOptions(context)

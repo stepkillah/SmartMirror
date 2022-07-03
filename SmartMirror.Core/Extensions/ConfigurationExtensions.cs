@@ -1,13 +1,17 @@
 ﻿using System.IO;
 using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace SmartMirror.Core.Common
+namespace SmartMirror.Core.Extensions
 {
-    public static class DirectoryInitializer
+    public static class ConfigurationExtensions
     {
-        public static void EnsureCorrectWorkingDirectory(ILogger log)
+        public static void SetSmartMirrorBasePath(this IConfigurationBuilder builder)
         {
+            using var factory = LoggerFactory.Create(loggerBuilder => loggerBuilder.AddSmartMirrorLogging());
+            var log = factory.CreateLogger<IConfigurationBuilder>();
+
             var currentDir = Directory.GetCurrentDirectory();
             log.LogInformation($"Current working directory: {currentDir}");
 
@@ -21,7 +25,12 @@ namespace SmartMirror.Core.Common
             var finalLocation = Path.GetDirectoryName(assemblyLocation);
             if (!string.IsNullOrEmpty(finalLocation))
             {
-                Directory.SetCurrentDirectory(finalLocation);
+                if (finalLocation == currentDir)
+                {
+                    log.LogInformation($"Current working dir is correct");
+                    return;
+                }
+                builder.SetBasePath(finalLocation);
                 log.LogInformation($"Current working set to: {finalLocation}");
             }
             else
