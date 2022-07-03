@@ -37,7 +37,7 @@ namespace SmartMirror.Core
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureHostConfiguration(builder => builder.SetSmartMirrorBasePath())
+                .ConfigureSmartMirrorRootPath()
                 .ConfigureServices((context, services) =>
                     services.AddLogging(builder => builder.AddSmartMirrorLogging())
                         .ConfigureSmartMirrorOptions(context)
