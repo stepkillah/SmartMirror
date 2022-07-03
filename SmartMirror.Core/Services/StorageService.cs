@@ -2,7 +2,6 @@
 using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using SmartMirror.Core.Interfaces;
 using SmartMirror.Core.JsonConverters;
