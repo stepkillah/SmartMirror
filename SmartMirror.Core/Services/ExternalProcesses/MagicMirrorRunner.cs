@@ -40,6 +40,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                         RedirectStandardInput = false,
                         UseShellExecute = false,
                         CreateNoWindow = false,
+                        UserName = _mirrorOptions.RunAsUser,
                         WorkingDirectory = _mirrorOptions.WorkingDirectory
                     }
                 };
