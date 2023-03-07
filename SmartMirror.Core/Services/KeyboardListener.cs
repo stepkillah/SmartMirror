@@ -23,6 +23,9 @@ namespace SmartMirror.Core.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            if (!Environment.UserInteractive)
+                return;
+            Console.WriteLine("Waiting for key command");
             while (!stoppingToken.IsCancellationRequested)
             {
                 if (Debugger.IsAttached && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
@@ -60,7 +63,6 @@ namespace SmartMirror.Core.Services
 
         private async Task WaitForCommand(ICommandsHandler commandsHandler, CancellationToken stoppingToken)
         {
-            Console.WriteLine("Waiting for key command");
             string line = Console.ReadLine();
             if (line == null)
                 return;
@@ -73,6 +75,7 @@ namespace SmartMirror.Core.Services
             }
 
             await commandsHandler.HandleCommand(result.Command, result.CommandData, stoppingToken);
+            Console.WriteLine("Waiting for key command");
         }
     }
 }
