@@ -46,10 +46,10 @@ Example:
 3. Create bat file with post build script  
    Example using SCP/PSCP or using [script](raspberry_deploy.bat):
 
-    ```bash
-    scp -r -P 22 -i e:\ssh\pi_key.ppk "path\to\source\*" pi@192.168.0.108:/home/pi/Projects/SmartMirror.LedStripe
-    pause
-    ```
+   ```bash
+   scp -r -P 22 -i e:\ssh\pi_key.ppk "path\to\source\*" pi@192.168.0.108:/home/pi/Projects/SmartMirror.LedStripe
+   pause
+   ```
 
    Example using RSync located [here](raspberry_deploy_rsync.bat)
 
@@ -57,41 +57,41 @@ Example:
 <https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio>
 5. Set ssh or plink addapter in launch.vs.json
 
-    ```json
-    {
-        "version": "0.2.1",
-        "adapter": "e:\\ssh\\ssh.exe",
-        "adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
-        "configurations": [
-            {
-                "name": ".NET Core Raspberry Launch",
-                "type": "coreclr",
-                "cwd": "~/Projects/SmartMirror.LedStripe",
-                "program": "/home/pi/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
-                "request": "launch",
-                "logging": {
-                    "engineLogging": true
-                }
-            }
-        ]
-    }
-    ```
+   ```json
+   {
+       "version": "0.2.1",
+       "adapter": "e:\\ssh\\ssh.exe",
+       "adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
+       "configurations": [
+           {
+               "name": ".NET Core Raspberry Launch",
+               "type": "coreclr",
+               "cwd": "~/Projects/SmartMirror.LedStripe",
+               "program": "/home/pi/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
+               "request": "launch",
+               "logging": {
+                   "engineLogging": true
+               }
+           }
+       ]
+   }
+   ```
 
 6. Set portable debug type in csproj
 
-    ```xml
-        <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
-            <DebugType>portable</DebugType>
-        </PropertyGroup>
-    ```
+   ```xml
+       <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
+           <DebugType>portable</DebugType>
+       </PropertyGroup>
+   ```
 
 7. Add Post build scipt to execute previously created bat. This is used to automatically deploy build files to target machine, in order to simplify remote debugging  
 
-    ```xml
-        <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-            <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
-        </Target> 
-    ```
+   ```xml
+       <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
+           <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
+       </Target> 
+   ```
 
 8. Start debug using following command in VisualStudio command line or using [RemoteDebugLauncher](https://marketplace.visualstudio.com/items?itemName=xpasza.RemoteDebugLauncher22) extension which automates that part.
 `DebugAdapterHost.Launch /LaunchJson:"E:\Job\SmartMirror\SmartMirror\.vs\launch.vs.json"`
