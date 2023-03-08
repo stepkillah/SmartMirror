@@ -1,8 +1,8 @@
 ﻿namespace SmartMirror.Core
 {
-    public static class Constants
+    internal static class Constants
     {
-        public const string SuccessSoundPath = "Assets/success.wav";
-        public const string ErrorSoundPath = "Assets/error.wav";
+        internal const string SuccessSoundPath = "Assets/success.wav";
+        internal const string ErrorSoundPath = "Assets/error.wav";
     }
 }
