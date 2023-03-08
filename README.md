@@ -37,10 +37,10 @@ For debugging and deployment you can check deployment readme located [here](scri
 
 To control what is going on with your SmartMirror you can use commands - either using your [voice](#speech-recognition) or [keyboard input](#Keyboard-listener). For now, application supports these commands:
 
--  `light on` enable led lights
--  `light off` disable led lights
--  `color {colorName or code}` set led color to specified in command
--  `sound test` play Success sound (used for test purposes)
+  - `light on` enable led lights
+  - `light off` disable led lights
+  - `color {colorName or code}` set led color to specified in command
+  - `sound test` play Success sound (used for test purposes)
 
 ## Keyboard listener
 
@@ -90,8 +90,8 @@ MagicMirror itself should be configured separately by following [guides](https:/
 App uses two types of audio players - one for [linux](#aplayrunner) and one for [windows](#naudioplayerservice)
 
 Simple playback for a specific file. SmartMirror app has currently two sounds to play:
--  Recognitions success (`Assets/success.wav`)
--  Recognition failed (`Assets/error.wav`)
+  - Recognitions success (`Assets/success.wav`)
+  - Recognition failed (`Assets/error.wav`)
 
 SmartMirror app provides a file path to platform-specific player which does all the magic for the playback.
 
