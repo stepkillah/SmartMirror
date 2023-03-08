@@ -64,7 +64,9 @@ namespace SmartMirror.Core.Services.LedControl
             return Task.CompletedTask;
         }
 
-        public async Task TurnOn(Color color = default)
+        public async Task TurnOn() => await TurnOn(default);
+
+        public async Task TurnOn(Color color)
         {
             if (_led == null)
                 return;
@@ -189,7 +191,7 @@ namespace SmartMirror.Core.Services.LedControl
             {
                 for (var j = 0; j < count; j++)
                 {
-                    img.SetPixel(j, 0, Wheel(((int)(j * 255 / count) + i) & 255));
+                    img.SetPixel(j, 0, Wheel((j * 255 / count + i) & 255));
                 }
 
                 neo.Update();

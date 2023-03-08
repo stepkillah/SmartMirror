@@ -122,6 +122,8 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
                         HandleCancel(result);
                         break;
                     }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(result.Reason), result.Reason, "Bad reason");
             }
         }
 
@@ -191,21 +193,13 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             _logger.LogInformation($"{nameof(SpeechRecognitionService)} disposed.");
         }
 
-        public void Dispose()
-        {
-            Dispose(disposing: true);
-            GC.SuppressFinalize(this);
-        }
+        public void Dispose() => Dispose(disposing: true);
 
-        public async ValueTask DisposeAsync()
-        {
-            await DisposeAsync(disposing: true);
-            GC.SuppressFinalize(this);
+        public async ValueTask DisposeAsync() => await DisposeAsync(disposing: true);
 
-        }
 
-        private int _maxTriesCount = 3;
-        private int _triesCount = 0;
+        private const int MaxTriesCount = 3;
+        private int _triesCount;
         private async Task SafeDisposeKeywordRecognizer()
         {
             try
@@ -222,13 +216,13 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             }
             catch (InvalidOperationException e)
             {
-                if (_triesCount >= _maxTriesCount)
+                if (_triesCount >= MaxTriesCount)
                 {
-                    _logger.LogError(e, $"Keyword recognizer disposing failed {_maxTriesCount} of {_maxTriesCount}");
+                    _logger.LogError(e, $"Keyword recognizer disposing failed {MaxTriesCount} of {MaxTriesCount}");
                     return;
                 }
                 _triesCount++;
-                _logger.LogWarning(e, $"Keyword recognizer disposing failed. Trying {_triesCount} of {_maxTriesCount} tries");
+                _logger.LogWarning(e, $"Keyword recognizer disposing failed. Trying {_triesCount} of {MaxTriesCount} tries");
                 await SafeDisposeKeywordRecognizer();
             }
         }

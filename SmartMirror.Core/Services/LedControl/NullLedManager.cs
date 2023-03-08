@@ -11,7 +11,12 @@ namespace SmartMirror.Core.Services.LedControl
             return Task.CompletedTask;
         }
 
-        public Task TurnOn(Color color = default)
+        public Task TurnOn()
+        {
+            return Task.CompletedTask;
+        }
+
+        public Task TurnOn(Color color)
         {
             return Task.CompletedTask;
         }
