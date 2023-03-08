@@ -2,94 +2,98 @@
 
 This is small guide on how to set all things up.
 
-## Required software:
+## Required software
 
-### Linux:
+### Linux
 
-1.    dotnet
-2.    vsdbg
-3.    SSH Server
+1. dotnet
+2. vsdbg
+3. SSH Server
 
-### Windows:
+### Windows
 
-1.    Visual Studio/VS Code
-2.    plink/OpenSSH
-3.    PCSP/RSync/SCP
+1. Visual Studio/VS Code
+2. plink/OpenSSH
+3. PCSP/RSync/SCP
 
-## Setup:
+## Setup
 
-### Linux:
+### Linux setup
 
-1.    Setup [ssh](#ssh)
-2.    Install VSDBG by running the following command. Replace `~/vsdbg` with wherever you want vsdbg installed to.
+1. Setup [ssh](#ssh)
+2. Install VSDBG by running the following command. Replace `~/vsdbg` with wherever you want vsdbg installed to.
+   Using cURL
+   `curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg`
+   Alternatively, wget
+   `wget https://aka.ms/getvsdbgsh -O - 2>/dev/null | /bin/sh /dev/stdin -v latest -l ~/vsdbg`
 
-    #### Using cURL
-
-    `curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg`
-    
-    #### Alternatively, wget
-
-    `wget https://aka.ms/getvsdbgsh -O - 2>/dev/null | /bin/sh /dev/stdin -v latest -l ~/vsdbg`
-
-3.    Configure ssh auto-login  
+3. Configure ssh auto-login  
 execute `sudo nano /etc/ssh/sshd_config` and set `#PermitRootLogin yes`
-4.    Grant permission  
+4. Grant permission  
 `install -d -m 700 ~/.ssh`
-5.    Set Public key from puttygen.exe  
+5. Set Public key from puttygen.exe  
 `nano ~/.ssh/authorized_keys`
-6.    Grant another permissions  
+6. Grant another permissions  
 `sudo chmod 644 ~/.ssh/authorized_keys`  
 `sudo chown pi:pi ~/.ssh/authorized_keys`
 
-### Windows:
+### Windows se
 
-1.    Generate public key for passwordless file transfer (See [SSH](#ssh) section)
-2.    Create new configuration in `.csproj` file  
+1. Generate public key for passwordless file transfer (See [SSH](#ssh) section)
+2. Create new configuration in `.csproj` file  
 Example:  
 `<Configurations>Debug;Release;RaspberryDebug;</Configurations>`
-3.    Create bat file with post build script  
-Example using SCP/PSCP or using [script](raspberry_deploy.bat):  
-```
-scp -r -P 22 -i e:\ssh\pi_key.ppk "path\to\source\*" pi@192.168.0.108:/home/pi/Projects/SmartMirror.LedStripe
-pause
-```
-Example using RSync located [here](raspberry_deploy_rsync.bat)
+3. Create bat file with post build script  
+   Example using SCP/PSCP or using [script](raspberry_deploy.bat):
 
-4.    Generate launch.vs.json  
-https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio
-5.    Set ssh or plink addapter in launch.vs.json
-```
-{
-    "version": "0.2.1",
-    "adapter": "e:\\ssh\\ssh.exe",
-    "adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
-    "configurations": [
-        {
-            "name": ".NET Core Raspberry Launch",
-            "type": "coreclr",
-            "cwd": "~/Projects/SmartMirror.LedStripe",
-            "program": "/home/pi/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
-            "request": "launch",
-            "logging": {
-                "engineLogging": true
+    ```bash
+    scp -r -P 22 -i e:\ssh\pi_key.ppk "path\to\source\*" pi@192.168.0.108:/home/pi/Projects/SmartMirror.LedStripe
+    pause
+    ```
+
+   Example using RSync located [here](raspberry_deploy_rsync.bat)
+
+4. Generate launch.vs.json  
+<https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio>
+5. Set ssh or plink addapter in launch.vs.json
+
+    ```json
+    {
+        "version": "0.2.1",
+        "adapter": "e:\\ssh\\ssh.exe",
+        "adapterArgs": "-i e:\\ssh\\pi_key.ppk pi@192.168.0.108 -batch -T ~/vsdbg/vsdbg --interpreter=vscode",  
+        "configurations": [
+            {
+                "name": ".NET Core Raspberry Launch",
+                "type": "coreclr",
+                "cwd": "~/Projects/SmartMirror.LedStripe",
+                "program": "/home/pi/Projects/SmartMirror.LedStripe/SmartMirror.LedStripe.dll",
+                "request": "launch",
+                "logging": {
+                    "engineLogging": true
+                }
             }
-        }
-    ]
-}
-```
-6.    Set portable debug type in csproj  
-```
-    <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <DebugType>portable</DebugType>
-    </PropertyGroup>
-```
-7.    Add Post build scipt to execute previously created bat. This is used to automatically deploy build files to target machine, in order to simplify remote debugging  
-```
-    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
-    </Target> 
-```
-8.    Start debug using following command in VisualStudio command line or using [RemoteDebugLauncher](https://marketplace.visualstudio.com/items?itemName=xpasza.RemoteDebugLauncher22) extension which automates that part.
+        ]
+    }
+    ```
+
+6. Set portable debug type in csproj
+
+    ```xml
+        <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
+            <DebugType>portable</DebugType>
+        </PropertyGroup>
+    ```
+
+7. Add Post build scipt to execute previously created bat. This is used to automatically deploy build files to target machine, in order to simplify remote debugging  
+
+    ```xml
+        <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebug'">
+            <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy.bat&quot; &quot;$(TargetDir)&quot;" />
+        </Target> 
+    ```
+
+8. Start debug using following command in VisualStudio command line or using [RemoteDebugLauncher](https://marketplace.visualstudio.com/items?itemName=xpasza.RemoteDebugLauncher22) extension which automates that part.
 `DebugAdapterHost.Launch /LaunchJson:"E:\Job\SmartMirror\SmartMirror\.vs\launch.vs.json"`
 
 ## SSH
@@ -116,10 +120,10 @@ Example:
 
 should print
 
-## Usefull links:
+## Usefull links
 
-https://github.com/microsoft/MIEngine/wiki/Offroad-Debugging-of-.NET-Core-on-Linux---OSX-from-Visual-Studio  
-https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html  
-https://github.com/OmniSharp/omnisharp-vscode/wiki/Attaching-to-remote-processes  
-https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2019  
-https://www.hanselman.com/blog/RemoteDebuggingWithVSCodeOnWindowsToARaspberryPiUsingNETCoreOnARM.aspx
+<https://github.com/microsoft/MIEngine/wiki/Offroad-Debugging-of-.NET-Core-on-Linux---OSX-from-Visual-Studio>  
+<https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html>  
+<https://github.com/OmniSharp/omnisharp-vscode/wiki/Attaching-to-remote-processes>  
+<https://docs.microsoft.com/en-us/visualstudio/ide/customize-build-and-debug-tasks-in-visual-studio?view=vs-2019>  
+<https://www.hanselman.com/blog/RemoteDebuggingWithVSCodeOnWindowsToARaspberryPiUsingNETCoreOnARM.aspx>
