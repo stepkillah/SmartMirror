@@ -23,7 +23,7 @@ namespace SmartMirror.Core.Services
         private readonly IDisplayManager _displayManager;
         private readonly ILogger _logger;
 
-        private readonly Dictionary<string, SmartMirrorCommand> _commandsMapTable = new Dictionary<string, SmartMirrorCommand>()
+        private readonly Dictionary<string, SmartMirrorCommand> _commandsMapTable = new()
         {
             {SmartMirrorCommand.LedOn.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOn},
             {SmartMirrorCommand.LedOff.GetAttributeOfType<DescriptionAttribute>().Description, SmartMirrorCommand.LedOff},
@@ -43,8 +43,10 @@ namespace SmartMirror.Core.Services
         }
         #endregion
 
+        public ValueTask HandleCommand(SmartMirrorCommand command, object data) =>
+            HandleCommand(command, data, default);
 
-        public async ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken = default)
+        public async ValueTask HandleCommand(SmartMirrorCommand command, object data, CancellationToken cancellationToken)
         {
             switch (command)
             {

@@ -5,6 +5,7 @@ namespace SmartMirror.Core.Interfaces
 {
     public interface IAudioPlayer
     {
-        Task Play(string path, CancellationToken cancellationToken = default);
+        Task Play(string path);
+        Task Play(string path, CancellationToken cancellationToken);
     }
 }

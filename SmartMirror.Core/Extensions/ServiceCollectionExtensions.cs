@@ -61,21 +61,6 @@ namespace SmartMirror.Core.Extensions
             }
         }
 
-
-        //private static IAudioService InitDeepSpeechAudioService(IServiceProvider arg)
-        //{
-        //    try
-        //    {
-        //        var audioService = new DeepSpeechAudioManager(arg.GetService<ILogger<DeepSpeechAudioManager>>());
-        //        return audioService;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ProgramLogger.LogError(e, nameof(InitAudioService));
-        //        return new NullAudioService();
-        //    }
-        //}
-
         private static ILedManager InitLedManager(IServiceProvider arg)
         {
             try

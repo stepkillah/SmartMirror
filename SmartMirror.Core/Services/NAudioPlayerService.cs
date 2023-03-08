@@ -16,7 +16,9 @@ namespace SmartMirror.Core.Services
             _logger = logger;
         }
 
-        public async Task Play(string path, CancellationToken cancellationToken = default)
+        public Task Play(string path) => Play(path, default);
+
+        public async Task Play(string path, CancellationToken cancellationToken)
         {
             try
             {

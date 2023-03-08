@@ -8,8 +8,8 @@ namespace SmartMirror.Core.Models
         public SmartMirrorCommand Command { get; private init; }
         public object CommandData { get; private init; }
 
-        public static CommandRecognitionResult Failed() => new CommandRecognitionResult() { Success = false };
-        public static CommandRecognitionResult SuccessResult(SmartMirrorCommand command) => new CommandRecognitionResult() { Success = true, Command = command };
-        public static CommandRecognitionResult SuccessResult(SmartMirrorCommand command, object commandData) => new CommandRecognitionResult() { Success = true, Command = command, CommandData = commandData };
+        public static CommandRecognitionResult Failed() => new() { Success = false };
+        public static CommandRecognitionResult SuccessResult(SmartMirrorCommand command) => new() { Success = true, Command = command };
+        public static CommandRecognitionResult SuccessResult(SmartMirrorCommand command, object commandData) => new() { Success = true, Command = command, CommandData = commandData };
     }
 }

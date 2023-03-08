@@ -15,7 +15,7 @@ namespace SmartMirror.Core.Services
         private readonly ILogger _logger;
         private bool _isDataSaved;
 
-        private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions()
+        private readonly JsonSerializerOptions _jsonSerializerOptions = new()
         {
             Converters =
             {

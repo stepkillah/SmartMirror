@@ -17,11 +17,13 @@ namespace SmartMirror.Core.Services.ExternalProcesses
         }
 
 
-        public async Task Play(string path, CancellationToken cancellationToken = default)
+        public Task Play(string path) => Play(path, default);
+
+        public async Task Play(string path, CancellationToken cancellationToken)
         {
             try
             {
-                using var aplayProcess = new Process()
+                using var aplayProcess = new Process
                 {
                     StartInfo = new ProcessStartInfo("aplay", path)
                     {

@@ -8,10 +8,10 @@ using SmartMirror.Core.Extensions;
 
 namespace SmartMirror.Core
 {
-    class Program
+    internal static class Program
     {
         private static IServiceProvider Container { get; set; }
-        public static ILogger ProgramLogger;
+        internal static ILogger ProgramLogger { get; private set; }
         private static readonly CancellationTokenSource AppCancellationTokenSource = new CancellationTokenSource();
 
         static async Task Main(string[] args)
@@ -21,7 +21,7 @@ namespace SmartMirror.Core
             if (Container == null)
                 throw new ArgumentNullException(nameof(Container));
             ProgramLogger = host.Services.GetRequiredService<ILoggerFactory>()
-                .CreateLogger<Program>();
+                .CreateLogger(nameof(Program));
             ProgramLogger.LogDebug("Container initialized");
             ProgramLogger.LogInformation("SmartMirror");
             ProgramLogger.LogInformation(
