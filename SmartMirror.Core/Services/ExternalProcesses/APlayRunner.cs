@@ -32,7 +32,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                     }
                 };
                 aplayProcess.Start();
-                await aplayProcess.StandardOutput.ReadToEndAsync();
+                await aplayProcess.StandardOutput.ReadToEndAsync(cancellationToken);
                 aplayProcess.Kill();
             }
             catch (Exception e)

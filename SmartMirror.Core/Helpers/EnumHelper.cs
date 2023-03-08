@@ -1,6 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Reflection;
 
 namespace SmartMirror.Core.Helpers
 {
@@ -19,18 +17,6 @@ namespace SmartMirror.Core.Helpers
             var memInfo = type.GetMember(enumVal.ToString());
             var attributes = memInfo[0].GetCustomAttributes(typeof(T), false);
             return (attributes.Length > 0) ? (T)attributes[0] : null;
-        }
-
-        public static string DescriptionAttr<T>(this T source)
-        {
-            if (source == null)
-                return null;
-            FieldInfo fi = source.GetType().GetField(source.ToString());
-
-            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(
-                typeof(DescriptionAttribute), false);
-
-            return attributes.Length > 0 ? attributes[0].Description : source.ToString();
         }
     }
 }
