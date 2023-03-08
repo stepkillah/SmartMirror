@@ -92,6 +92,8 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
                     case ResultReason.Canceled:
                         HandleCancel(result);
                         break;
+                    default:
+                        throw new ArgumentOutOfRangeException(nameof(result.Reason), result.Reason, "Bad result");
                 }
             }
             finally

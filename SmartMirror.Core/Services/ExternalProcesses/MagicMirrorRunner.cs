@@ -32,7 +32,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                     return Task.CompletedTask;
 
                 _logger.LogInformation($"{nameof(MagicMirrorRunner)} Starting");
-                _magicMirrorRunProcess = new Process()
+                _magicMirrorRunProcess = new Process
                 {
                     StartInfo = new ProcessStartInfo("npm", $"run start")
                     {
