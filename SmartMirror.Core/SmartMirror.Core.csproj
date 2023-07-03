@@ -35,7 +35,7 @@
 
     <ItemGroup>
         <PackageReference Include="Iot.Device.Bindings" Version="2.2.0" />
-        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.29.0" />
+        <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.30.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="7.0.0" />
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
