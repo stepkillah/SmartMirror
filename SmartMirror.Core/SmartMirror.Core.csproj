@@ -44,7 +44,7 @@
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
         <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
         <PackageReference Include="NAudio" Version="2.2.1" />
-        <PackageReference Include="Polly" Version="8.0.0" />
+        <PackageReference Include="Polly" Version="8.1.0" />
         <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
         <PackageReference Include="System.Device.Gpio" Version="3.0.0" />
     </ItemGroup>
