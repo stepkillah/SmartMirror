@@ -60,8 +60,8 @@ namespace SmartMirror.Core.Services
                 _logger.LogInformation($"Starting listening for {button} button on pin {pinNumber}");
 
 
-                Button gpioButton = new Button(pinNumber, _gpioController,
-                    false, PinMode.InputPullUp, TimeSpan.FromMilliseconds(50))
+                Button gpioButton = new Button(pinNumber, true,
+                    false, _gpioController, debounceTime: TimeSpan.FromMilliseconds(50))
                 {
                     IsDoublePressEnabled = false,
                     IsHoldingEnabled = false

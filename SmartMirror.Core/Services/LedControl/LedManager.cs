@@ -118,7 +118,7 @@ namespace SmartMirror.Core.Services.LedControl
 
         private void ColorWipe(Ws28xx neo, Color color, int count)
         {
-            BitmapImage img = neo.Image;
+            var img = neo.Image;
             for (var i = 0; i < count; i++)
             {
                 if (_ledOptions.Missing.Contains(i))
@@ -134,7 +134,7 @@ namespace SmartMirror.Core.Services.LedControl
 
         private void TheatreChase(Ws28xx neo, Color color, int count, int iterations = 10)
         {
-            BitmapImage img = neo.Image;
+            var img = neo.Image;
             for (var i = 0; i < iterations; i++)
             {
                 for (var j = 0; j < 3; j++)
@@ -172,7 +172,7 @@ namespace SmartMirror.Core.Services.LedControl
 
         private void Rainbow(Ws28xx neo, int count, int iterations = 1)
         {
-            BitmapImage img = neo.Image;
+            var img = neo.Image;
             for (var i = 0; i < 255 * iterations; i++)
             {
                 for (var j = 0; j < count; j++)
@@ -186,7 +186,7 @@ namespace SmartMirror.Core.Services.LedControl
 
         private void RainbowCycle(Ws28xx neo, int count, int iterations = 1)
         {
-            BitmapImage img = neo.Image;
+            var img = neo.Image;
             for (var i = 0; i < 255 * iterations; i++)
             {
                 for (var j = 0; j < count; j++)
@@ -200,7 +200,7 @@ namespace SmartMirror.Core.Services.LedControl
 
         private void TheaterChaseRainbow(Ws28xx neo, int count)
         {
-            BitmapImage img = neo.Image;
+            var img = neo.Image;
             for (var i = 0; i < 255; i++)
             {
                 for (var j = 0; j < 3; j++)
