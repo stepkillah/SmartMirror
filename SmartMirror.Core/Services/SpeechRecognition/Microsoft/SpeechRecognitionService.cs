@@ -34,7 +34,19 @@ namespace SmartMirror.Core.Services.SpeechRecognition.Microsoft
             _logger = logger;
             _commandsHandler = commandsHandler;
             _audioPlayer = audioPlayer;
-            _audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+
+
+            if (!string.IsNullOrEmpty(recognitionOptions.Value.InputDeviceId))
+            {
+                logger.LogInformation($"Using input device id: {recognitionOptions.Value.InputDeviceId}");
+                _audioConfig = AudioConfig.FromMicrophoneInput(recognitionOptions.Value.InputDeviceId);
+            }
+            else
+            {
+                logger.LogInformation("Using default input device");
+                _audioConfig = AudioConfig.FromDefaultMicrophoneInput();
+            }
+
             _keywordRecognizer = new KeywordRecognizer(_audioConfig);
 
             var keywordRecognitionTablePath = Path.Combine(Directory.GetCurrentDirectory(), recognitionOptions.Value.ActivationRecognitionTablePath);

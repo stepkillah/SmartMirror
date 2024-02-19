@@ -30,7 +30,7 @@ namespace SmartMirror.Core.Services.ExternalProcesses
                         RedirectStandardOutput = true,
                         RedirectStandardInput = false,
                         UseShellExecute = false,
-                        CreateNoWindow = false,
+                        CreateNoWindow = false
                     }
                 };
                 aplayProcess.Start();
