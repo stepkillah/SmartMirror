@@ -36,18 +36,18 @@
     <ItemGroup>
         <PackageReference Include="Iot.Device.Bindings" Version="3.2.0" />
         <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.42.0" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.0" />
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
         <PackageReference Include="Microsoft.NETCore.Platforms" Version="7.0.4" />
         <PackageReference Include="NAudio" Version="2.2.1" />
-        <PackageReference Include="Polly" Version="8.5.0" />
+        <PackageReference Include="Polly" Version="8.5.2" />
         <PackageReference Include="Serilog.Extensions.Logging.File" Version="3.0.0" />
         <PackageReference Include="System.Device.Gpio" Version="3.2.0" />
-        <PackageReference Include="System.Text.Json" Version="9.0.0" />
+        <PackageReference Include="System.Text.Json" Version="9.0.2" />
     </ItemGroup>
 
     <PropertyGroup Condition="'$(Configuration)' == 'RaspberryDebug'">
@@ -79,6 +79,6 @@
     </Target>
 
     <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)' == 'RaspberryDebugRsyncX64'">
-        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\pi_key_ubuntu_ssh $(TargetDir)/* ubuntu@192.168.0.108:/home/ubuntu/Projects/SmartMirror" />
+        <Exec Command="call &quot;$(SolutionDir)scripts\raspberry_deploy_rsync.bat&quot; F:\raspbery\cwrsync F:\ssh\pi_key_ubuntu_ssh $(TargetDir)/* raspberry@192.168.0.108:/home/raspberry/Projects/SmartMirror" />
     </Target>
 </Project>
