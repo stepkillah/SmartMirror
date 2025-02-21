@@ -21,19 +21,28 @@ This is small guide on how to set all things up.
 ### Linux setup
 
 1. Setup [ssh](#ssh)
-2. Install VSDBG by running the following command. Replace `~/vsdbg` with wherever you want vsdbg installed to.
+2. Install dotnet using script 
+`curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel STS`  
+set PATH environment variable
+```bash
+echo 'export DOTNET_ROOT=$HOME/.dotnet' >> ~/.bashrc
+echo 'export PATH=$PATH:$HOME/.dotnet' >> ~/.bashrc
+source ~/.bashrc
+```
+
+3. Install VSDBG by running the following command. Replace `~/vsdbg` with wherever you want vsdbg installed to.
    Using cURL
    `curl -sSL https://aka.ms/getvsdbgsh | bash /dev/stdin -v latest -l ~/vsdbg`
    Alternatively, wget
    `wget https://aka.ms/getvsdbgsh -O - 2>/dev/null | /bin/sh /dev/stdin -v latest -l ~/vsdbg`
 
-3. Configure ssh auto-login  
+4. Configure ssh auto-login  
 execute `sudo nano /etc/ssh/sshd_config` and set `#PermitRootLogin yes`
-4. Grant permission  
+5. Grant permission  
 `install -d -m 700 ~/.ssh`
-5. Set Public key from puttygen.exe  
+6. Set Public key from puttygen.exe  
 `nano ~/.ssh/authorized_keys`
-6. Grant another permissions  
+7. Grant another permissions  
 `sudo chmod 644 ~/.ssh/authorized_keys`  
 `sudo chown pi:pi ~/.ssh/authorized_keys`
 
